@@ -582,59 +582,54 @@
     
 
     <!-- SLIDE 2: ŹRÓDŁA LOGÓW -->
-    <div class="slide-container" data-title="Skąd wziąć fakty? Czytanie logów u źródła" data-type="Źródła Logów">
+    <div class="slide-container" data-title="Skąd wziąć fakty? Czytanie logów u źródła i przez CLI" data-type="Źródła Logów">
       <header class="slide-header">
         <span class="slide-kicker">FAKTY ZAMIAST ZGADYWANIA // DOCKER, CLOUDWATCH, DATADOG, TERMINAL</span>
-        <h2 class="slide-title">Skąd Wziąć Prawdziwe Logi Przed Zadaniem Pytania Copilotowi?</h2>
+        <h2 class="slide-title">Dwa Sposoby Pracy z Logami: Przekazanie Ręczne lub Agent przez CLI</h2>
       </header>
       <div class="slide-body" style="justify-content: center;">
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; margin-bottom: 14px;">
+        <!-- TRYBY PRACY W ZALEŻNOŚCI OD STRUKTURY SKILLA -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; margin-bottom: 12px;">
+          <div style="background: #F8FAFC; border: 1.5px solid var(--primary); border-radius: 8px; padding: 10px 14px;">
+            <span style="font-size: 11px; font-weight: 800; color: var(--primary); text-transform: uppercase; display: block; margin-bottom: 3px;">OPCJA A · TY DOSTARCZASZ LOGI DO AGENTA</span>
+            <div style="font-size: 12px; color: #334155; line-height: 1.35;">Kopiujesz 15–20 linii błędu do czatu. Bezpieczny tryb, gdy klient zabrania agentowi bezpośredniego dostępu do powłoki terminala.</div>
+          </div>
+          <div style="background: #FAF5FF; border: 1.5px solid var(--accent); border-radius: 8px; padding: 10px 14px;">
+            <span style="font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; display: block; margin-bottom: 3px;">OPCJA B · AGENT SAM ZBIERA LOGI PRZEZ CLI</span>
+            <div style="font-size: 12px; color: #334155; line-height: 1.35;">Gdy Skill ma uprawnienia CLI, Agent sam odpala <code>docker logs</code> lub <code>aws logs</code> i samodzielnie bada stack trace.</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; margin-bottom: 12px;">
           
-          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--primary); border-radius: 10px; padding: 16px 18px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-              <span style="font-size: 12px; font-weight: 800; color: var(--primary); text-transform: uppercase;">🐳 1. Kontenery Lokalne: Docker</span>
-              <span style="font-size: 10px; font-weight: 700; background: #F1F5F9; color: #475569; padding: 2px 6px; border-radius: 4px;">CLI</span>
-            </div>
-            <pre style="background: #0F172A; color: #38BDF8; padding: 8px 10px; border-radius: 6px; font-size: 11.5px; margin: 0 0 8px; font-family: monospace;">docker logs --tail 100 --timestamps backend_api | grep -E "ERROR|Exception"</pre>
-            <p style="font-size: 12.5px; color: #475569; line-height: 1.4; margin: 0;">Pobierasz ostatnie 100 linii z kontenera. Widzisz dokładny stan aplikacji tuż przed awarią, a nie tylko suchy komunikat błędu.</p>
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 3px solid var(--primary); border-radius: 8px; padding: 12px 14px;">
+            <div style="font-size: 11px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 4px;">🐳 1. Docker Logs (Lokalnie / CLI)</div>
+            <pre style="background: #0F172A; color: #38BDF8; padding: 6px 8px; border-radius: 4px; font-size: 10.5px; margin: 0 0 6px; font-family: monospace;">docker logs --tail 100 backend_api | grep -E "ERROR"</pre>
+            <p style="font-size: 11.5px; color: #475569; line-height: 1.35; margin: 0;">Pobranie stanu kontenera tuż przed awarią. Agent CLI może odpalić to sam.</p>
           </div>
 
-          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid #D97706; border-radius: 10px; padding: 16px 18px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-              <span style="font-size: 12px; font-weight: 800; color: #D97706; text-transform: uppercase;">☁️ 2. Chmura: CloudWatch & Datadog</span>
-              <span style="font-size: 10px; font-weight: 700; background: #F1F5F9; color: #475569; padding: 2px 6px; border-radius: 4px;">OBSERVABILITY</span>
-            </div>
-            <pre style="background: #0F172A; color: #FBBF24; padding: 8px 10px; border-radius: 6px; font-size: 11.5px; margin: 0 0 8px; font-family: monospace;">aws logs filter-log-events --log-group-name /ecs/orders --filter-pattern "NullPointer"</pre>
-            <p style="font-size: 12.5px; color: #475569; line-height: 1.4; margin: 0;">Filtruj po <code>Correlation-ID</code> lub <code>trace_id</code> w Datadog. Wyciągasz dokładny ciąg zdarzeń użytkownika, który doprowadził do błędu.</p>
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 3px solid #D97706; border-radius: 8px; padding: 12px 14px;">
+            <div style="font-size: 11px; font-weight: 800; color: #D97706; text-transform: uppercase; margin-bottom: 4px;">☁️ 2. CloudWatch / Datadog</div>
+            <pre style="background: #0F172A; color: #FBBF24; padding: 6px 8px; border-radius: 4px; font-size: 10.5px; margin: 0 0 6px; font-family: monospace;">aws logs filter-log-events --filter-pattern "500"</pre>
+            <p style="font-size: 11.5px; color: #475569; line-height: 1.35; margin: 0;">Filtrowanie po <code>Correlation-ID</code> lub <code>trace_id</code> w rozproszonym środowisku.</p>
           </div>
 
-          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid #256654; border-radius: 10px; padding: 16px 18px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-              <span style="font-size: 12px; font-weight: 800; color: #256654; text-transform: uppercase;">💻 3. Terminal & Pipeline CI</span>
-              <span style="font-size: 10px; font-weight: 700; background: #F1F5F9; color: #475569; padding: 2px 6px; border-radius: 4px;">TEST RUNNER</span>
-            </div>
-            <pre style="background: #0F172A; color: #34D399; padding: 8px 10px; border-radius: 6px; font-size: 11.5px; margin: 0 0 8px; font-family: monospace;">mvn test -Dtest=OrderServiceTest#testProcessOrder -DtrimStackTrace=false</pre>
-            <p style="font-size: 12.5px; color: #475569; line-height: 1.4; margin: 0;">Odpalsz pojedynczy test z pełnym stack trace'em bez obcinania ramek stosu. Znasz dokładny plik i numer linii.</p>
-          </div>
-
-          <div class="fragment" style="background: #FFF1F2; border: 1.5px solid #FDA4AF; border-top: 4px solid var(--danger); border-radius: 10px; padding: 16px 18px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-              <span style="font-size: 12px; font-weight: 800; color: var(--danger); text-transform: uppercase;">⚠️ 4. Złota Zasada Czystego Kontekstu</span>
-              <span style="font-size: 10px; font-weight: 700; background: #FFE4E6; color: #9F1239; padding: 2px 6px; border-radius: 4px;">NO SPAM</span>
-            </div>
-            <p style="font-size: 12.5px; color: #881337; line-height: 1.4; margin: 0;"><strong>Nigdy nie wklejaj 5000 linii logów!</strong> Wyodrębnij 15–20 linii wokół wyjątku (Root Cause) + dane wejściowe żądania. Więcej logów = większe ryzyko halucynacji AI.</p>
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 3px solid #256654; border-radius: 8px; padding: 12px 14px;">
+            <div style="font-size: 11px; font-weight: 800; color: #256654; text-transform: uppercase; margin-bottom: 4px;">💻 3. Terminal & Test Runner</div>
+            <pre style="background: #0F172A; color: #34D399; padding: 6px 8px; border-radius: 4px; font-size: 10.5px; margin: 0 0 6px; font-family: monospace;">pytest -vv -k "test_process" --tb=short</pre>
+            <p style="font-size: 11.5px; color: #475569; line-height: 1.35; margin: 0;">Uruchomienie pojedynczego testu w terminalu z czystym stack trace'em.</p>
           </div>
 
         </div>
 
-        <div style="background: #FAF5FF; border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; padding: 10px 16px; font-size: 12.5px; color: #3B0764;">
-          💡 <strong>Zasada inżynierska:</strong> Im lepsze dane z terminala/Dockera podasz Copilotowi, tym mniej zgadywania i bzdurnych propozycji otrzymasz w odpowiedzi.
+        <div style="background: #FFF1F2; border-left: 4px solid var(--danger); border-radius: 0 8px 8px 0; padding: 8px 14px; font-size: 12px; color: #881337;">
+          ⚠️ <strong>Złota reguła czystego kontekstu:</strong> Niezależnie czy logi wklejasz ręcznie, czy pobiera je Agent przez CLI — analizujemy tylko 15–20 linii wokół Root Cause, a nie tysiące linii spamu.
         </div>
 
       </div>
       <div class="slide-footer">
-        <span>LOGI & DIAGNOSTYKA // TERMINAL / CLOUD</span>
+        <span>LOGI & DIAGNOSTYKA // TERMINAL / CLI / CLOUD</span>
         <span>Slajd 2 / 5</span>
       </div>
     </div>
@@ -693,42 +688,45 @@
     <div class="slide-container" data-title="Dedykowany Skill w projekcie: debug-investigator" data-type="Skill Automatyzacja">
       <header class="slide-header">
         <span class="slide-kicker">AUTOMATYZACJA STANDARDU // REUSABLE SKILL W REPOZYTORIUM</span>
-        <h2 class="slide-title">Stwórz Dedykowany Skill: <code>debug-investigator / SKILL.md</code></h2>
+        <h2 class="slide-title">Stwórz Skill: <code>debug-investigator</code> (Zbiórka Logów przez CLI lub Ręcznie)</h2>
       </header>
       <div class="slide-body" style="justify-content: center;">
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; align-items: center;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; align-items: center; margin-bottom: 10px;">
           
-          <div class="fragment" style="background: #0F172A; border-radius: 10px; padding: 16px 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="fragment" style="background: #0F172A; border-radius: 10px; padding: 14px 18px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
               <span style="font-size: 11px; font-weight: 800; color: #38BDF8; font-family: monospace;">.agents/skills/debug-investigator/SKILL.md</span>
               <span style="font-size: 10px; background: rgba(56,189,248,0.2); color: #38BDF8; padding: 2px 6px; border-radius: 4px;">CUSTOM SKILL</span>
             </div>
-            <pre style="margin: 0; font-family: 'Consolas', monospace; font-size: 11.5px; color: #E2E8F0; line-height: 1.45; white-space: pre-wrap;">---
+            <pre style="margin: 0; font-family: 'Consolas', monospace; font-size: 11px; color: #E2E8F0; line-height: 1.4; white-space: pre-wrap;">---
 name: debug-investigator
-description: Dochodzenie przyczyn awarii z logów Docker/CloudWatch
+description: Diagnoza awarii z logów Docker/CloudWatch
+# STRUKTURA SKILLA DEFINIUJE SPOSÓB ZBIÓRKI LOGÓW:
+enable_cli_tools: true  # Jeśli TRUE -> Agent sam odpala CLI
 ---
 # ZASADY DLA AGENTA DEBUGUJĄCEGO:
-1. Zawsze zażądaj wycinka logów z Dockera, CloudWatch lub Datadog.
+1. Jeśli masz dostęp do CLI: sam uruchom `docker logs` / `aws logs`.
+   Jeśli brak CLI: poproś inżyniera o wklejenie 20 linii z błędem.
 2. Zanim zaproponujesz kod, ZAWSZE napisz test odtwarzający (reproduction test).
 3. Podaj 3 hipotezy i ZAKWESTIONUJ każdą z nich (Challenging).
 4. Nie maskuj błędu prostym 'if != null', chyba że udowodnisz brak regresji.</pre>
           </div>
 
-          <div class="fragment" style="display: flex; flex-direction: column; gap: 12px;">
-            <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-radius: 8px; padding: 12px 16px;">
-              <div style="font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 4px;">🚀 1. Koniec z Przypadkowymi Promptami</div>
-              <p style="font-size: 12px; color: #475569; margin: 0; line-height: 1.4;">Każdy programista w zespole wywołuje <code>@debug-investigator</code>. AI automatycznie postępuje według procedury bezpieczeństwa firmy.</p>
+          <div class="fragment" style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-radius: 8px; padding: 10px 14px;">
+              <div style="font-size: 12px; font-weight: 800; color: var(--primary); margin-bottom: 2px;">⚡ Struktura Skilla Steruje Autonomią</div>
+              <p style="font-size: 11.5px; color: #475569; margin: 0; line-height: 1.35;">To Ty decydujesz w pliku <code>SKILL.md</code>: czy Agent ma narzędzie terminala do samodzielnego czytania kontenerów, czy ma czekać na wklejenie logów przez człowieka.</p>
             </div>
 
-            <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-radius: 8px; padding: 12px 16px;">
-              <div style="font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 4px;">🛡️ 2. Przymus Napisania Testu Regresyjnego</div>
-              <p style="font-size: 12px; color: #475569; margin: 0; line-height: 1.4;">Skill ma twardą regułę: model odmawia wygenerowania poprawki w kodzie produkcyjnym, dopóki nie zatwierdzisz testu odtwarzającego błąd.</p>
+            <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-radius: 8px; padding: 10px 14px;">
+              <div style="font-size: 12px; font-weight: 800; color: var(--primary); margin-bottom: 2px;">🛡️ Żelazna Reguła Testu Regresyjnego</div>
+              <p style="font-size: 11.5px; color: #475569; margin: 0; line-height: 1.35;">Skill blokuje model przed generowaniem poprawki biznesowej, dopóki nie zatwierdzisz testu, który najpierw wywala się na czerwono.</p>
             </div>
 
-            <div style="background: #FAF5FF; border: 1px solid var(--primary-light); border-radius: 8px; padding: 12px 16px;">
-              <div style="font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 4px;">📂 3. Wersjonowane Razem z Kodem w Git</div>
-              <p style="font-size: 12px; color: #475569; margin: 0; line-height: 1.4;">Plik <code>SKILL.md</code> jest częścią repozytorium projektu. Nowy deweloper pierwszego dnia ma do dyspozycji wiedzę seniorów.</p>
+            <div style="background: #FAF5FF; border: 1px solid var(--primary-light); border-radius: 8px; padding: 10px 14px;">
+              <div style="font-size: 12px; font-weight: 800; color: var(--primary); margin-bottom: 2px;">📂 Współdzielony Standard w Git</div>
+              <p style="font-size: 11.5px; color: #475569; margin: 0; line-height: 1.35;">Plik <code>SKILL.md</code> jest wersjonowany w repozytorium. Każdy w zespole wywołuje <code>@debug-investigator</code> i postępuje według tej samej procedury.</p>
             </div>
           </div>
 
@@ -750,39 +748,42 @@ description: Dochodzenie przyczyn awarii z logów Docker/CloudWatch
       </header>
       <div class="slide-body" style="justify-content: center;">
         
-        <div style="background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; padding: 10px 16px; margin-bottom: 12px; font-size: 13px; color: #334155; line-height: 1.4;">
-          <strong>Scenariusz w kontenerze:</strong> W kontenerze Docker <code>order-service</code> poleciał <code>NullPointerException</code> przy zamówieniu klienta bez zdefiniowanego kodu rabatowego. Pipeline CI stoi na czerwono.
+        <div style="background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; padding: 8px 14px; margin-bottom: 10px; font-size: 12.5px; color: #334155; line-height: 1.35;">
+          <strong>Scenariusz w kontenerze:</strong> W kontenerze Docker <code>order-service</code> poleciał <code>NullPointerException</code> przy zamówieniu klienta bez rabatu. Pipeline CI stoi na czerwono.
         </div>
 
-        <div class="fragment" style="background: #0F172A; border-radius: 8px; padding: 14px 18px; margin-bottom: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <div class="fragment" style="background: #0F172A; border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
             <span style="font-size: 11px; font-weight: 800; color: #38BDF8; letter-spacing: 0.08em; text-transform: uppercase;">
-              👉 KROK 1 & 2: WYCIĄGNIJ LOGI I WKLEJ TEN PROMPT DO COPILOT CHAT
+              👉 WYBIERZ METODĘ I WKLEJ PROMPT DO COPILOT CHAT / AGENTA
             </span>
-            <span style="font-size: 10px; color: #94A3B8; font-family: monospace;">TRYB: UNDERSTAND & CHALLENGE</span>
+            <span style="font-size: 10px; color: #94A3B8; font-family: monospace;">TRYB: PLAN & CHALLENGE</span>
           </div>
-          <pre style="margin: 0; font-family: 'Consolas', monospace; font-size: 12px; color: #E2E8F0; line-height: 1.4; white-space: pre-wrap;">@workspace Oto logi błędu z kontenera Docker i plik OrderService.py.
-NIE GENERUJ KODU NAPRAWY KROKU BIZNESOWEGO.
-1. Zrozumienie: Wskaż dokładny stan obiektu i przyczynę NullPointerException w linii 48.
-2. Reprodukcja: Napisz minimalny test jednostkowy test_process_order_without_discount_fails(), który TERAZ wywali się na czerwono.
+          <pre style="margin: 0; font-family: 'Consolas', monospace; font-size: 11.5px; color: #E2E8F0; line-height: 1.38; white-space: pre-wrap;">@debug-investigator 
+# WARIANT 1 (Agent zbiera z CLI): Uruchom polecenie `docker logs --tail 50 order-service` i zbadaj błąd.
+# WARIANT 2 (Ty wklejasz): Oto 15 linii stack trace'a z terminala oraz plik OrderService.py.
+
+NIE GENERUJ KODU NAPRAWY BIZNESOWEJ.
+1. Zrozumienie: Wskaż stan obiektu i przyczynę NullPointerException w linii 48.
+2. Reprodukcja: Napisz minimalny test test_order_without_discount_fails(), który TERAZ wywali się na czerwono.
 3. Challenging: Zakwestionuj proponowane rozwiązania — dlaczego zwykły 'if discount != null' może zamaskować błąd w bazie?
 4. Plan: Przedstaw 2-etapowy bezpieczny plan naprawy z gwarancją braku regresji.</pre>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
           
-          <div class="fragment" style="background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: 8px; padding: 10px 14px;">
-            <span style="font-size: 11px; font-weight: 800; color: #16A34A; text-transform: uppercase; display: block; margin-bottom: 3px;">🎯 Oczekiwany Rezultat (Sukces)</span>
-            <div style="font-size: 12px; color: #14532D; line-height: 1.35;">
+          <div class="fragment" style="background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: 8px; padding: 8px 12px;">
+            <span style="font-size: 11px; font-weight: 800; color: #16A34A; text-transform: uppercase; display: block; margin-bottom: 2px;">🎯 Oczekiwany Rezultat (Sukces)</span>
+            <div style="font-size: 11.5px; color: #14532D; line-height: 1.3;">
               1. Czerwony test potwierdzający błąd reprodukuje awarię 1:1.<br>
               2. Po wdrożeniu planu test przechodzi na zielono.<br>
               3. Zapisujesz instrukcję w <code>.agents/skills/debug-investigator/SKILL.md</code>.
             </div>
           </div>
 
-          <div class="fragment" style="background: #FFF1F2; border: 1.5px solid #FDA4AF; border-radius: 8px; padding: 10px 14px;">
-            <span style="font-size: 11px; font-weight: 800; color: #E11D48; text-transform: uppercase; display: block; margin-bottom: 3px;">⚠️ Czego Bezwzględnie Unikać</span>
-            <div style="font-size: 12px; color: #881337; line-height: 1.35;">
+          <div class="fragment" style="background: #FFF1F2; border: 1.5px solid #FDA4AF; border-radius: 8px; padding: 8px 12px;">
+            <span style="font-size: 11px; font-weight: 800; color: #E11D48; text-transform: uppercase; display: block; margin-bottom: 2px;">⚠️ Czego Bezwzględnie Unikać</span>
+            <div style="font-size: 11.5px; color: #881337; line-height: 1.3;">
               Wdrożenia poprawki „na czuja” bez testu regresyjnego. Za 2 tygodnie inny programista zmieni ten sam warunek i błąd wróci na produkcji.
             </div>
           </div>
