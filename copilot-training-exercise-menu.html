@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A practical menu of Microsoft Copilot and GitHub Copilot training exercises for four-hour workshops.">
+  <title>Copilot Workshop | Exercise Menu</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f3f5f0;
+      --surface: #fffefa;
+      --ink: #1d2b29;
+      --muted: #64716c;
+      --line: #d7dfd8;
+      --green: #256654;
+      --green-soft: #e3efe9;
+      --orange: #bc573d;
+      --orange-soft: #f7e9e2;
+      --blue: #34687b;
+      --blue-soft: #e5eef1;
+      --yellow: #e9c961;
+      --shadow: 0 12px 32px rgba(32, 54, 46, .07);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background-color: var(--paper);
+      background-image: repeating-linear-gradient(0deg, transparent 0 39px, rgba(47, 86, 69, .035) 39px 40px);
+      font-family: "Aptos", "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 22px 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wordmark, .eyebrow, .section-kicker, .card-index, .label, .time-mark {
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .wordmark { color: var(--green); }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 22px;
+      font-size: 13px;
+    }
+
+    nav a {
+      text-decoration: none;
+      text-underline-offset: 4px;
+    }
+
+    nav a:hover { text-decoration: underline; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+      gap: 48px;
+      align-items: end;
+      padding: 64px 0 48px;
+    }
+
+    .eyebrow { color: var(--orange); }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+    }
+
+    h1 {
+      max-width: 700px;
+      margin: 10px 0 16px;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.02;
+    }
+
+    h1 em { color: var(--green); font-weight: 400; }
+
+    .hero-copy > p {
+      max-width: 670px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-note {
+      padding: 21px 22px;
+      border-left: 4px solid var(--yellow);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-note strong {
+      display: block;
+      margin-bottom: 7px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      font-weight: 500;
+    }
+
+    .hero-note p { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fact { padding: 17px 20px 17px 0; }
+    .fact + .fact { padding-left: 20px; border-left: 1px solid var(--line); }
+    .fact b { display: block; font-size: 19px; font-weight: 700; }
+    .fact span { color: var(--muted); font-size: 12px; }
+
+    section { scroll-margin-top: 22px; }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      margin: 5px 0 0;
+      font-size: 36px;
+      line-height: 1.08;
+    }
+
+    .section-heading p {
+      max-width: 470px;
+      margin-bottom: 2px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section-kicker { color: var(--blue); }
+
+    .format-section { padding: 50px 0 58px; }
+
+    .schedule {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .schedule-item {
+      min-height: 154px;
+      padding: 19px 21px;
+    }
+
+    .schedule-item + .schedule-item { border-left: 1px solid var(--line); }
+
+    .time-mark { color: var(--orange); }
+    .schedule-item h3 { margin: 8px 0 8px; font-size: 21px; }
+    .schedule-item p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .session-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .session-strip b { color: var(--ink); }
+
+    .session-strip span {
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      background: rgba(255, 254, 250, .72);
+    }
+
+    .exercise-section { padding: 36px 0 56px; border-top: 1px solid var(--line); }
+
+    .track-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 0 0 20px;
+    }
+
+    .track-mark {
+      display: grid;
+      width: 43px;
+      aspect-ratio: 1;
+      place-items: center;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .track-mark.ms { color: var(--green); background: var(--green-soft); }
+    .track-mark.gh { color: var(--orange); background: var(--orange-soft); }
+
+    .track-header h2 { margin: 0; font-size: 31px; }
+    .track-header p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+
+    .exercise-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .exercise-card {
+      position: relative;
+      overflow: hidden;
+      padding: 22px 23px 20px;
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--green);
+      background: var(--surface);
+      box-shadow: 0 5px 16px rgba(32, 54, 46, .035);
+      break-inside: avoid;
+    }
+
+    .exercise-card.tech { border-top-color: var(--orange); }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .card-index { color: var(--muted); }
+
+    .pick {
+      flex: 0 0 auto;
+      padding: 4px 8px;
+      border: 1px solid #d5e5db;
+      color: var(--green);
+      background: var(--green-soft);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .tech .pick { border-color: #efd6ca; color: var(--orange); background: var(--orange-soft); }
+
+    .exercise-card h3 { margin: 6px 0 8px; font-size: 25px; line-height: 1.13; }
+    .scenario { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .card-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 17px 0 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .label { display: block; margin-bottom: 5px; color: var(--blue); }
+    .card-details p { margin: 0; font-size: 13px; }
+
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      color: #43504b;
+      background: #f7f8f4;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .review-line {
+      margin: 14px 0 0;
+      padding: 10px 11px;
+      border-left: 3px solid var(--yellow);
+      background: #faf6e9;
+      color: #555446;
+      font-size: 12px;
+    }
+
+    .review-line b { color: var(--ink); }
+
+    .setup-note {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 18px;
+      margin-top: 20px;
+      padding: 19px 21px;
+      color: #f7f8f2;
+      background: #263c37;
+    }
+
+    .setup-note h3 {
+      margin: 0;
+      color: #f0d978;
+      font-size: 20px;
+    }
+
+    .setup-note p { margin: 0; color: #e0e8e2; font-size: 13px; }
+
+    .method-section { padding: 42px 0 56px; border-top: 1px solid var(--line); }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .method-step { min-height: 140px; padding: 18px; }
+    .method-step + .method-step { border-left: 1px solid var(--line); }
+    .method-step .number { color: var(--orange); font-family: Georgia, "Times New Roman", serif; font-size: 29px; }
+    .method-step h3 { margin: 4px 0 5px; font-size: 19px; }
+    .method-step p { margin: 0; color: var(--muted); font-size: 12px; }
+
+    .guardrails {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .guardrail {
+      padding: 18px 20px;
+      border-left: 3px solid var(--blue);
+      background: var(--blue-soft);
+    }
+
+    .guardrail.caution { border-color: var(--orange); background: var(--orange-soft); }
+    .guardrail h3 { margin: 0 0 6px; font-size: 20px; }
+    .guardrail p { margin: 0; color: #46534e; font-size: 13px; }
+
+    details {
+      margin-top: 18px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 254, 250, .62);
+    }
+
+    summary {
+      padding: 15px 3px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    details p { max-width: 900px; margin: 0 3px 16px; color: var(--muted); font-size: 13px; }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 0 28px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .page { width: min(100% - 28px, 560px); }
+      .masthead { align-items: start; flex-direction: column; gap: 12px; }
+      .hero { grid-template-columns: 1fr; gap: 23px; padding: 42px 0 34px; }
+      h1 { font-size: 48px; }
+      .quick-facts { grid-template-columns: 1fr; }
+      .fact, .fact + .fact { padding: 12px 0; border-left: 0; }
+      .fact + .fact { border-top: 1px solid var(--line); }
+      .section-heading { align-items: start; flex-direction: column; gap: 9px; }
+      .section-heading h2 { font-size: 31px; }
+      .schedule, .exercise-grid, .method-grid, .guardrails { grid-template-columns: 1fr; }
+      .schedule-item { min-height: auto; }
+      .schedule-item + .schedule-item, .method-step + .method-step { border-top: 1px solid var(--line); border-left: 0; }
+      .setup-note { grid-template-columns: 1fr; gap: 7px; }
+      .card-details { grid-template-columns: 1fr; gap: 11px; }
+      footer { flex-direction: column; gap: 5px; }
+    }
+
+    @media print {
+      :root { --paper: #fff; --surface: #fff; }
+      body { background: #fff; font-size: 11pt; }
+      .page { width: 100%; }
+      .masthead nav { display: none; }
+      .hero { padding: 24px 0; }
+      .exercise-section, .format-section, .method-section { padding-top: 24px; padding-bottom: 24px; }
+      .exercise-card, .schedule, .method-grid, .setup-note, .guardrail { box-shadow: none; break-inside: avoid; }
+      a { text-decoration: none; }
+      details > *:not(summary) { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="masthead">
+      <div class="wordmark">Copilot workshop / field notes</div>
+      <nav aria-label="Page sections">
+        <a href="#format">Four-hour format</a>
+        <a href="#microsoft">Microsoft Copilot</a>
+        <a href="#github">GitHub Copilot</a>
+        <a href="#method">Exercise pattern</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <div class="eyebrow">Idea menu · practical labs · two audiences</div>
+          <h1 id="page-title">Make the work<br><em>the curriculum.</em></h1>
+          <p>Pick real, recognizable work. Give people a safe dataset and a clear finish line. Let Copilot help with the task, then spend the review finding what still needs human judgment.</p>
+        </div>
+        <aside class="hero-note">
+          <strong>Use this to choose, not to cram.</strong>
+          <p>Each track has more ideas than one session can hold. Choose three labs for the group and keep one in reserve.</p>
+        </aside>
+      </section>
+
+      <div class="quick-facts" aria-label="Workshop summary">
+        <div class="fact"><b>4 hours</b><span>for each audience group</span></div>
+        <div class="fact"><b>3 practical labs</b><span>one scenario per lab</span></div>
+        <div class="fact"><b>40 minutes</b><span>hands-on time per lab</span></div>
+      </div>
+
+      <section class="format-section" id="format" aria-labelledby="format-title">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">The session rhythm</div>
+            <h2 id="format-title">A four-hour room that stays hands-on</h2>
+          </div>
+          <p>Every lab starts with a compact story about the work, moves into practice, and ends with a review of the result.</p>
+        </div>
+        <div class="schedule">
+          <article class="schedule-item">
+            <div class="time-mark">00:00–00:10 · Set the room</div>
+            <h3>Baseline and boundaries</h3>
+            <p>What people do today, what data is safe to use, and what a good result must include.</p>
+          </article>
+          <article class="schedule-item">
+            <div class="time-mark">Three lab cycles</div>
+            <h3>12 + 40 + 10 minutes</h3>
+            <p>12-minute situation and AI opportunity; 40-minute exercise; 10-minute review and discussion.</p>
+          </article>
+          <article class="schedule-item">
+            <div class="time-mark">00:10–04:00 · With two 10-minute breaks</div>
+            <h3>Three cycles + transfer</h3>
+            <p>Three 62-minute labs, two breaks, a 10-minute opening, and 24 minutes to compare results and choose a next workflow.</p>
+          </article>
+        </div>
+        <div class="session-strip">
+          <b>Simple loop:</b>
+          <span>12 min · Set the scene</span>
+          <span>40 min · Try the work</span>
+          <span>10 min · Inspect and learn</span>
+          <span>24 min · Take it back to work</span>
+        </div>
+      </section>
+
+      <section class="exercise-section" id="microsoft" aria-labelledby="microsoft-title">
+        <div class="track-header">
+          <div class="track-mark ms" aria-hidden="true">M365</div>
+          <div>
+            <h2 id="microsoft-title">Non-technical · Microsoft Copilot</h2>
+            <p>Good materials: a sanitized Jira export, a small source pack, a sample spreadsheet, or approved meeting notes.</p>
+          </div>
+        </div>
+
+        <div class="exercise-grid">
+          <article class="exercise-card">
+            <div class="card-head">
+              <div><div class="card-index">Lab idea 01 · Jira to presentation</div><h3>Turn scattered tickets into a clear story</h3></div>
+              <span class="pick">Strong starter</span>
+            </div>
+            <p class="scenario"><b>Scene:</b> A project update is due, but status, blockers, owners, and dates are spread across Jira issues.</p>
+            <div class="card-details">
+              <div><span class="label">Try</span><p>Give Copilot a small approved export or curated issue pack. Ask it to identify missing context before drafting.</p></div>
+              <div><span class="label">Leave with</span><p>A one-page update and a 3-slide presentation outline, with each claim traceable to a ticket.</p></div>
+            </div>
+            <ol class="steps"><li>Set audience + reporting period</li><li>Build a fact / source list</li><li>Draft, critique, refine</li></ol>
+            <p class="review-line"><b>Review:</b> Are blockers and unknowns visible? Can a reader trace dates, owners, and status back to the source?</p>
+          </article>
+
+          <article class="exercise-card">
+            <div class="card-head">
+              <div><div class="card-index">Lab idea 02 · Notebook to document</div><h3>Build a useful guide from a source pack</h3></div>
+              <span class="pick">Strong starter</span>
+            </div>
+            <p class="scenario"><b>Scene:</b> A teammate needs a reliable how-to from several approved project documents, not another long chat answer.</p>
+            <div class="card-details">
+              <div><span class="label">Try</span><p>Collect the right sources, ask focused questions, identify gaps, then iterate the guide for its intended reader.</p></div>
+              <div><span class="label">Leave with</span><p>A one-page guide with steps, exceptions, source links, and unanswered questions.</p></div>
+            </div>
+            <ol class="steps"><li>Choose sources</li><li>Ask before drafting</li><li>Check, then simplify</li></ol>
+            <p class="review-line"><b>Review:</b> Is each important instruction supported? Did the rewrite make the guide clearer without losing a caveat?</p>
+          </article>
+
+          <article class="exercise-card">
+            <div class="card-head">
+              <div><div class="card-index">Lab idea 03 · Excel to action</div><h3>Find the exceptions, explain the pattern</h3></div>
+              <span class="pick">Strong starter</span>
+            </div>
+            <p class="scenario"><b>Scene:</b> A spreadsheet has a backlog, correspondence log, or workload estimate that takes too long to scan manually.</p>
+            <div class="card-details">
+              <div><span class="label">Try</span><p>Ask what the columns mean, look for overdue or unusual rows, and request a concise explanation with the method shown.</p></div>
+              <div><span class="label">Leave with</span><p>A checked exception list and a short manager-ready summary of what needs attention.</p></div>
+            </div>
+            <ol class="steps"><li>Clarify the question</li><li>Inspect the calculation</li><li>Verify selected rows</li></ol>
+            <p class="review-line"><b>Review:</b> Do filters, formulas, and sample rows support the summary? What can the data not tell us?</p>
+          </article>
+
+          <article class="exercise-card">
+            <div class="card-head">
+              <div><div class="card-index">Lab idea 04 · Teams to follow-up</div><h3>Turn meeting notes into owned actions</h3></div>
+              <span class="pick">Alternate</span>
+            </div>
+            <p class="scenario"><b>Scene:</b> A useful meeting ends, but decisions and next steps disappear into a transcript and a busy inbox.</p>
+            <div class="card-details">
+              <div><span class="label">Try</span><p>Extract decisions, owners, due dates, and open questions; draft a follow-up in the right tone.</p></div>
+              <div><span class="label">Leave with</span><p>An action register and a review-ready email, not an automatically sent message.</p></div>
+            </div>
+            <ol class="steps"><li>Separate decision from idea</li><li>Flag missing owners</li><li>Review before sending</li></ol>
+            <p class="review-line"><b>Review:</b> Did Copilot invent an owner, deadline, or commitment? Are transcript access and meeting settings appropriate?</p>
+          </article>
+        </div>
+
+        <div class="setup-note">
+          <h3>Microsoft tool notes</h3>
+          <p>Try the experience participants actually have: Copilot Chat, Word, Excel, PowerPoint, or Teams. Copilot Notebooks and Pages are good source-and-document exercises when enabled. For Jira or Confluence, use an approved connector only if confirmed; otherwise bring a sanitized export. Verify licenses, tenant settings, source permissions, and sharing before the workshop.</p>
+        </div>
+      </section>
+
+      <section class="exercise-section" id="github" aria-labelledby="github-title">
+        <div class="track-header">
+          <div class="track-mark gh" aria-hidden="true">GH</div>
+          <div>
+            <h2 id="github-title">Technical · GitHub Copilot</h2>
+            <p>Good materials: a small sandbox repository, one bounded Jira issue, a known test gap, and a seeded pull-request diff.</p>
+          </div>
+        </div>
+
+        <div class="exercise-grid">
+          <article class="exercise-card tech">
+            <div class="card-head">
+              <div><div class="card-index">Lab idea 01 · Ticket to tested slice</div><h3>Turn a Jira request into a small, checked change</h3></div>
+              <span class="pick">Strong starter</span>
+            </div>
+            <p class="scenario"><b>Scene:</b> A short Jira ticket leaves implementation details open, and the developer needs to turn it into a safe plan before coding.</p>
+            <div class="card-details">
+              <div><span class="label">Try</span><p>Collect ticket + repo context; write acceptance criteria and open questions; plan; implement one small slice; run checks.</p></div>
+              <div><span class="label">Leave with</span><p>A reviewable diff, meaningful tests, and a short note explaining assumptions and evidence.</p></div>
+            </div>
+            <ol class="steps"><li>Ask for missing context</li><li>Spec before code</li><li>Test and inspect diff</li></ol>
+            <p class="review-line"><b>Review:</b> Did the code meet the acceptance criteria? Which assumption should have been a question?</p>
+          </article>
+
+          <article class="exercise-card tech">
+            <div class="card-head">
+              <div><div class="card-index">Lab idea 02 · CLI + skill + Jira</div><h3>Close the ticket loop from the console</h3></div>
+              <span class="pick">Strong starter</span>
+            </div>
+            <p class="scenario"><b>Scene:</b> The change is done, but the ticket still needs a useful update grounded in actual code and test results.</p>
+            <div class="card-details">
+              <div><span class="label">Try</span><p>Use a team skill to gather issue, diff, and test context; draft a Jira comment; preview it; require a person to approve any write.</p></div>
+              <div><span class="label">Leave with</span><p>A reusable skill outline and a safe console workflow: read → summarize → preview → approve → update.</p></div>
+            </div>
+            <ol class="steps"><li>Start read-only</li><li>Show a dry run</li><li>Human approves write</li></ol>
+            <p class="review-line"><b>Review:</b> Is every claim backed by a test or diff? Could the skill accidentally post secrets or overwrite a useful update?</p>
+          </article>
+
+          <article class="exercise-card tech">
+            <div class="card-head">
+              <div><div class="card-index">Lab idea 03 · Adversarial code review</div><h3>Review a pull request like a skeptic</h3></div>
+              <span class="pick">Strong starter</span>
+            </div>
+            <p class="scenario"><b>Scene:</b> A pull request looks plausible, but it contains one real defect and one tempting false alarm.</p>
+            <div class="card-details">
+              <div><span class="label">Try</span><p>Give Copilot the diff, ticket criteria, and test output. Ask for prioritized findings with evidence, impact, and a verification idea.</p></div>
+              <div><span class="label">Leave with</span><p>A review that distinguishes a real issue from speculation and names the missing test.</p></div>
+            </div>
+            <ol class="steps"><li>Find evidence in diff</li><li>Challenge each finding</li><li>Verify before accepting</li></ol>
+            <p class="review-line"><b>Review:</b> Were findings actionable and correct? Did the reviewer miss a security or behavior regression?</p>
+          </article>
+
+          <article class="exercise-card tech">
+            <div class="card-head">
+              <div><div class="card-index">Lab idea 04 · Models and loops</div><h3>Compare models on one real task</h3></div>
+              <span class="pick">Alternate</span>
+            </div>
+            <p class="scenario"><b>Scene:</b> The team debates which model is best, but has no shared task or review criteria.</p>
+            <div class="card-details">
+              <div><span class="label">Try</span><p>Run the same bounded task with two available models. Use `/goal` to keep the objective explicit and `/loop` to iterate on checks if supported.</p></div>
+              <div><span class="label">Leave with</span><p>A small scorecard for correctness, test quality, review effort, latency, and usage limits.</p></div>
+            </div>
+            <ol class="steps"><li>Same prompt + context</li><li>Same acceptance tests</li><li>Compare reviewed output</li></ol>
+            <p class="review-line"><b>Review:</b> Which model helped this task, under these constraints? Avoid declaring a universal winner.</p>
+          </article>
+        </div>
+
+        <div class="setup-note">
+          <h3>CLI + skill boundary</h3>
+          <p>GitHub Copilot CLI provides the assistant workflow; Jira access comes from a separately approved Jira CLI, MCP server, API, or connector. Keep the exercise read-only or in a sandbox first, preview every change, and require explicit approval before posting. Check the installed CLI's help for `/goal` and `/loop`; command availability and behavior vary by version and configuration.</p>
+        </div>
+      </section>
+
+      <section class="method-section" id="method" aria-labelledby="method-title">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">A repeatable exercise pattern</div>
+            <h2 id="method-title">Collect context. Shape it. Improve it.</h2>
+          </div>
+          <p>Use the same visible method in both groups. The tools differ; the quality habit is shared.</p>
+        </div>
+
+        <div class="method-grid">
+          <article class="method-step"><div class="number">01</div><h3>Collect</h3><p>Goal, audience, source, timeframe, constraints, and what is unknown.</p></article>
+          <article class="method-step"><div class="number">02</div><h3>Structure</h3><p>Ask questions first. Turn the request into criteria, steps, and a finish line.</p></article>
+          <article class="method-step"><div class="number">03</div><h3>Draft or build</h3><p>Make one useful version or small code change. Keep facts tied to sources.</p></article>
+          <article class="method-step"><div class="number">04</div><h3>Challenge</h3><p>Check evidence, gaps, tests, audience fit, and what still needs a person.</p></article>
+        </div>
+
+        <div class="guardrails">
+          <article class="guardrail">
+            <h3>Good 12-minute setup</h3>
+            <p>Tell a specific work story: what is slow or unclear today, what data is available, where AI may help, and what a successful result looks like. Keep the pitch grounded in the group's own tasks.</p>
+          </article>
+          <article class="guardrail caution">
+            <h3>Keep the room safe</h3>
+            <p>Use synthetic or sanitized material. Do not connect customer systems or enable write actions just for a demo. Keep legal, financial, security, and code-approval decisions with qualified people.</p>
+          </article>
+        </div>
+
+        <details>
+          <summary>Facilitator setup checklist</summary>
+          <p>Confirm the exact Copilot licenses and feature availability; prepare a no-login fallback dataset; create a sandbox Jira project and repository if using integrations; check CLI commands and skill loading on the training machines; seed one correct answer and one realistic failure; define the review rubric before the session.</p>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      <span>Copilot workshop · exercise menu for discussion</span>
+      <span>Feature availability, licenses, and approved integrations vary by environment.</span>
+    </footer>
+  </div>
+</body>
+</html>

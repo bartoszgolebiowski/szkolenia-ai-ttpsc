@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Detailed technical GitHub Copilot scenario examples with before-and-after workflows and trainee benefits.">
+  <title>GitHub Copilot | Scenario Examples</title>
+  <link rel="stylesheet" href="scenario-pages.css">
+</head>
+<body class="technical">
+  <div class="page">
+    <header class="masthead">
+      <div class="brand">Copilot training · scenario detail</div>
+      <nav aria-label="Scenario pages">
+        <a href="../copilot-pain-point-shortlist.html">Pain-point shortlist</a>
+        <a href="microsoft-copilot.html">Non-technical examples</a>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="eyebrow">Technical group · GitHub Copilot</div>
+        <h1>Keep the developer<br><em>in the loop.</em></h1>
+        <p class="intro">Each example compares the usual engineering workflow with a Copilot-assisted option. The developer still owns the plan, diff, tests, and final decision. Use a sandbox repository and approved context.</p>
+        <div class="session-rhythm" aria-label="Suggested timing">
+          <span><b>10–15 min</b> situation + AI opportunity</span>
+          <span><b>30–40 min</b> hands-on task</span>
+          <span><b>10 min</b> review and discussion</span>
+        </div>
+      </section>
+      <p class="notice"><strong>How to read these:</strong> Copilot features vary by IDE, subscription, organization policy, and configuration. It only has the repository or tool context available to the user. Never send restricted client data to an unapproved service.</p>
+      <div class="section-label">Jump to an example</div>
+      <nav class="jump-nav" aria-label="GitHub Copilot examples">
+        <a href="#T1">T1 · Debug</a><a href="#T2">T2 · Tests</a><a href="#T3">T3 · Review</a><a href="#T4">T4 · Refactor</a><a href="#T5">T5 · SQL</a><a href="#T6">T6 · Jira tasks</a><a href="#T7">T7 · Repository</a><a href="#T8">T8 · Business update</a><a href="#T9">T9 · Client rules</a>
+      </nav>
+
+      <article class="example-card" id="T1">
+        <div class="example-head"><div><span class="evidence">Repeated signal</span><h2>Find the cause of a failing test</h2><p class="scene"><strong>Situation:</strong> A release candidate is nearly ready, but one unit test has started failing after a recent change. The stack trace points through several layers and the pull request is waiting. You need to find the smallest useful next check without guessing at a fix or pasting sensitive production logs into chat.</p></div><a class="back-link" href="../copilot-pain-point-shortlist.html#T1">Back to T1</a></div>
+        <div class="comparison">
+          <section class="work-panel"><h3>Without AI</h3><ol><li>Reproduce the failure and inspect the trace.</li><li>Trace the code path and form a cause hypothesis.</li><li>Add a check or change, then rerun the test.</li></ol><p class="friction"><strong>Pain:</strong> It can take several rounds to separate symptoms from the cause.</p></section>
+          <section class="work-panel with-ai"><h3>With GitHub Copilot</h3><ol><li>Share the failing test, relevant code, and sanitized trace in Copilot Chat.</li><li>Ask for likely causes and the smallest check that distinguishes them.</li><li>Inspect the suggested code path and run the check.</li></ol><p class="friction"><strong>Tool:</strong> Copilot Chat in the IDE; it does not see runtime behavior unless relevant output is provided.</p></section>
+        </div>
+        <div class="takeaways"><section class="takeaway"><h3>What the trainee gains</h3><p>How to provide focused debugging context, form testable hypotheses, and verify suggestions with runtime evidence.</p></section><section class="success"><h3>Good result</h3><p>A reproduced failure, verified root cause, and targeted test that confirms the fix.</p></section></div>
+        <div class="guardrail"><p><strong>Human check:</strong> Confirm the cause from code and test results. Share only approved, sanitized logs.</p></div>
+      </article>
+
+      <article class="example-card" id="T2">
+        <div class="example-head"><div><span class="evidence direct">Directly mentioned</span><h2>Improve the quality of generated tests</h2><p class="scene"><strong>Situation:</strong> A small feature is ready for review, but its test suite covers only the happy path. A teammate previously tried AI-generated tests and found that they passed while missing important edge cases. You want useful coverage, not a larger test file that only creates confidence.</p></div><a class="back-link" href="../copilot-pain-point-shortlist.html#T2">Back to T2</a></div>
+        <div class="comparison">
+          <section class="work-panel"><h3>Without AI</h3><ol><li>Read the function and infer expected behavior.</li><li>List edge cases and write tests in the local style.</li><li>Run tests and revise weak assertions.</li></ol><p class="friction"><strong>Pain:</strong> It takes effort to find overlooked cases and match local conventions.</p></section>
+          <section class="work-panel with-ai"><h3>With GitHub Copilot</h3><ol><li>Provide the function and representative existing tests.</li><li>Ask Copilot to list missing cases before writing tests.</li><li>Review each assertion, edit it, and run the relevant test suite.</li></ol><p class="friction"><strong>Tool:</strong> Copilot Chat or inline suggestions plus the repository’s normal test runner.</p></section>
+        </div>
+        <div class="takeaways"><section class="takeaway"><h3>What the trainee gains</h3><p>How to derive tests from behavior, spot boundary cases, and judge whether an assertion proves the outcome.</p></section><section class="success"><h3>Good result</h3><p>Focused tests pass and meaningfully detect a regression in the behavior being tested.</p></section></div>
+        <div class="guardrail"><p><strong>Human check:</strong> Passing generated tests do not prove the test design is complete; review every assertion.</p></div>
+      </article>
+
+      <article class="example-card" id="T3">
+        <div class="example-head"><div><span class="evidence">Repeated signal</span><h2>Review a Copilot-assisted change</h2><p class="scene"><strong>Situation:</strong> A pull request is ready, but the author used Copilot and now worries they have missed an assumption. The reviewer has limited time and needs to focus on behavior, missing tests, and risky changes rather than stylistic nits. The goal is a better review, not an AI-generated approval.</p></div><a class="back-link" href="../copilot-pain-point-shortlist.html#T3">Back to T3</a></div>
+        <div class="comparison">
+          <section class="work-panel"><h3>Without AI</h3><ol><li>Compare the change with the ticket or requirements.</li><li>Inspect affected code and tests.</li><li>Find gaps, fix them, and rerun checks.</li></ol><p class="friction"><strong>Pain:</strong> Review effort can be high, and unstated assumptions are easy to miss.</p></section>
+          <section class="work-panel with-ai"><h3>With GitHub Copilot</h3><ol><li>Provide Copilot Chat with the ticket and relevant diff.</li><li>Ask for prioritized mismatches, missing tests, and assumptions with file-level evidence.</li><li>Verify each finding, reject speculation, and address confirmed gaps.</li></ol><p class="friction"><strong>Tool:</strong> Copilot Chat with approved diff/context; this is assistance, not an approval gate.</p></section>
+        </div>
+        <div class="takeaways"><section class="takeaway"><h3>What the trainee gains</h3><p>How to request evidence-based critique, prioritize findings, and measure whether review effort improves.</p></section><section class="success"><h3>Good result</h3><p>A verified checklist and reviewed diff, with no unresolved high-impact findings.</p></section></div>
+        <div class="guardrail"><p><strong>Human check:</strong> Treat suggestions as leads, not approval. The developer remains responsible for the change.</p></div>
+      </article>
+
+      <article class="example-card" id="T4">
+        <div class="example-head"><div><span class="evidence">Repeated signal</span><h2>Scope a safe legacy-code migration</h2><p class="scene"><strong>Situation:</strong> The team is replacing a deprecated package call with its own wrapper. A repository search finds many usages, and some callers pass different options. A global replacement looks tempting, but one missed variation could create a regression that only appears later.</p></div><a class="back-link" href="../copilot-pain-point-shortlist.html#T4">Back to T4</a></div>
+        <div class="comparison">
+          <section class="work-panel"><h3>Without AI</h3><ol><li>Search for calls and understand their variations.</li><li>Plan and perform replacements.</li><li>Review the diff and run regression tests.</li></ol><p class="friction"><strong>Pain:</strong> A broad change is risky, inconsistent, and difficult to review.</p></section>
+          <section class="work-panel with-ai"><h3>With GitHub Copilot</h3><ol><li>Ask Copilot to locate representative usages in the workspace.</li><li>Request a migration plan with variations and open questions.</li><li>Change one bounded slice, inspect it, and test before expanding.</li><li>Search for remaining old calls and review the full diff.</li></ol><p class="friction"><strong>Tool:</strong> Copilot Chat or agent mode where enabled; keep edits bounded and reviewable.</p></section>
+        </div>
+        <div class="takeaways"><section class="takeaway"><h3>What the trainee gains</h3><p>How to stage a migration, validate coverage with repository search, and review AI-generated edits.</p></section><section class="success"><h3>Good result</h3><p>A migration diff with no unintended old calls and passing targeted and regression tests.</p></section></div>
+        <div class="guardrail"><p><strong>Human check:</strong> Confirm behavior in each usage; do not accept broad edits without reviewing the full diff.</p></div>
+      </article>
+
+      <article class="example-card" id="T5">
+        <div class="example-head"><div><span class="evidence">Repeated signal</span><h2>Investigate a slow SQL job</h2><p class="scene"><strong>Situation:</strong> An Oracle job that normally completes on time occasionally exceeds its window. The team has a query, a schema summary, and an execution plan, but no reliable explanation for the timeout. You need a testable optimization idea while preserving exactly the same result.</p></div><a class="back-link" href="../copilot-pain-point-shortlist.html#T5">Back to T5</a></div>
+        <div class="comparison">
+          <section class="work-panel"><h3>Without AI</h3><ol><li>Inspect the query, schema, and execution plan.</li><li>Identify possible bottlenecks and propose a change.</li><li>Benchmark the change and compare results.</li></ol><p class="friction"><strong>Pain:</strong> Relating query structure to plan behavior can take repeated investigation.</p></section>
+          <section class="work-panel with-ai"><h3>With GitHub Copilot</h3><ol><li>Provide a sanitized query, schema summary, and execution plan in Copilot Chat.</li><li>Ask for bottleneck hypotheses, uncertainties, and a test plan.</li><li>Review the suggestion and test it in a non-production environment.</li><li>Compare performance and verify result equivalence.</li></ol><p class="friction"><strong>Tool:</strong> Copilot Chat can analyze supplied context; it is not connected to the database by default.</p></section>
+        </div>
+        <div class="takeaways"><section class="takeaway"><h3>What the trainee gains</h3><p>How to provide useful technical context, evaluate optimization ideas, and balance speed with correctness.</p></section><section class="success"><h3>Good result</h3><p>A benchmarked query change or documented hypothesis with equivalent results and measured performance.</p></section></div>
+        <div class="guardrail"><p><strong>Human check:</strong> Use approved data in non-production; verify the plan, output equivalence, and measured performance.</p></div>
+      </article>
+
+      <article class="example-card" id="T6">
+        <div class="example-head"><div><span class="evidence direct">Directly mentioned</span><h2>Turn a UI mockup into Jira-ready tasks</h2><p class="scene"><strong>Situation:</strong> A project lead hands you a screen mockup and a sentence describing the desired feature. An intern or teammate needs tasks they can start, but the mockup leaves responsive behavior, validation, and error states unclear. You want a useful first breakdown without silently turning guesses into requirements.</p></div><a class="back-link" href="../copilot-pain-point-shortlist.html#T6">Back to T6</a></div>
+        <div class="comparison">
+          <section class="work-panel"><h3>Without AI</h3><ol><li>Inspect the mockup and request.</li><li>Break work into UI, API, and supporting tasks.</li><li>Write acceptance criteria and clarify ambiguous decisions.</li></ol><p class="friction"><strong>Pain:</strong> Task breakdown is manual, and uncertainty can be mistaken for a requirement.</p></section>
+          <section class="work-panel with-ai"><h3>With GitHub Copilot</h3><ol><li>Provide an approved mockup where image input is supported, or describe relevant UI details.</li><li>Ask Copilot to draft small tasks, acceptance criteria, dependencies, and open questions.</li><li>Review drafts and resolve design decisions with the responsible people.</li><li>Prepare Jira drafts only through a separately approved CLI, MCP, or API integration.</li></ol><p class="friction"><strong>Tool:</strong> GitHub Copilot helps draft; Jira access comes from a separately approved integration.</p></section>
+        </div>
+        <div class="takeaways"><section class="takeaway"><h3>What the trainee gains</h3><p>How to turn requests into testable criteria, distinguish facts from questions, and create reviewable tasks.</p></section><section class="success"><h3>Good result</h3><p>A human-reviewed task set with clear scope, acceptance criteria, and unresolved questions called out.</p></section></div>
+        <div class="guardrail"><p><strong>Human check:</strong> A person resolves design decisions and approves every Jira write. Copilot does not grant Jira access.</p></div>
+      </article>
+
+      <article class="example-card" id="T7">
+        <div class="example-head"><div><span class="evidence direct">Directly mentioned</span><h2>Find a rule in an unfamiliar repository</h2><p class="scene"><strong>Situation:</strong> You have just joined a project and a bug report says an input is rejected, but nobody remembers which layer applies the rule. The repository has several similarly named validators and tests. You need to orient yourself before proposing a change.</p></div><a class="back-link" href="../copilot-pain-point-shortlist.html#T7">Back to T7</a></div>
+        <div class="comparison">
+          <section class="work-panel"><h3>Without AI</h3><ol><li>Search for names, error messages, or tests.</li><li>Follow references through the code.</li><li>Confirm behavior by reading or running tests.</li></ol><p class="friction"><strong>Pain:</strong> Unfamiliar names and call paths can hide the right entry point.</p></section>
+          <section class="work-panel with-ai"><h3>With GitHub Copilot</h3><ol><li>Ask Copilot Chat to locate the rule in available workspace context.</li><li>Request the likely implementation path and related tests.</li><li>Open those files, trace behavior, and run a focused check.</li></ol><p class="friction"><strong>Tool:</strong> Workspace context depends on IDE configuration and the user’s existing access.</p></section>
+        </div>
+        <div class="takeaways"><section class="takeaway"><h3>What the trainee gains</h3><p>How to ask focused repository questions and trace an explanation from implementation to tests.</p></section><section class="success"><h3>Good result</h3><p>A confirmed code path and relevant test that together explain the rule.</p></section></div>
+        <div class="guardrail"><p><strong>Human check:</strong> Validate the answer against source and tests; Copilot cannot grant access to repositories or connected systems.</p></div>
+      </article>
+
+      <article class="example-card" id="T8">
+        <div class="example-head"><div><span class="evidence direct">Directly mentioned</span><h2>Explain a technical change to a project lead</h2><p class="scene"><strong>Situation:</strong> A project lead asks what changed in the upcoming release and whether it affects a customer workflow. Your notes contain implementation details, test results, and one known limitation. You need a short explanation for the meeting that is clear without promising more than the change delivers.</p></div><a class="back-link" href="../copilot-pain-point-shortlist.html#T8">Back to T8</a></div>
+        <div class="comparison">
+          <section class="work-panel"><h3>Without AI</h3><ol><li>Gather verified change notes and release details.</li><li>Translate technical terms into plain language.</li><li>Check impact, limitations, and caveats.</li></ol><p class="friction"><strong>Pain:</strong> Simplifying without losing important constraints takes effort.</p></section>
+          <section class="work-panel with-ai"><h3>With GitHub Copilot</h3><ol><li>Provide verified change notes and identify the audience.</li><li>Ask Copilot for a plain-language draft covering impact, limitations, and risks.</li><li>Compare each claim with the source notes and revise.</li></ol><p class="friction"><strong>Tool:</strong> Copilot Chat with only the verified information you provide or authorize.</p></section>
+        </div>
+        <div class="takeaways"><section class="takeaway"><h3>What the trainee gains</h3><p>How to adapt technical detail to an audience and clearly separate fact from implication.</p></section><section class="success"><h3>Good result</h3><p>A concise, accurate summary whose claims map to verified release information.</p></section></div>
+        <div class="guardrail"><p><strong>Human check:</strong> Do not imply behavior, impact, or timelines that the code and release plan do not support.</p></div>
+      </article>
+
+      <article class="example-card" id="T9">
+        <div class="example-head"><div><span class="evidence direct">Directly mentioned</span><h2>Work within client data restrictions</h2><p class="scene"><strong>Situation:</strong> You are stuck on a client issue and Copilot could be useful, but the client has not approved the repository or data for that service. The deadline is real, yet copying code into an unapproved tool could violate the engagement rules. You need to know what safe assistance is possible—and where the boundary means stopping.</p></div><a class="back-link" href="../copilot-pain-point-shortlist.html#T9">Back to T9</a></div>
+        <div class="comparison">
+          <section class="work-panel"><h3>Without AI</h3><ol><li>Check client rules and approved tools.</li><li>Keep restricted context out of unapproved services.</li><li>Continue manually or ask about an approved environment.</li></ol><p class="friction"><strong>Pain:</strong> Missing context limits assistance, but policy remains the boundary.</p></section>
+          <section class="work-panel with-ai"><h3>With GitHub Copilot</h3><ol><li>Do not provide restricted code, data, or prompts to an unapproved tool.</li><li>Practice the workflow in a public or synthetic repository.</li><li>Use client material only in an explicitly approved environment.</li><li>Confirm approval before enabling any integration.</li></ol><p class="friction"><strong>Tool:</strong> Copilot only where expressly approved; otherwise use synthetic/public material for practice.</p></section>
+        </div>
+        <div class="takeaways"><section class="takeaway"><h3>What the trainee gains</h3><p>How to recognize data boundaries, choose safe practice material, and verify tool approval before use.</p></section><section class="success"><h3>Good result</h3><p>A demonstrated workflow using synthetic/public data or an explicitly approved client environment.</p></section></div>
+        <div class="guardrail"><p><strong>Human check:</strong> Copilot cannot bypass client rules. Use synthetic/public data unless an approved client environment exists.</p></div>
+      </article>
+    </main>
+    <footer class="page-footer"><span>GitHub Copilot · scenario detail</span><span><a href="../copilot-pain-point-shortlist.html">Return to the pain-point shortlist</a></span></footer>
+  </div>
+</body>
+</html>

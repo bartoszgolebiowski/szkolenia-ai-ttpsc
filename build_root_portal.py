@@ -1,0 +1,386 @@
+import os
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")
+
+portal_content = """<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transition Technologies PSC · Akademia AI & Copilot</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #2B0D30;
+      --primary: #7B2D85;
+      --primary-light: #ECD3ED;
+      --accent: #D03A8C;
+      --success: #64B237;
+      --text-dark: #1F1F1F;
+      --text-muted: #6B7280;
+      --border-light: #E2E8F0;
+      --bg-light: #FBF7FB;
+      --white: #FFFFFF;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.5;
+      padding: 0 0 60px 0;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, #2B0D30 0%, #4A1A52 50%, #7B2D85 100%);
+      color: #FFFFFF;
+      padding: 60px 24px 50px;
+      text-align: center;
+      border-bottom: 4px solid var(--accent);
+    }
+    .hero-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .kicker {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+    .subtitle {
+      font-size: clamp(16px, 2vw, 20px);
+      color: #ECD3ED;
+      max-width: 840px;
+      margin: 0 auto 30px;
+      line-height: 1.45;
+    }
+    .badge-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      font-size: 13px;
+    }
+    .badge-item {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 14px;
+      border-radius: 20px;
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    .main-container {
+      max-width: 1240px;
+      margin: -25px auto 0;
+      padding: 0 20px;
+    }
+
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+
+    .track-card {
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 10px 30px rgba(43, 13, 48, 0.08);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .track-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(43, 13, 48, 0.14);
+    }
+    .track-card.tech {
+      border-top: 6px solid #7B2D85;
+    }
+    .track-card.non-tech {
+      border-top: 6px solid #256654;
+    }
+
+    .track-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .tech .track-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+    .non-tech .track-tag {
+      background: #E3EFE9;
+      color: #256654;
+    }
+
+    .track-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .track-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      text-align: center;
+      padding: 14px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+    .tech .btn-primary {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+    .non-tech .btn-primary {
+      background: #256654;
+      color: #FFFFFF;
+    }
+
+    .case-list-preview {
+      margin-top: 20px;
+      border-top: 1px solid var(--border-light);
+      padding-top: 16px;
+      font-size: 13px;
+    }
+    .case-list-preview strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .case-link-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      color: #334155;
+      text-decoration: none;
+      border-bottom: 1px dashed #F1F5F9;
+    }
+    .case-link-item:hover {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .info-panel {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+    .info-panel h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: var(--bg-dark);
+    }
+
+    .shortcuts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      font-size: 13px;
+    }
+    .shortcut-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .shortcut-card kbd {
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--primary);
+    }
+
+    @media (max-width: 840px) {
+      .tracks-grid { grid-template-columns: 1fr; }
+      .main-container { margin-top: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero-banner">
+    <div class="hero-inner">
+      <span class="kicker">TRANSITION TECHNOLOGIES PSC // AKADEMIA AI 2026</span>
+      <h1>Ekosystem Prezentacji Warsztatowych AI</h1>
+      <p class="subtitle">Interaktywne, jedno-plikowe prezentacje biznesowo-techniczne z wektorowymi diagramami Inline SVG. Opracowane w standardzie McKinsey/BCG dla 4-godzinnych szkoleń praktycznych.</p>
+      
+      <div class="badge-strip">
+        <span class="badge-item">★ 2 Ścieżki Kompetencyjne</span>
+        <span class="badge-item">★ 20 Dedykowanych Prezentacji</span>
+        <span class="badge-item">★ Text-Free Inline SVG</span>
+        <span class="badge-item">★ Motyw Domyślny TTPSC</span>
+        <span class="badge-item">★ Obsługa Druku PDF</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <div class="tracks-grid">
+
+      <!-- ŚCIEŻKA TECHNICZNA -->
+      <section class="track-card tech">
+        <div>
+          <span class="track-tag">ŚCIEŻKA DLA PROGRAMISTÓW // IDE & CLI</span>
+          <h2 class="track-title">Zespoły Inżynieryjne (Technical Track)</h2>
+          <p class="track-desc">Szkolenie skupione na GitHub Copilot, zamykaniu pętli zadania z konsoli CLI (polecenia <code>/goal</code> i <code>/loop</code>), zaawansowanej diagnostyce błędu oraz tworzeniu wartościowych testów jednostkowych.</p>
+          
+          <a href="technical-trainee/index.html" class="btn-primary" style="width: 100%; margin-bottom: 20px;">
+            Otwórz Portal Inżynierski (Katalog Slajdów) →
+          </a>
+
+          <div style="background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+            <a href="technical-trainee/00-master-1h-training.html" style="text-decoration: none; color: inherit; display: block;">
+              <span style="font-size: 11px; font-weight: 800; color: #7B2D85; text-transform: uppercase;">★ Prezentacja Główna (1h Keynote)</span>
+              <div style="font-weight: 700; font-size: 15px; color: #1F1F1F; margin-top: 2px;">00. GitHub Copilot w Inżynierii Oprogramowania</div>
+              <div style="font-size: 12px; color: #64748B; margin-top: 4px;">11 slajdów: ankieta TTPSC, pipeline 4h, Ishikawa, Double Diamond, CTA.</div>
+            </a>
+          </div>
+
+          <div class="case-list-preview">
+            <strong>9 Modułów Laboratoryjnych (T1 – T9):</strong>
+            <a class="case-link-item" href="technical-trainee/case-01-failing-test-debug.html"><span>T1 · Diagnostyka Czerwonego Testu</span><span>-70% czasu →</span></a>
+            <a class="case-link-item" href="technical-trainee/case-02-test-quality.html"><span>T2 · Jakość Generowanych Testów</span><span>+85% pokrycia →</span></a>
+            <a class="case-link-item" href="technical-trainee/case-03-code-review.html"><span>T3 · Sceptyczny Audyt PR</span><span>2.5x precyzja →</span></a>
+            <a class="case-link-item" href="technical-trainee/case-04-legacy-refactor.html"><span>T4 · Bezpieczna Migracja Legacy</span><span>-50% ryzyka →</span></a>
+            <a class="case-link-item" href="technical-trainee/case-05-slow-sql-optimization.html"><span>T5 · Optymalizacja Oracle SQL</span><span>-80% czasu →</span></a>
+            <a class="case-link-item" href="technical-trainee/case-06-mockup-to-jira.html"><span>T6 · Makieta UI na Zadania Jira</span><span>4x szybciej →</span></a>
+            <a class="case-link-item" href="technical-trainee/case-07-unfamiliar-repo.html"><span>T7 · Nowe Repozytorium (@workspace)</span><span>-65% czasu →</span></a>
+            <a class="case-link-item" href="technical-trainee/case-08-technical-to-business-update.html"><span>T8 · Tłumaczenie Kodu na Biznes</span><span>3x klarowniej →</span></a>
+            <a class="case-link-item" href="technical-trainee/case-09-client-restrictions-security.html"><span>T9 · Reżim Ograniczeń NDA i Sandbox</span><span>100% zgodności →</span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ŚCIEŻKA BIZNESOWA -->
+      <section class="track-card non-tech">
+        <div>
+          <span class="track-tag">ŚCIEŻKA DLA BIZNESU // MICROSOFT 365</span>
+          <h2 class="track-title">Zespoły Biznesowe (Non-Technical Track)</h2>
+          <p class="track-desc">Szkolenie dedykowane analitykom, PM, liderom i specjalistom operacyjnym. Obejmuje Microsoft 365 Copilot w Word, Excel, PowerPoint i Teams, uziemienie w SharePoint oraz pracę bez halucynacji.</p>
+          
+          <a href="non-technical-trainee/index.html" class="btn-primary" style="width: 100%; margin-bottom: 20px;">
+            Otwórz Portal Biznesowy (Katalog Slajdów) →
+          </a>
+
+          <div style="background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+            <a href="non-technical-trainee/00-master-1h-training.html" style="text-decoration: none; color: inherit; display: block;">
+              <span style="font-size: 11px; font-weight: 800; color: #256654; text-transform: uppercase;">★ Prezentacja Główna (1h Keynote)</span>
+              <div style="font-weight: 700; font-size: 15px; color: #1F1F1F; margin-top: 2px;">00. Microsoft Copilot w Pracy Biznesowej</div>
+              <div style="font-size: 12px; color: #64748B; margin-top: 4px;">11 slajdów: ankieta M365, błąd braku źródła, most transformacji, CTA.</div>
+            </a>
+          </div>
+
+          <div class="case-list-preview">
+            <strong>9 Modułów Laboratoryjnych (N1 – N9):</strong>
+            <a class="case-link-item" href="non-technical-trainee/case-01-long-agreement-contract.html"><span>N1 · Kluczowe Zapisy w Umowach</span><span>-75% czasu →</span></a>
+            <a class="case-link-item" href="non-technical-trainee/case-02-correspondence-register.html"><span>N2 · Rejestr Pism z SharePoint</span><span>5x szybciej →</span></a>
+            <a class="case-link-item" href="non-technical-trainee/case-03-source-access-sharepoint.html"><span>N3 · Uprawnienia i Oficjalne Źródło</span><span>100% pewności →</span></a>
+            <a class="case-link-item" href="non-technical-trainee/case-04-weekly-update-drafting.html"><span>N4 · Raport Tygodniowy dla Zarządu</span><span>-70% czasu →</span></a>
+            <a class="case-link-item" href="non-technical-trainee/case-05-spreadsheet-overdue-analysis.html"><span>N5 · Zaległości i Formuły w Excel</span><span>3x szybciej →</span></a>
+            <a class="case-link-item" href="non-technical-trainee/case-06-meeting-actions-follow-up.html"><span>N6 · Notatki Teams na Rejestr Zadań</span><span>-85% czasu →</span></a>
+            <a class="case-link-item" href="non-technical-trainee/case-07-report-to-presentation.html"><span>N7 · Raport 40 Stron na 5 Slajdów</span><span>4x lepszy odbiór →</span></a>
+            <a class="case-link-item" href="non-technical-trainee/case-08-customer-meeting-prep.html"><span>N8 · Rozmowa B2B w Trudnej Sytuacji</span><span>100% kontroli →</span></a>
+            <a class="case-link-item" href="non-technical-trainee/case-09-estimating-implementation-work.html"><span>N9 · Wycena Wdrożeń i Struktura WBS</span><span>-70% czasu →</span></a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- PANEL SKRÓTÓW I INFORMACJI -->
+    <section class="info-panel">
+      <h3>Narzędzia Prezentera i Skróty Klawiszowe w Prezentacjach</h3>
+      <div class="shortcuts-grid">
+        <div class="shortcut-card">
+          <p><kbd>Spacja</kbd> lub <kbd>→</kbd></p>
+          <p>Odsłania kolejny element animowany (<code>.fragment</code>) lub przełącza na kolejny slajd.</p>
+        </div>
+        <div class="shortcut-card">
+          <p><kbd>G</kbd> lub <kbd>Esc</kbd></p>
+          <p>Przełącza interaktywny widok siatki (Grid View) ze wszystkimi miniaturami slajdów.</p>
+        </div>
+        <div class="shortcut-card">
+          <p><kbd>Alt + A</kbd></p>
+          <p>Otwiera dyskretny Panel Administratora (wybór motywów: TTPSC, PwC, CyberArk, Palo Alto, próbniki kolorów).</p>
+        </div>
+        <div class="shortcut-card">
+          <p><kbd>H</kbd></p>
+          <p>Ukrywa lub pokazuje dolny pływający pasek kontrolek (tryb czystego ekranu przed uczestnikami).</p>
+        </div>
+        <div class="shortcut-card">
+          <p><kbd>F</kbd></p>
+          <p>Przełącza tryb pełnoekranowy przeglądarki (Fullscreen API).</p>
+        </div>
+        <div class="shortcut-card">
+          <p><kbd>Ctrl + P</kbd></p>
+          <p>Gotowy eksport do PDF dzięki dedykowanym stylom druku <code>@media print</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer style="text-align: center; color: var(--text-muted); font-size: 13px; padding-top: 20px;">
+      Transition Technologies PSC · Wszelkie Prawa Zastrzeżone · 2026
+    </footer>
+
+  </main>
+
+</body>
+</html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(portal_content)
+
+print("Master root index.html generated successfully.")
