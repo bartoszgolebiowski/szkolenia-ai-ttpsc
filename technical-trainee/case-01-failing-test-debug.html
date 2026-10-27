@@ -556,172 +556,235 @@
     <!-- SLIDE 1: ŻYCIOWY PUNKT WYJŚCIA -->
     <div class="slide-container slide-dark" data-title="CASE T1: Czerwony Test na 15 Minut Przed Releasem" data-type="Wprowadzenie">
       <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 980px; z-index: 2;">
-        <span class="slide-kicker" style="color: var(--accent); letter-spacing: 0.12em; margin-bottom: 12px;">CASE T1 // GITHUB COPILOT W PRAKTYCE</span>
-        <h1 style="font-size: 38px; font-weight: 800; line-height: 1.18; color: var(--text-light); margin-bottom: 20px;">Czerwony Test na 15 Minut Przed Releasem</h1>
+        <span class="slide-kicker" style="color: var(--accent); letter-spacing: 0.12em; margin-bottom: 12px;">CASE T1 // DIAGNOSTYKA BŁĘDÓW & DEDYKOWANY SKILL</span>
+        <h1 style="font-size: 38px; font-weight: 800; line-height: 1.18; color: var(--text-light); margin-bottom: 20px;">Czerwony Test na 15 Minut Przed Releasem: Od Logów do Testu Regresyjnego</h1>
         
-        <div style="background: rgba(255, 255, 255, 0.08); border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0; padding: 18px 24px; margin-bottom: 26px;">
+        <div style="background: rgba(255, 255, 255, 0.08); border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0; padding: 18px 24px; margin-bottom: 24px;">
           <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 6px;">
-            💬 SYTUACJA Z ŻYCIA: "Piątek, 15:45 i czerwony pipeline"
+            💬 SYTUACJA Z ŻYCIA: "PIĄTEK, 15:45 I CZERWONY PIPELINE"
           </div>
           <p style="font-size: 17px; line-height: 1.48; color: #F1F5F9; margin: 0;">
-            Chcesz wdrożyć poprawkę i wyjść z pracy. Nagle test integracyjny wywala się z 80 liniami czerwonego błędu w terminalu. Wklejasz go w panice do Copilota z hasłem 'napraw to', a on podmienia pół klasy i psuje kolejne 3 moduły.
+            Chcesz zamknąć sprint i zrobić deploy. Nagle test integracyjny wywala się z 80 liniami czerwonego błędu w terminalu. Zamiast panikować i wklejać do AI hasło „napraw to”, wyciągamy prawdziwe logi z Dockera lub CloudWatcha, piszemy test regresyjny i tworzymy własny <strong>Skill</strong>, który zabezpiecza zespół na przyszłość.
           </p>
         </div>
 
-        <div style="display: flex; gap: 24px; align-items: center; border-top: 1px solid var(--border-dark); padding-top: 18px;">
-          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Format</span><strong style="font-size: 14px; color: var(--text-light);">12 minut ćwiczenia</strong></div>
-          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Złota Zasada</span><strong style="font-size: 14px; color: var(--accent);">Najpierw PLAN, potem KOD</strong></div>
-          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Cel</span><strong style="font-size: 14px; color: var(--text-light);">Czysty kod bez zgadywania</strong></div>
+        <div style="display: flex; gap: 24px; align-items: center; border-top: 1px solid var(--border-dark); padding-top: 16px;">
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Format</span><strong style="font-size: 14px; color: var(--text-light);">15 minut praktyki</strong></div>
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Źródła Danych</span><strong style="font-size: 14px; color: var(--accent);">Docker, CloudWatch, Datadog</strong></div>
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Metoda</span><strong style="font-size: 14px; color: var(--text-light);">Zrozum → Odtwórz → Plan & Challenge → Test Regresyjny</strong></div>
         </div>
       </div>
       <div class="slide-footer">
         <span style="color: var(--text-light-muted);">TTPSC TECHNICAL TRAINING // 2026</span>
-        <span style="color: var(--text-light-muted);">Slajd 1 / 4</span>
+        <span style="color: var(--text-light-muted);">Slajd 1 / 5</span>
       </div>
     </div>
     
 
-    <!-- SLIDE 2: ZDERZENIE RZECZYWISTOŚCI -->
-    <div class="slide-container" data-title="Zderzenie rzeczywistości: Jak robisz to dziś vs z AI" data-type="Zderzenie">
+    <!-- SLIDE 2: ŹRÓDŁA LOGÓW -->
+    <div class="slide-container" data-title="Skąd wziąć fakty? Czytanie logów u źródła" data-type="Źródła Logów">
       <header class="slide-header">
-        <span class="slide-kicker">ZDERZENIE RZECZYWISTOŚCI // GDZIE TRACIMY CZAS?</span>
-        <h2 class="slide-title">Jak Robisz To Dzisiaj vs. Jak Zrobisz To z Copilotem</h2>
-      </header>
-      <div class="slide-body" style="justify-content: center;">
-        <div style="display: grid; grid-template-columns: 1fr 50px 1fr; gap: 16px; align-items: center; width: 100%;">
-          
-          <div class="fragment" style="background: #FFF5F5; border: 1.5px solid #FCA5A5; border-radius: 12px; padding: 22px; height: 100%; display: flex; flex-direction: column;">
-            <div style="display: inline-block; padding: 4px 10px; background: #FEE2E2; color: #DC2626; font-size: 11px; font-weight: 800; border-radius: 4px; text-transform: uppercase; margin-bottom: 10px; width: fit-content;">
-              ❌ DZIŚ: FRUSTRACJA I CHAOS
-            </div>
-            <h3 style="font-size: 18px; font-weight: 800; color: #991B1B; margin-bottom: 14px;">Dlaczego tracisz 40 minut na debugowanie?</h3>
-            <ul style="margin: 0; padding-left: 18px; font-size: 13.5px; color: #450A0A; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
-              <li style='margin-bottom: 8px;'>Wklejasz cały 80-liniowy stack trace bez podania kontekstu i pliku</li><li style='margin-bottom: 8px;'>Pytasz ogólnie 'gdzie jest błąd i napraw', więc AI strzela w ciemno</li><li style='margin-bottom: 8px;'>Wciskasz Tab bez czytania i tracisz czas na odkręcanie zmian w gicie</li>
-            </ul>
-          </div>
-
-          <div style="display: flex; justify-content: center; align-items: center;">
-            <svg viewBox="0 0 50 40" style="width: 44px; height: 34px;">
-              <defs>
-                <marker id="arrow_t_CASE T1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                  <polygon points="0 1, 8 4, 0 7" fill="var(--primary)" />
-                </marker>
-              </defs>
-              <line x1="4" y1="20" x2="40" y2="20" stroke="var(--primary)" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow_t_CASE T1)" />
-            </svg>
-          </div>
-
-          <div class="fragment" style="background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: 12px; padding: 22px; height: 100%; display: flex; flex-direction: column;">
-            <div style="display: inline-block; padding: 4px 10px; background: #DCFCE7; color: #16A34A; font-size: 11px; font-weight: 800; border-radius: 4px; text-transform: uppercase; margin-bottom: 10px; width: fit-content;">
-              ✅ Z COPILOTEM: KONTROLA I SPOKÓJ
-            </div>
-            <h3 style="font-size: 18px; font-weight: 800; color: #14532D; margin-bottom: 14px;">Opanowana diagnoza w 3 minuty</h3>
-            <ul style="margin: 0; padding-left: 18px; font-size: 13.5px; color: #052E16; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
-              <li style='margin-bottom: 8px;'>Wskazujesz samą asercję i plik z błędem w edytorze (@workspace /explain)</li><li style='margin-bottom: 8px;'>Zlecasz zbadanie 2-3 prawdopodobnych przyczyn BEZ pisania kodu</li><li style='margin-bottom: 8px;'>Wybierasz właściwą hipotezę i dopiero wtedy generujesz 3 linijki poprawki</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-      <div class="slide-footer">
-        <span>KONTRAST // CO ZMIENIAMY</span>
-        <span>Slajd 2 / 4</span>
-      </div>
-    </div>
-    
-
-    <!-- SLIDE 3: ZŁOTA ZASADA: PLAN-FIRST -->
-    <div class="slide-container" data-title="Złota zasada: Najpierw Plan, potem Implementacja" data-type="Złota Zasada">
-      <header class="slide-header">
-        <span class="slide-kicker">ZŁOTA ZASADA // WORKFLOW INŻYNIERSKI</span>
-        <h2 class="slide-title">Nigdy Nie Proś o Kod w Ciemno: Najpierw PLAN, potem IMPLEMENTACJA</h2>
+        <span class="slide-kicker">FAKTY ZAMIAST ZGADYWANIA // DOCKER, CLOUDWATCH, DATADOG, TERMINAL</span>
+        <h2 class="slide-title">Skąd Wziąć Prawdziwe Logi Przed Zadaniem Pytania Copilotowi?</h2>
       </header>
       <div class="slide-body" style="justify-content: center;">
         
-        <div style="display: grid; grid-template-columns: 1fr 30px 1fr 30px 1fr; align-items: center; width: 100%; margin-bottom: 20px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; margin-bottom: 14px;">
           
-          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--primary); border-radius: 10px; padding: 18px; height: 100%;">
-            <div style="font-size: 11px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 6px;">KROK 1 · WYMUŚ PLAN</div>
-            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Zero Kodu w Pytaniu</h4>
-            <p style="font-size: 13px; color: #475569; line-height: 1.45; margin: 0;">Wpisz: 'Przeanalizuj ten stack trace. Nie generuj kodu. Wypisz w 3 punktach plan diagnozy i wskaż zmienną, która mogła mieć null'.</p>
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--primary); border-radius: 10px; padding: 16px 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 12px; font-weight: 800; color: var(--primary); text-transform: uppercase;">🐳 1. Kontenery Lokalne: Docker</span>
+              <span style="font-size: 10px; font-weight: 700; background: #F1F5F9; color: #475569; padding: 2px 6px; border-radius: 4px;">CLI</span>
+            </div>
+            <pre style="background: #0F172A; color: #38BDF8; padding: 8px 10px; border-radius: 6px; font-size: 11.5px; margin: 0 0 8px; font-family: monospace;">docker logs --tail 100 --timestamps backend_api | grep -E "ERROR|Exception"</pre>
+            <p style="font-size: 12.5px; color: #475569; line-height: 1.4; margin: 0;">Pobierasz ostatnie 100 linii z kontenera. Widzisz dokładny stan aplikacji tuż przed awarią, a nie tylko suchy komunikat błędu.</p>
           </div>
 
-          <div style="display: flex; justify-content: center;">
-            <svg viewBox="0 0 30 20" style="width: 24px; height: 16px;">
-              <defs><marker id="arr1_CASE T1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 1, 6 3, 0 5" fill="var(--primary)" /></marker></defs>
-              <line x1="2" y1="10" x2="24" y2="10" stroke="var(--primary)" stroke-width="2.5" marker-end="url(#arr1_CASE T1)" />
-            </svg>
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid #D97706; border-radius: 10px; padding: 16px 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 12px; font-weight: 800; color: #D97706; text-transform: uppercase;">☁️ 2. Chmura: CloudWatch & Datadog</span>
+              <span style="font-size: 10px; font-weight: 700; background: #F1F5F9; color: #475569; padding: 2px 6px; border-radius: 4px;">OBSERVABILITY</span>
+            </div>
+            <pre style="background: #0F172A; color: #FBBF24; padding: 8px 10px; border-radius: 6px; font-size: 11.5px; margin: 0 0 8px; font-family: monospace;">aws logs filter-log-events --log-group-name /ecs/orders --filter-pattern "NullPointer"</pre>
+            <p style="font-size: 12.5px; color: #475569; line-height: 1.4; margin: 0;">Filtruj po <code>Correlation-ID</code> lub <code>trace_id</code> w Datadog. Wyciągasz dokładny ciąg zdarzeń użytkownika, który doprowadził do błędu.</p>
           </div>
 
-          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--primary); border-top: 4px solid var(--accent); border-radius: 10px; padding: 18px; height: 100%; box-shadow: 0 4px 12px rgba(123,45,133,0.08);">
-            <div style="font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 6px;">KROK 2 · TWOJA DECYZJA</div>
-            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Przegląd w 30 Sekund</h4>
-            <p style="font-size: 13px; color: #475569; line-height: 1.45; margin: 0;">Przeglądasz plan w 30 sekund: widzisz, że punkt 2 (brakujący nagłówek autoryzacji w requeście) to strzał w dziesiątkę.</p>
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid #256654; border-radius: 10px; padding: 16px 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 12px; font-weight: 800; color: #256654; text-transform: uppercase;">💻 3. Terminal & Pipeline CI</span>
+              <span style="font-size: 10px; font-weight: 700; background: #F1F5F9; color: #475569; padding: 2px 6px; border-radius: 4px;">TEST RUNNER</span>
+            </div>
+            <pre style="background: #0F172A; color: #34D399; padding: 8px 10px; border-radius: 6px; font-size: 11.5px; margin: 0 0 8px; font-family: monospace;">mvn test -Dtest=OrderServiceTest#testProcessOrder -DtrimStackTrace=false</pre>
+            <p style="font-size: 12.5px; color: #475569; line-height: 1.4; margin: 0;">Odpalsz pojedynczy test z pełnym stack trace'em bez obcinania ramek stosu. Znasz dokładny plik i numer linii.</p>
           </div>
 
-          <div style="display: flex; justify-content: center;">
-            <svg viewBox="0 0 30 20" style="width: 24px; height: 16px;">
-              <defs><marker id="arr2_CASE T1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 1, 6 3, 0 5" fill="var(--primary)" /></marker></defs>
-              <line x1="2" y1="10" x2="24" y2="10" stroke="var(--primary)" stroke-width="2.5" marker-end="url(#arr2_CASE T1)" />
-            </svg>
-          </div>
-
-          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--success); border-radius: 10px; padding: 18px; height: 100%;">
-            <div style="font-size: 11px; font-weight: 800; color: var(--success); text-transform: uppercase; margin-bottom: 6px;">KROK 3 · KOD PO KAWAŁKU</div>
-            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Tylko Wybrany Punkt</h4>
-            <p style="font-size: 13px; color: #475569; line-height: 1.45; margin: 0;">Dopiero teraz: 'Zaimplementuj Krok 2 z planu — dopisz sprawdzenie nagłówka w metodzie parseRequest() w minimalnej liczbie linii'.</p>
+          <div class="fragment" style="background: #FFF1F2; border: 1.5px solid #FDA4AF; border-top: 4px solid var(--danger); border-radius: 10px; padding: 16px 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 12px; font-weight: 800; color: var(--danger); text-transform: uppercase;">⚠️ 4. Złota Zasada Czystego Kontekstu</span>
+              <span style="font-size: 10px; font-weight: 700; background: #FFE4E6; color: #9F1239; padding: 2px 6px; border-radius: 4px;">NO SPAM</span>
+            </div>
+            <p style="font-size: 12.5px; color: #881337; line-height: 1.4; margin: 0;"><strong>Nigdy nie wklejaj 5000 linii logów!</strong> Wyodrębnij 15–20 linii wokół wyjątku (Root Cause) + dane wejściowe żądania. Więcej logów = większe ryzyko halucynacji AI.</p>
           </div>
 
         </div>
 
-        <div class="fragment" style="background: #FAF5FF; border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; padding: 12px 18px; font-size: 13px; color: #3B0764; line-height: 1.45;">
-          💡 <strong>Dlaczego to działa w praktyce?</strong> Copilot doskonale rozumie przyczynę błędu, ale jeśli od razu poprosisz o kod, zacznie zgadywać i zmieniać architekturę. Najpierw wymuś plan.
+        <div style="background: #FAF5FF; border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; padding: 10px 16px; font-size: 12.5px; color: #3B0764;">
+          💡 <strong>Zasada inżynierska:</strong> Im lepsze dane z terminala/Dockera podasz Copilotowi, tym mniej zgadywania i bzdurnych propozycji otrzymasz w odpowiedzi.
         </div>
 
       </div>
       <div class="slide-footer">
-        <span>METODYKA // PLAN-FIRST</span>
-        <span>Slajd 3 / 4</span>
+        <span>LOGI & DIAGNOSTYKA // TERMINAL / CLOUD</span>
+        <span>Slajd 2 / 5</span>
       </div>
     </div>
     
 
-    <!-- SLIDE 4: ĆWICZENIE WARSZTATOWE -->
-    <div class="slide-container" data-title="Zadanie warsztatowe: Przetestuj ten workflow" data-type="Warsztat">
+    <!-- SLIDE 3: ŻELAZNY WORKFLOW -->
+    <div class="slide-container" data-title="Żelazna procedura: Zrozum → Odtwórz → Plan & Challenge → Test" data-type="Procedura">
       <header class="slide-header">
-        <span class="slide-kicker">WARSZTAT HANDS-ON // CZAS NA PRAKTYKĘ (12 MIN)</span>
-        <h2 class="slide-title">Twoje Zadanie: Otwórz IDE i Zastosuj Regułę Plan-First</h2>
+        <span class="slide-kicker">ŻELAZNA PROCEDURA // 4 KROKI PRZED DOTKNIĘCIEM KODU</span>
+        <h2 class="slide-title">Zrozumienie, Reprodukcja i Zakwestionowanie Hipotez (Challenging)</h2>
       </header>
       <div class="slide-body" style="justify-content: center;">
         
-        <div style="background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; padding: 12px 18px; margin-bottom: 14px; font-size: 13.5px; color: #334155; line-height: 1.4;">
-          <strong>Twoje zadanie:</strong> Otwórz plik z wywalającym się testem 'OrderProcessingTest'. Zamiast prosić o kod, przeprowadź kontrolowaną diagnozę.
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; width: 100%; margin-bottom: 16px;">
+          
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid #6366F1; border-radius: 10px; padding: 16px 14px; display: flex; flex-direction: column;">
+            <div style="font-size: 11px; font-weight: 800; color: #6366F1; text-transform: uppercase; margin-bottom: 6px;">1. ZROZUMIENIE</div>
+            <h4 style="font-size: 15px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Rozbicie Logów</h4>
+            <p style="font-size: 12px; color: #475569; line-height: 1.4; margin: 0;">Co dokładnie było nullem lub wywołało timeout? Jaki stan obiektu przyszedł z Dockera/bazy?</p>
+          </div>
+
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid #EC4899; border-radius: 10px; padding: 16px 14px; display: flex; flex-direction: column;">
+            <div style="font-size: 11px; font-weight: 800; color: #EC4899; text-transform: uppercase; margin-bottom: 6px;">2. REPRODUKCJA</div>
+            <h4 style="font-size: 15px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Czerwony Test</h4>
+            <p style="font-size: 12px; color: #475569; line-height: 1.4; margin: 0;">Zanim cokolwiek naprawisz, napisz test, który <strong>wywala się dokładnie tym samym błędem</strong>. Jeśli nie umiesz odtworzyć — nie wiesz, co naprawiasz.</p>
+          </div>
+
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--primary); border-top: 4px solid var(--primary); border-radius: 10px; padding: 16px 14px; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(123,45,133,0.08);">
+            <div style="font-size: 11px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 6px;">3. PLAN & CHALLENGING</div>
+            <h4 style="font-size: 15px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Kwestionowanie Założeń</h4>
+            <p style="font-size: 12px; color: #475569; line-height: 1.4; margin: 0;">Wymuś 3 hipotezy. Zapytaj: <em>„Dlaczego to wywaliło dopiero dziś? Czy maskujemy brak wartości, czy naprawiamy źródło?”</em>.</p>
+          </div>
+
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--success); border-radius: 10px; padding: 16px 14px; display: flex; flex-direction: column;">
+            <div style="font-size: 11px; font-weight: 800; color: var(--success); text-transform: uppercase; margin-bottom: 6px;">4. REGRESJA: ZERO RYZYKA</div>
+            <h4 style="font-size: 15px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Zielony Pasek & Git</h4>
+            <p style="font-size: 12px; color: #475569; line-height: 1.4; margin: 0;">Implementujesz minimalną poprawkę. Test z Kroku 2 świeci na zielono i zostaje w repo jako tarcza przed regresją.</p>
+          </div>
+
         </div>
 
-        <div class="fragment" style="background: #0F172A; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <div class="fragment" style="background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: 8px; padding: 10px 16px; font-size: 12.5px; color: #14532D; display: flex; justify-content: space-between; align-items: center;">
+          <span>🎯 <strong>Kluczowa zasada:</strong> Dopóki nie masz czerwonego testu odtwarzającego błąd, nie dotykasz kodu produkcyjnego.</span>
+          <span style="font-weight: 800; color: #16A34A;">GWARANCJA BRAKU REGRESJI</span>
+        </div>
+
+      </div>
+      <div class="slide-footer">
+        <span>PROCEDURA // ODTWÓRZ PRZED NAPRAWĄ</span>
+        <span>Slajd 3 / 5</span>
+      </div>
+    </div>
+    
+
+    <!-- SLIDE 4: DEDYKOWANY SKILL DLA ZESPOŁU -->
+    <div class="slide-container" data-title="Dedykowany Skill w projekcie: debug-investigator" data-type="Skill Automatyzacja">
+      <header class="slide-header">
+        <span class="slide-kicker">AUTOMATYZACJA STANDARDU // REUSABLE SKILL W REPOZYTORIUM</span>
+        <h2 class="slide-title">Stwórz Dedykowany Skill: <code>debug-investigator / SKILL.md</code></h2>
+      </header>
+      <div class="slide-body" style="justify-content: center;">
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; align-items: center;">
+          
+          <div class="fragment" style="background: #0F172A; border-radius: 10px; padding: 16px 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 11px; font-weight: 800; color: #38BDF8; font-family: monospace;">.agents/skills/debug-investigator/SKILL.md</span>
+              <span style="font-size: 10px; background: rgba(56,189,248,0.2); color: #38BDF8; padding: 2px 6px; border-radius: 4px;">CUSTOM SKILL</span>
+            </div>
+            <pre style="margin: 0; font-family: 'Consolas', monospace; font-size: 11.5px; color: #E2E8F0; line-height: 1.45; white-space: pre-wrap;">---
+name: debug-investigator
+description: Dochodzenie przyczyn awarii z logów Docker/CloudWatch
+---
+# ZASADY DLA AGENTA DEBUGUJĄCEGO:
+1. Zawsze zażądaj wycinka logów z Dockera, CloudWatch lub Datadog.
+2. Zanim zaproponujesz kod, ZAWSZE napisz test odtwarzający (reproduction test).
+3. Podaj 3 hipotezy i ZAKWESTIONUJ każdą z nich (Challenging).
+4. Nie maskuj błędu prostym 'if != null', chyba że udowodnisz brak regresji.</pre>
+          </div>
+
+          <div class="fragment" style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-radius: 8px; padding: 12px 16px;">
+              <div style="font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 4px;">🚀 1. Koniec z Przypadkowymi Promptami</div>
+              <p style="font-size: 12px; color: #475569; margin: 0; line-height: 1.4;">Każdy programista w zespole wywołuje <code>@debug-investigator</code>. AI automatycznie postępuje według procedury bezpieczeństwa firmy.</p>
+            </div>
+
+            <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-radius: 8px; padding: 12px 16px;">
+              <div style="font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 4px;">🛡️ 2. Przymus Napisania Testu Regresyjnego</div>
+              <p style="font-size: 12px; color: #475569; margin: 0; line-height: 1.4;">Skill ma twardą regułę: model odmawia wygenerowania poprawki w kodzie produkcyjnym, dopóki nie zatwierdzisz testu odtwarzającego błąd.</p>
+            </div>
+
+            <div style="background: #FAF5FF; border: 1px solid var(--primary-light); border-radius: 8px; padding: 12px 16px;">
+              <div style="font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 4px;">📂 3. Wersjonowane Razem z Kodem w Git</div>
+              <p style="font-size: 12px; color: #475569; margin: 0; line-height: 1.4;">Plik <code>SKILL.md</code> jest częścią repozytorium projektu. Nowy deweloper pierwszego dnia ma do dyspozycji wiedzę seniorów.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="slide-footer">
+        <span>STANDARYZACJA // CUSTOM SKILL W PROJEKCIE</span>
+        <span>Slajd 4 / 5</span>
+      </div>
+    </div>
+    
+
+    <!-- SLIDE 5: ĆWICZENIE WARSZTATOWE -->
+    <div class="slide-container" data-title="Zadanie warsztatowe: Od logów do zielonego testu" data-type="Warsztat">
+      <header class="slide-header">
+        <span class="slide-kicker">WARSZTAT HANDS-ON // ĆWICZENIE PRAKTYCZNE (15 MIN)</span>
+        <h2 class="slide-title">Twoje Zadanie: Zdiagnozuj Błąd, Napisz Test Regresyjny i Stwórz Skill</h2>
+      </header>
+      <div class="slide-body" style="justify-content: center;">
+        
+        <div style="background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; padding: 10px 16px; margin-bottom: 12px; font-size: 13px; color: #334155; line-height: 1.4;">
+          <strong>Scenariusz w kontenerze:</strong> W kontenerze Docker <code>order-service</code> poleciał <code>NullPointerException</code> przy zamówieniu klienta bez zdefiniowanego kodu rabatowego. Pipeline CI stoi na czerwono.
+        </div>
+
+        <div class="fragment" style="background: #0F172A; border-radius: 8px; padding: 14px 18px; margin-bottom: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <span style="font-size: 11px; font-weight: 800; color: #38BDF8; letter-spacing: 0.08em; text-transform: uppercase;">
-              👉 SKOPIUJ TEN PROMPT I WKLEJ DO COPILOT CHAT
+              👉 KROK 1 & 2: WYCIĄGNIJ LOGI I WKLEJ TEN PROMPT DO COPILOT CHAT
             </span>
-            <span style="font-size: 11px; color: #94A3B8; font-family: monospace;">TRYB: PLAN-FIRST</span>
+            <span style="font-size: 10px; color: #94A3B8; font-family: monospace;">TRYB: UNDERSTAND & CHALLENGE</span>
           </div>
-          <pre style="margin: 0; font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; color: #E2E8F0; line-height: 1.45; white-space: pre-wrap; word-break: break-word;">@workspace /explain Zbadaj powyższy błąd asercji w OrderProcessingTest.
-NIE GENERUJ KODU IMPLEMENTACJI.
-1. Wypisz 3 najbardziej prawdopodobne przyczyny asercji Expected: 200, Actual: 504.
-2. Przygotuj 3-etapowy plan weryfikacji mocka i serwisu płatności.
-3. Wskaż, którą linijkę musimy sprawdzić w debuggerze.</pre>
+          <pre style="margin: 0; font-family: 'Consolas', monospace; font-size: 12px; color: #E2E8F0; line-height: 1.4; white-space: pre-wrap;">@workspace Oto logi błędu z kontenera Docker i plik OrderService.py.
+NIE GENERUJ KODU NAPRAWY KROKU BIZNESOWEGO.
+1. Zrozumienie: Wskaż dokładny stan obiektu i przyczynę NullPointerException w linii 48.
+2. Reprodukcja: Napisz minimalny test jednostkowy test_process_order_without_discount_fails(), który TERAZ wywali się na czerwono.
+3. Challenging: Zakwestionuj proponowane rozwiązania — dlaczego zwykły 'if discount != null' może zamaskować błąd w bazie?
+4. Plan: Przedstaw 2-etapowy bezpieczny plan naprawy z gwarancją braku regresji.</pre>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
           
-          <div class="fragment" style="background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: 8px; padding: 12px 16px;">
-            <span style="font-size: 11px; font-weight: 800; color: #16A34A; text-transform: uppercase; display: block; margin-bottom: 4px;">🎯 Oczekiwany Wynik (Definicja Sukcesu)</span>
-            <div style="font-size: 12.5px; color: #14532D; line-height: 1.4;">Otrzymujesz 3 precyzyjne hipotezy i krótki plan weryfikacji mocka, bez ani jednej niepotrzebnej linijki wygenerowanego kodu.</div>
+          <div class="fragment" style="background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: 8px; padding: 10px 14px;">
+            <span style="font-size: 11px; font-weight: 800; color: #16A34A; text-transform: uppercase; display: block; margin-bottom: 3px;">🎯 Oczekiwany Rezultat (Sukces)</span>
+            <div style="font-size: 12px; color: #14532D; line-height: 1.35;">
+              1. Czerwony test potwierdzający błąd reprodukuje awarię 1:1.<br>
+              2. Po wdrożeniu planu test przechodzi na zielono.<br>
+              3. Zapisujesz instrukcję w <code>.agents/skills/debug-investigator/SKILL.md</code>.
+            </div>
           </div>
 
-          <div class="fragment" style="background: #FFF1F2; border: 1.5px solid #FDA4AF; border-radius: 8px; padding: 12px 16px;">
-            <span style="font-size: 11px; font-weight: 800; color: #E11D48; text-transform: uppercase; display: block; margin-bottom: 4px;">⚠️ Na Co Uważać (Częsty Błąd)</span>
-            <div style="font-size: 12.5px; color: #881337; line-height: 1.4;">Pozwolenie Copilotowi na wygenerowanie nowego kodu w pierwszym kroku — to najczęstsza przyczyna regresji w projekcie.</div>
+          <div class="fragment" style="background: #FFF1F2; border: 1.5px solid #FDA4AF; border-radius: 8px; padding: 10px 14px;">
+            <span style="font-size: 11px; font-weight: 800; color: #E11D48; text-transform: uppercase; display: block; margin-bottom: 3px;">⚠️ Czego Bezwzględnie Unikać</span>
+            <div style="font-size: 12px; color: #881337; line-height: 1.35;">
+              Wdrożenia poprawki „na czuja” bez testu regresyjnego. Za 2 tygodnie inny programista zmieni ten sam warunek i błąd wróci na produkcji.
+            </div>
           </div>
 
         </div>
@@ -729,7 +792,7 @@ NIE GENERUJ KODU IMPLEMENTACJI.
       </div>
       <div class="slide-footer">
         <span>PRAKTYKA // ĆWICZENIE WARSZTATOWE</span>
-        <span>Slajd 4 / 4</span>
+        <span>Slajd 5 / 5</span>
       </div>
     </div>
     
