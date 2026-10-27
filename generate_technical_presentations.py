@@ -7,7 +7,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 OUT_DIR = "technical-trainee"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-print(f"Generating technical presentations in ./{OUT_DIR} ...")
+print(f"Generating human-friendly technical presentations in ./{OUT_DIR} ...")
 
 # ==============================================================================
 # 00: MASTER PRESENTATION (TECHNICAL TRACK - 3 SLIDES)
@@ -208,529 +208,505 @@ tech_master_html = be.wrap_presentation(
 )
 with open(os.path.join(OUT_DIR, "00-master-1h-training.html"), "w", encoding="utf-8") as f:
     f.write(tech_master_html)
-print("  Generated: 00-master-1h-training.html")
+print("  Generated: 00-master-1h-training.html (3 slides)")
 
 # ==============================================================================
-# CASE STUDY GENERATOR HELPER
+# HUMAN-FRIENDLY 4-SLIDE DECK BUILDER FOR TECHNICAL CASES
 # ==============================================================================
-def generate_case_deck(filename, case_id, title, situation, without_ai, with_ai, gain, good_result, guardrail, deep_diagram_type):
-    slides = [
-        be.slide_title(
-            title=f"{case_id}: {title}",
-            kicker="TECHNICAL CASE STUDY // GITHUB COPILOT",
-            subtitle=f"Warsztatowe studium przypadku: od manualnego tarcia do zweryfikowanego rezultatu.",
-            meta=f"Scenariusz {case_id} · TTPSC 2026"
-        ),
-
-        be.slide_split_screen(
-            kicker="SYTUACJA I WYZWANIE // PROBLEM DEFINITION",
-            title=f"Kontekst Operacyjny: {title}",
-            left_badge="Wyzwanie w Projekcie",
-            left_title="Stan Rzeczywisty",
-            left_points=[
-                f"<strong>Scena:</strong> {situation['scene']}",
-                f"<strong>Presja:</strong> {situation['pressure']}",
-                f"<strong>Ryzyko:</strong> {situation['risk']}"
-            ],
-            right_badge="Cel Warsztatu",
-            right_title="Oczekiwana Transformacja",
-            right_points=[
-                f"<strong>Cel:</strong> {situation['goal']}",
-                f"<strong>Narzędzie:</strong> {situation['tool']}",
-                f"<strong>Standard:</strong> {situation['standard']}"
-            ],
-            slide_num=2
-        ),
-
-        be.slide_split_screen(
-            kicker="PORÓWNANIE METODYK // WORKFLOW CONTRAST",
-            title="Ścieżka Tradycyjna vs Praca z GitHub Copilot",
-            left_badge="Bez Wsparcia AI",
-            left_title="Przebieg Manualny",
-            left_points=[
-                f"<strong>Krok 1:</strong> {without_ai['step1']}",
-                f"<strong>Krok 2:</strong> {without_ai['step2']}",
-                f"<strong>Tarcie:</strong> {without_ai['friction']}"
-            ],
-            right_badge="Z GitHub Copilot",
-            right_title="Pętla Wspomagana",
-            right_points=[
-                f"<strong>Krok 1:</strong> {with_ai['step1']}",
-                f"<strong>Krok 2:</strong> {with_ai['step2']}",
-                f"<strong>Dźwignia:</strong> {with_ai['gain']}"
-            ],
-            slide_num=3
-        ),
-
-        be.slide_pipeline(
-            kicker="PRZEPŁYW LABORATORYJNY // 4 KROKI ĆWICZENIA",
-            title="Krok po Kroku w Środowisku Sandbox",
-            steps=[
-                {"phase": "Krok 1 (10 min)", "title": "Przygotowanie", "desc": "Pobierz gałąź laboratoryjną i zanonimizuj wejściowe dane testowe.", "active": False},
-                {"phase": "Krok 2 (15 min)", "title": "Interakcja AI", "desc": "Sformułuj precyzyjny prompt z kryteriami rozstrzygającymi.", "active": True},
-                {"phase": "Krok 3 (10 min)", "title": "Weryfikacja", "desc": "Uruchom lokalny test suite i zbadaj wygenerowany diff.", "active": True},
-                {"phase": "Krok 4 (5 min)", "title": "Decyzja Dewelopera", "desc": "Zaakceptuj, zmodyfikuj lub odrzuć propozycję asystenta.", "active": False}
-            ],
-            slide_num=4
-        ),
-
-        be.slide_hero_stat(
-            kicker="REZULTAT JAKOŚCIOWY // MEASURABLE SUCCESS",
-            title="Mierzalna Korzyść i Wartość dla Uczestnika",
-            big_stat=gain['stat'],
-            stat_sub=gain['stat_sub'],
-            conclusion_bold=gain['title'],
-            conclusion_text=gain['desc'],
-            slide_num=5
-        ),
-
-        be.slide_cta_decision_rows(
-            kicker="REKOMENDACJE & BARIERY // GUARDRAILS",
-            title="Niezbędna Kontrola Człowieka i Kryteria Jakości",
-            decisions=[
-                {
-                    "num": "1",
-                    "title": "Definicja Sukcesu",
-                    "desc": good_result,
-                    "stat": "DONE",
-                    "stat_desc": "Kryterium ukończenia",
-                    "stat_color": "var(--success)"
-                },
-                {
-                    "num": "2",
-                    "title": "Punkt Kontroli Człowieka",
-                    "desc": guardrail,
-                    "stat": "HUMAN",
-                    "stat_desc": "Wymóg zatwierdzenia",
-                    "stat_color": "var(--danger)"
-                }
-            ],
-            slide_num=6
-        ),
-
-        be.slide_closing(
-            title=f"Gotowi do Zadania {case_id}?",
-            subtitle="Otwórz IDE, pobierz przygotowany branch i rozpocznij ćwiczenie.",
-            kicker=f"CASE STUDY {case_id} // HANDS-ON LAB",
-            contact="support-lab@ttpsc.pl"
-        )
-    ]
-
-    html_content = be.wrap_presentation(f"{case_id}: {title} · GitHub Copilot Case", "\n".join(slides))
-    with open(os.path.join(OUT_DIR, filename), "w", encoding="utf-8") as f:
-        f.write(html_content)
-    print(f"  Generated: {filename}")
-
-# ==============================================================================
-# TECHNICAL CASES DEFINITIONS (T1 - T9)
-# ==============================================================================
-cases = [
-    {
-        "filename": "case-01-failing-test-debug.html",
-        "case_id": "T1",
-        "title": "Diagnostyka Przyczyny Czerwonego Testu Jednostkowego",
-        "situation": {
-            "scene": "Wersja Release Candidate prawie gotowa, lecz pojedynczy test zaczął niespodziewanie failować.",
-            "pressure": "Pull request czeka na merge przed zaplanowanym oknem wdrożeniowym.",
-            "risk": "Zgadnięcie poprawki na ślepo lub wklejenie wrażliwych logów z produkcji do czatu.",
-            "goal": "Znalezienie najmniejszego rozstrzygającego sprawdzenia bez zgadywania.",
-            "tool": "Copilot Chat wewnątrz IDE ze zanonimizowanym stosem błędów.",
-            "standard": "Zweryfikowana hipoteza i powtarzalny test odtwarzający defekt."
-        },
-        "without_ai": {
-            "step1": "Odtworzenie błędu i ręczne przeglądanie 5 warstw stosu wywołań.",
-            "step2": "Dodawanie printów i wielokrotne uruchamianie całego zestawu testów.",
-            "friction": "Wiele rund prób i błędów przed odróżnieniem objawu od sedna awarii."
-        },
-        "with_ai": {
-            "step1": "Udostępnienie testu, powiązanego kodu i zanonimizowanego fragmentu trace.",
-            "step2": "Prośba o 2 konkurencyjne hipotezy i najtańszy test rozstrzygający.",
-            "gain": "Zawężenie obszaru poszukiwań do 1 pliku w poniżej 3 minuty."
-        },
-        "gain": {
-            "stat": "-70%",
-            "stat_sub": "Czasu diagnozy",
-            "title": "Błyskawiczna Izolacja Błędu",
-            "desc": "Uczestnik uczy się formułować pytania o najmniejszy test rozstrzygający zamiast pytać o gotowy kod."
-        },
-        "good_result": "Zreprodukowany błąd, potwierdzona przyczyna źródłowa i ukierunkowany test asercji chroniący przed regresją.",
-        "guardrail": "Potwierdź przyczynę bezpośrednio w kodzie; udostępniaj wyłącznie zanonimizowane logi bez danych klientów.",
-        "deep_diagram_type": "ishikawa"
-    },
-    {
-        "filename": "case-02-test-quality.html",
-        "case_id": "T2",
-        "title": "Podnoszenie Jakości i Pokrycia Generowanych Testów",
-        "situation": {
-            "scene": "Nowa funkcja jest gotowa, lecz zestaw testów pokrywa wyłącznie scenariusz pozytywny (happy path).",
-            "pressure": "Wcześniej generowane testy AI przechodziły na zielono, ale pomijały kluczowe wyjątki.",
-            "risk": "Fałszywe poczucie bezpieczeństwa i puchnący plik testowy o zerowej wartości weryfikacyjnej.",
-            "goal": "Odkrycie nieoczywistych stanów brzegowych i asercji przed merge.",
-            "tool": "Copilot Chat w połączeniu z lokalnym runnerem testów (pytest / jest / junit).",
-            "standard": "Testy wykrywające rzeczywiste błędy biznesowe."
-        },
-        "without_ai": {
-            "step1": "Ręczne wyobrażanie sobie nietypowych wejść (null, puste listy, timeouty).",
-            "step2": "Pisanie powtarzalnego kodu mockującego w konwencji projektu.",
-            "friction": "Zmęczenie dewelopera i przeoczenie nieoczywistych kombinacji parametrów."
-        },
-        "with_ai": {
-            "step1": "Podanie funkcji i prośba: 'Zanim napiszesz test, wylistuj 5 brakujących przypadków brzegowych'.",
-            "step2": "Krytyczna ocena listy, wybór 3 kluczowych i zlecenie wygenerowania precyzyjnych asercji.",
-            "gain": "Wykrycie 2 krytycznych edge-case'ów przed audytem QA."
-        },
-        "gain": {
-            "stat": "+85%",
-            "stat_sub": "Wartości testów",
-            "title": "Eliminacja Płytkich Testów",
-            "desc": "Uczestnik zyskuje nawyk wymagania listy ryzyk przed pozwoleniem asystentowi na pisanie kodu testu."
-        },
-        "good_result": "Skupione testy sprawdzają rzeczywiste zachowanie, a mutacja warunku w kodzie natychmiast wywołuje czerwony pasek.",
-        "guardrail": "Zielony pasek wygenerowanego testu niczego nie dowodzi; zbadaj każdą asercję pod kątem tautologii (np. assert res == res).",
-        "deep_diagram_type": "double_diamond"
-    },
-    {
-        "filename": "case-03-code-review.html",
-        "case_id": "T3",
-        "title": "Sceptyczny Audyt i Przegląd Kodu Wspomaganego AI",
-        "situation": {
-            "scene": "Pull Request oczekuje na akceptację; autor korzystał z AI i obawia się ukrytych założeń w kodzie.",
-            "pressure": "Reviewer ma ograniczony czas i musi skupić się na architekturze i logice, nie formatowaniu.",
-            "risk": "Bezrefleksyjne kliknięcie 'Approve' na 300 liniach wygenerowanego kodu.",
-            "goal": "Ustrukturyzowany przegląd oparty na faktach i odrzucenie spekulacji.",
-            "tool": "Copilot Chat z wczytanym diffem zmian oraz kryteriami z ticketa Jira.",
-            "standard": "Znalezienie ukrytych luk bezpieczeństwa i niezgodności kontraktów."
-        },
-        "without_ai": {
-            "step1": "Lektura całego diffa linia po linii z próbą odtworzenia kontekstu w pamięci.",
-            "step2": "Zwracanie uwagi na drobne nity stylistyczne zamiast na błędy stanu.",
-            "friction": "Wysoki koszt kognitywny i przepuszczanie cichych błędów logicznych."
-        },
-        "with_ai": {
-            "step1": "Dostarczenie diffa i ticketa z poleceniem: 'Wskaż niezgodności z wymaganiami poparte dowodami w plikach'.",
-            "step2": "Asystent priorytetyzuje znaleziska; deweloper weryfikuje tylko faktyczne luki.",
-            "gain": "Wykrycie ukrytych założeń architektonicznych w 5 minut."
-        },
-        "gain": {
-            "stat": "2.5x",
-            "stat_sub": "Głębszy audyt",
-            "title": "Skupienie na Sednie Kodu",
-            "desc": "Zdolność zadawania pytań o dowody w kodzie zamiast przyjmowania sugestii za pewnik."
-        },
-        "good_result": "Przejrzana lista uwag o wysokim priorytecie i zweryfikowany diff pozbawiony nierozwiązanych wątpliwości.",
-        "guardrail": "Sugestie AI to tropy śledcze, a nie pieczęć zatwierdzenia. Odpowiedzialność za merge zawsze spoczywa na deweloperze.",
-        "deep_diagram_type": "vicious_cycle"
-    },
-    {
-        "filename": "case-04-legacy-refactor.html",
-        "case_id": "T4",
-        "title": "Bezpieczna Migracja i Refaktoryzacja Kodu Legacy",
-        "situation": {
-            "scene": "Zespół zastępuje przestarzałą bibliotekę własnym wrapperem modułowym w dużej aplikacji.",
-            "pressure": "Przeszukanie repozytorium znajduje dziesiątki wywołań o zróżnicowanych zestawach parametrów.",
-            "risk": "Globalne 'Find & Replace' grozi regresją, która ujawni się dopiero pod obciążeniem.",
-            "goal": "Zaplanowanie i wykonanie migracji w ograniczonych, bezpiecznych plastrach.",
-            "tool": "Copilot Chat / Agent mode z precyzyjnymi granicami edycji w obszarze roboczym.",
-            "standard": "Pełna kompatybilność wsteczna i 0 zmian w zachowaniu zewnętrznym."
-        },
-        "without_ai": {
-            "step1": "Ręczne przeglądanie każdego wystąpienia i dokumentowanie wariantów w notatniku.",
-            "step2": "Pojedyncza modyfikacja i lęk przed naruszeniem nieudokumentowanej logiki.",
-            "friction": "Długotrwały, podatny na błędy proces blokujący rozwój nowych funkcji."
-        },
-        "with_ai": {
-            "step1": "Polecenie znalezienia reprezentatywnych wariantów użycia w całym workspace.",
-            "step2": "Przygotowanie planu etapowego: refaktor 1 ograniczonego plastra, test, rozszerzenie.",
-            "gain": "Bezpieczna migracja 40 wywołań w kontrolowanych krokach."
-        },
-        "gain": {
-            "stat": "-50%",
-            "stat_sub": "Ryzyka regresji",
-            "title": "Izolowane Plastry Zmian",
-            "desc": "Uczestnik uczy się ograniczać zakres zmian asystenta do pojedynczego pliku i weryfikować diff przed kolejnym krokiem."
-        },
-        "good_result": "Czysty diff migracyjny bez starych wywołań, z zielonymi testami jednostkowymi i zachowanym kontraktem API.",
-        "guardrail": "Zweryfikuj semantykę każdego wywołania; nie akceptuj hurtowych zmian w wielu plikach bez inspekcji diffa.",
-        "deep_diagram_type": "transformation_bridge"
-    },
-    {
-        "filename": "case-05-slow-sql-optimization.html",
-        "case_id": "T5",
-        "title": "Optymalizacja Wolnego Zapytania i Zadania Bazy Danych Oracle",
-        "situation": {
-            "scene": "Cykliczny job bazodanowy Oracle okresowo przekracza dopuszczalne okno czasowe.",
-            "pressure": "Zespół posiada treść zapytania i plan wykonania (Explain Plan), lecz brakuje jasnej diagnozy spowolnienia.",
-            "risk": "Modyfikacja zapytania bez gwarancji zwrócenia identycznego zbioru wynikowego.",
-            "goal": "Przetestowanie hipotez optymalizacyjnych przy 100% zachowaniu ekwiwalencji danych.",
-            "tool": "Copilot Chat analizujący zanonimizowany schemat tabel i drzewo planu zapytania.",
-            "standard": "Skrócenie czasu wykonania potwierdzone w środowisku testowym."
-        },
-        "without_ai": {
-            "step1": "Manualna analiza setek linii drzewa Explain Plan i próby wymuszenia hintów.",
-            "step2": "Metoda prób i błędów na kopii bazy bez jasnej hierarchii podejrzeń.",
-            "friction": "Wielogodzinne dochodzenie, dlaczego optymalizator wybrał Full Table Scan."
-        },
-        "with_ai": {
-            "step1": "Wprowadzenie zanonimizowanego SQL i drzewa planu z prośbą o wskazanie wąskich gardeł.",
-            "step2": "Otrzymanie 3 hipotez (np. brakujący indeks złożony, nieoptymalny join) wraz z testem ekwiwalencji.",
-            "gain": "Sformułowanie zweryfikowanej hipotezy w 15 minut."
-        },
-        "gain": {
-            "stat": "-80%",
-            "stat_sub": "Czasu analizy planu",
-            "title": "Precyzja Indeksowania",
-            "desc": "Uczestnik uczy się dostarczać modelowi metadane i plany wykonania bez ujawniania danych biznesowych."
-        },
-        "good_result": "Zweryfikowany plan indeksacji lub przepisany SQL dający identyczny wynik przy drastycznie niższym koszcie I/O.",
-        "guardrail": "Wykonuj testy wyłącznie na zanonimizowanych danych testowych; udowodnij identyczność wyników testem różnicowym.",
-        "deep_diagram_type": "pipeline"
-    },
-    {
-        "filename": "case-06-mockup-to-jira.html",
-        "case_id": "T6",
-        "title": "Transformacja Makiety UI w Gotowe Zadania Implementacyjne Jira",
-        "situation": {
-            "scene": "Lider projektu przekazuje makietę ekranu (np. Figma) z jednym ogólnikowym zdaniem opisu.",
-            "pressure": "Młodszy programista musi rozpocząć pracę, lecz brakuje obsługi stanów błędów i walidacji pól.",
-            "risk": "Ciche zamienienie domysłów dewelopera w nieuzgodnione wymagania biznesowe.",
-            "goal": "Podział pracy na zadania UI, API i logikę z jawnym oznaczeniem pytań otwartych.",
-            "tool": "GitHub Copilot analizujący zrzut makiety lub opis komponentów interfejsu.",
-            "standard": "Kompletne kryteria akceptacji w formacie Given-When-Then."
-        },
-        "without_ai": {
-            "step1": "Ręczne spisywanie kontrolek z makiety i wymyślanie scenariuszy brzegowych.",
-            "step2": "Formatowanie opisów zgłoszeń w Jira od zera dla każdego komponentu.",
-            "friction": "Pominięcie stanów ładowania, błędów sieciowych i walidacji formularza."
-        },
-        "with_ai": {
-            "step1": "Wprowadzenie makiety z prośbą: 'Stwórz zadania z kryteriami akceptacji i sekcją pytań otwartych'.",
-            "step2": "Wygenerowanie spójnego podziału na frontend, backend i stan pusty (empty state).",
-            "gain": "Kompletny backlog zadania w 10 minut zamiast 2 godzin."
-        },
-        "gain": {
-            "stat": "4x",
-            "stat_sub": "Szybszy backlog",
-            "title": "Eliminacja Niedomówień",
-            "desc": "Zdolność natychmiastowego wyciągania pytań projektowych przed rozpoczęciem kodowania."
-        },
-        "good_result": "Przejrzany przez inżyniera zestaw zadań Jira z kryteriami akceptacji i wyeksponowanymi wątpliwościami.",
-        "guardrail": "Człowiek rozstrzyga decyzje projektowe i zatwierdza treść w Jira. Copilot nie posiada bezpośredniego dostępu do tworzenia zgłoszeń bez autoryzacji.",
-        "deep_diagram_type": "grid_matrix"
-    },
-    {
-        "filename": "case-07-unfamiliar-repo.html",
-        "case_id": "T7",
-        "title": "Odnajdywanie Reguł Biznesowych w Nowym Repozytorium",
-        "situation": {
-            "scene": "Dołączasz do nowego projektu; zgłoszenie mówi o odrzucaniu błędnego wejścia, lecz nikt nie pamięta warstwy walidacji.",
-            "pressure": "Repozytorium zawiera dziesiątki modułów, serwisów i podobnie nazwanych walidatorów.",
-            "risk": "Wdrożenie duplikatu walidacji w złym miejscu architektury i naruszenie separacji warstw.",
-            "goal": "Szybka orientacja w ścieżce wykonania przed zaproponowaniem jakiejkolwiek zmiany.",
-            "tool": "Copilot Chat operujący na kontekście workspace (@workspace) w IDE.",
-            "standard": "Zmapowany graf wywołań i wskazany właściwy punkt wejścia."
-        },
-        "without_ai": {
-            "step1": "Globalne wyszukiwanie ciągów tekstowych i komunikatów o błędach w kodzie.",
-            "step2": "Żmudne przechodzenie po referencjach (Go to Definition) w 15 plikach.",
-            "friction": "Utrata orientacji w gąszczu abstrakcji i frameworków pośredniczących."
-        },
-        "with_ai": {
-            "step1": "Zapytanie: '@workspace Gdzie w przepływie żądania sprawdzany jest warunek X i jakie testy go chronią?'.",
-            "step2": "Asystent wskazuje 2 kluczowe klasy i powiązany plik testowy.",
-            "gain": "Dotarcie do źródła reguły w 2 minuty bez pytania innych deweloperów."
-        },
-        "gain": {
-            "stat": "-65%",
-            "stat_sub": "Czasu onboardingu",
-            "title": "Nawigacja w Repozytorium",
-            "desc": "Uczestnik uczy się precyzyjnie odpytywać indeks @workspace o architekturę przepływu."
-        },
-        "good_result": "Zidentyfikowany punkt wejścia, zrozumiany kontrakt danych i przygotowany ukierunkowany test sprawdzający zachowanie.",
-        "guardrail": "Zweryfikuj sugestię w drzewie kodu; indeks AI może pominąć dynamiczne ładowanie zależności lub konfigurację w runtime.",
-        "deep_diagram_type": "pipeline"
-    },
-    {
-        "filename": "case-08-technical-to-business-update.html",
-        "case_id": "T8",
-        "title": "Tłumaczenie Złożonych Zmian Technicznych na Język Biznesowy",
-        "situation": {
-            "scene": "Rozwiązałeś skomplikowaną awarię asynchronicznego worker'a; PM i Product Owner pytają o status i wpływ.",
-            "pressure": "Notatki inżyniera zawierają nazwy wątków, deadlocki i pule połączeń bazy danych.",
-            "risk": "Niezrozumienie przez biznes, eskalacja paniki lub zbagatelizowanie konieczności okna serwisowego.",
-            "goal": "Przygotowanie zwięzłego podsumowania skupionego na ryzyku, korzyściach i kolejnych krokach.",
-            "tool": "Copilot Chat przekształcający techniczny commit log w executive summary.",
-            "standard": "Jasna komunikacja bez żargonu przy 100% zgodności merytorycznej."
-        },
-        "without_ai": {
-            "step1": "Mozolne przepisywanie technicznych terminów na język ogólny.",
-            "step2": "Dopisywanie wyjaśnień dlaczego naprawa trwała tyle czasu.",
-            "friction": "Wyczerpujące redagowanie maila odciągające programistę od kolejnych zadań."
-        },
-        "with_ai": {
-            "step1": "Wklejenie notatek technicznych z poleceniem: 'Przetłumacz na 3 punkty dla Product Ownera: Co się stało, wpływ na klienta, akcja'.",
-            "step2": "Błyskawiczne wygenerowanie profesjonalnego, rzeczowego komunikatu.",
-            "gain": "Gotowa notatka menedżerska w 3 minuty."
-        },
-        "gain": {
-            "stat": "3x",
-            "stat_sub": "Lepsza przejrzystość",
-            "title": "Spójność z Biznesem",
-            "desc": "Zdolność natychmiastowego generowania raportów biznesowych bezpośrednio ze zmian w kodzie."
-        },
-        "good_result": "Przejrzysta notatka biznesowa, w której liczby, terminy i ograniczenia są precyzyjnie zachowane i zrozumiałe dla interesariuszy.",
-        "guardrail": "Sprawdź, czy asystent nie wygładził komunikatu do poziomu zatajenia realnego ryzyka lub nie obiecał nierealnego terminu.",
-        "deep_diagram_type": "split_screen"
-    },
-    {
-        "filename": "case-09-client-restrictions-security.html",
-        "case_id": "T9",
-        "title": "Praca w Reżimie Ograniczeń Klienta i Ochrona Danych (NDA / MCP)",
-        "situation": {
-            "scene": "Projekt komercyjny podlega rygorystycznemu NDA; klient blokuje zewnętrzne integracje MCP i przesyłanie kodu.",
-            "pressure": "Deweloper chce korzystać z dobrodziejstw AI, lecz nie może naruszyć zasad bezpieczeństwa kontraktu.",
-            "risk": "Wyciek własności intelektualnej klienta, incydent bezpieczeństwa lub zerwanie umowy.",
-            "goal": "Opanowanie technik pracy w bezpiecznym sandboxie z użyciem danych syntetycznych.",
-            "tool": "Lokalne szablony, zanonimizowane ekstrakty problemu i zatwierdzone instrukcje projektowe.",
-            "standard": "Zero bajtów poufnych danych poza autoryzowaną granicą."
-        },
-        "without_ai": {
-            "step1": "Całkowita rezygnacja z AI w obawie przed naruszeniem polityk bezpieczeństwa.",
-            "step2": "Frustracja z powodu manualnej pracy w projektach objętych klauzulami.",
-            "friction": "Brak wypracowanych bezpiecznych wzorców sanitacji i izolacji."
-        },
-        "with_ai": {
-            "step1": "Wyodrębnienie abstrakcyjnego algorytmu na danych zastępczych (mock / dummy data).",
-            "step2": "Rozwiązanie problemu w sandboxie i bezpieczne przeniesienie czystej logiki do repozytorium klienta.",
-            "gain": "Pełne bezpieczeństwo prawne przy zachowaniu produktywności AI."
-        },
-        "gain": {
-            "stat": "100%",
-            "stat_sub": "Zgodności NDA",
-            "title": "Bezpieczna Produktywność",
-            "desc": "Uczestnik uczy się tworzyć zanonimizowane minimalne przykłady problemu (MRE) z zachowaniem pełnej poufności."
-        },
-        "good_result": "Zadanie rozwiązane z pomocą asystenta na danych syntetycznych bez wysłania ani jednego wrażliwego rekordu klienta.",
-        "guardrail": "Przyjmij zasadę zerowego zaufania: jeśli masz wątpliwość co do klasyfikacji danych, skonsultuj się z Security Officerem projektu.",
-        "deep_diagram_type": "grid_matrix"
-    }
-]
-
-for c in cases:
-    generate_case_deck(
-        filename=c["filename"],
-        case_id=c["case_id"],
-        title=c["title"],
-        situation=c["situation"],
-        without_ai=c["without_ai"],
-        with_ai=c["with_ai"],
-        gain=c["gain"],
-        good_result=c["good_result"],
-        guardrail=c["guardrail"],
-        deep_diagram_type=c["deep_diagram_type"]
-    )
-
-# ==============================================================================
-# INDEX.HTML PORTAL FOR TECHNICAL TRAINEE
-# ==============================================================================
-index_cards_html = """
-<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 30px;">
-  <a href="00-master-1h-training.html" style="text-decoration: none; color: inherit; grid-column: 1 / -1;">
-    <div style="background: linear-gradient(135deg, #2B0D30 0%, #4A1A52 100%); color: #FFFFFF; border-radius: 12px; padding: 28px 32px; box-shadow: 0 6px 20px rgba(43,13,48,0.2); border: 2px solid #D03A8C; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-      <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #D03A8C; margin-bottom: 8px;">★ PREZENTACJA GŁÓWNA // 1-GODZINNY PRZEGLĄD (4 SLAJDY)</div>
-      <h2 style="font-size: 26px; font-weight: 800; margin: 0 0 10px; color: #FFFFFF;">00. GitHub Copilot w Inżynierii Oprogramowania: Sesja Wprowadzająca</h2>
-      <p style="font-size: 15px; color: #D9D9D9; margin: 0; line-height: 1.45;">Zwięzły 4-slajdowy konspekt wprowadzający do 4-godzinnego warsztatu. Zawiera wyjaśnienie celu szkolenia, zebrane wnioski z ankiety zespołu inżynierów TTPSC, pełną agendę 4-godzinnego warsztatu (3 pętle) oraz kluczowe rezultaty.</p>
-    </div>
-  </a>
-"""
-
-for c in cases:
-    index_cards_html += f"""
-    <a href="{c['filename']}" style="text-decoration: none; color: inherit;">
-      <div style="background: #FFFFFF; border: 1px solid #D9D9D9; border-top: 3px solid #7B2D85; border-radius: 10px; padding: 22px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.03); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 18px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.03)'">
-        <div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span style="font-size: 12px; font-weight: 800; color: #7B2D85; background: #ECD3ED; padding: 3px 8px; border-radius: 4px;">CASE {c['case_id']}</span>
-            <span style="font-size: 11px; font-weight: 700; color: #6B7280; text-transform: uppercase;">LAB DECK</span>
+def generate_human_tech_deck(filename, case_id, title, quote_heading, quote_body,
+                             today_title, today_points, ai_title, ai_points,
+                             step1, step2, step3, takeaway,
+                             scenario, prompt, success, trap):
+    
+    # Slide 1: Hook & "Tak, to ja!"
+    s1 = f"""
+    <!-- SLIDE 1: ŻYCIOWY PUNKT WYJŚCIA -->
+    <div class="slide-container slide-dark" data-title="{case_id}: {title}" data-type="Wprowadzenie">
+      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 980px; z-index: 2;">
+        <span class="slide-kicker" style="color: var(--accent); letter-spacing: 0.12em; margin-bottom: 12px;">{case_id} // GITHUB COPILOT W PRAKTYCE</span>
+        <h1 style="font-size: 38px; font-weight: 800; line-height: 1.18; color: var(--text-light); margin-bottom: 20px;">{title}</h1>
+        
+        <div style="background: rgba(255, 255, 255, 0.08); border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0; padding: 18px 24px; margin-bottom: 26px;">
+          <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 6px;">
+            💬 SYTUACJA Z ŻYCIA: "{quote_heading}"
           </div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #1F1F1F; margin: 0 0 8px; line-height: 1.3;">{c['title']}</h3>
-          <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.4;">{c['situation']['scene']}</p>
+          <p style="font-size: 17px; line-height: 1.48; color: #F1F5F9; margin: 0;">
+            {quote_body}
+          </p>
         </div>
-        <div style="margin-top: 16px; pt: 12px; border-top: 1px solid #F1F5F9; display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-size: 12px; font-weight: 800; color: #64B237;">{c['gain']['stat']} {c['gain']['stat_sub']}</span>
-          <span style="font-size: 12px; font-weight: 700; color: #7B2D85;">Otwórz slajdy →</span>
+
+        <div style="display: flex; gap: 24px; align-items: center; border-top: 1px solid var(--border-dark); padding-top: 18px;">
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Format</span><strong style="font-size: 14px; color: var(--text-light);">12 minut ćwiczenia</strong></div>
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Złota Zasada</span><strong style="font-size: 14px; color: var(--accent);">Najpierw PLAN, potem KOD</strong></div>
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Cel</span><strong style="font-size: 14px; color: var(--text-light);">Czysty kod bez zgadywania</strong></div>
         </div>
       </div>
-    </a>
+      <div class="slide-footer">
+        <span style="color: var(--text-light-muted);">TTPSC TECHNICAL TRAINING // 2026</span>
+        <span style="color: var(--text-light-muted);">Slajd 1 / 4</span>
+      </div>
+    </div>
     """
 
-index_cards_html += "</div>"
+    # Slide 2: Contrast (Today vs AI)
+    today_li = "".join([f"<li style='margin-bottom: 8px;'>{p}</li>" for p in today_points])
+    ai_li = "".join([f"<li style='margin-bottom: 8px;'>{p}</li>" for p in ai_points])
+    s2 = f"""
+    <!-- SLIDE 2: ZDERZENIE RZECZYWISTOŚCI -->
+    <div class="slide-container" data-title="Zderzenie rzeczywistości: Jak robisz to dziś vs z AI" data-type="Zderzenie">
+      <header class="slide-header">
+        <span class="slide-kicker">ZDERZENIE RZECZYWISTOŚCI // GDZIE TRACIMY CZAS?</span>
+        <h2 class="slide-title">Jak Robisz To Dzisiaj vs. Jak Zrobisz To z Copilotem</h2>
+      </header>
+      <div class="slide-body" style="justify-content: center;">
+        <div style="display: grid; grid-template-columns: 1fr 50px 1fr; gap: 16px; align-items: center; width: 100%;">
+          
+          <div class="fragment" style="background: #FFF5F5; border: 1.5px solid #FCA5A5; border-radius: 12px; padding: 22px; height: 100%; display: flex; flex-direction: column;">
+            <div style="display: inline-block; padding: 4px 10px; background: #FEE2E2; color: #DC2626; font-size: 11px; font-weight: 800; border-radius: 4px; text-transform: uppercase; margin-bottom: 10px; width: fit-content;">
+              ❌ DZIŚ: FRUSTRACJA I CHAOS
+            </div>
+            <h3 style="font-size: 18px; font-weight: 800; color: #991B1B; margin-bottom: 14px;">{today_title}</h3>
+            <ul style="margin: 0; padding-left: 18px; font-size: 13.5px; color: #450A0A; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
+              {today_li}
+            </ul>
+          </div>
 
-portal_html = f"""<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal Prezentacji Inżynierskich · GitHub Copilot Training</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    body {{
-      font-family: 'Montserrat', Arial, sans-serif;
-      margin: 0;
-      padding: 40px 20px;
-      background: #FBF7FB;
-      color: #1F1F1F;
-    }}
-    .container {{
-      max-width: 1200px;
-      margin: 0 auto;
-    }}
-    .header {{
-      margin-bottom: 24px;
-      border-bottom: 1px solid #D9D9D9;
-      padding-bottom: 24px;
-    }}
-    .back-nav {{
-      margin-bottom: 16px;
-    }}
-    .back-nav a {{
-      color: #7B2D85;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 700;
-    }}
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="back-nav">
-      <a href="../index.html">← Powrót do Głównego Portalu Szkolenia</a>
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <svg viewBox="0 0 50 40" style="width: 44px; height: 34px;">
+              <defs>
+                <marker id="arrow_t_{case_id}" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                  <polygon points="0 1, 8 4, 0 7" fill="var(--primary)" />
+                </marker>
+              </defs>
+              <line x1="4" y1="20" x2="40" y2="20" stroke="var(--primary)" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow_t_{case_id})" />
+            </svg>
+          </div>
+
+          <div class="fragment" style="background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: 12px; padding: 22px; height: 100%; display: flex; flex-direction: column;">
+            <div style="display: inline-block; padding: 4px 10px; background: #DCFCE7; color: #16A34A; font-size: 11px; font-weight: 800; border-radius: 4px; text-transform: uppercase; margin-bottom: 10px; width: fit-content;">
+              ✅ Z COPILOTEM: KONTROLA I SPOKÓJ
+            </div>
+            <h3 style="font-size: 18px; font-weight: 800; color: #14532D; margin-bottom: 14px;">{ai_title}</h3>
+            <ul style="margin: 0; padding-left: 18px; font-size: 13.5px; color: #052E16; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
+              {ai_li}
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>KONTRAST // CO ZMIENIAMY</span>
+        <span>Slajd 2 / 4</span>
+      </div>
     </div>
-    <header class="header">
-      <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #7B2D85;">TRANSITION TECHNOLOGIES PSC // TECHNICAL TRACK</span>
-      <h1 style="font-size: 36px; font-weight: 800; margin: 8px 0 10px; color: #2B0D30;">Katalog Prezentacji dla Zespołów Inżynieryjnych</h1>
-      <p style="font-size: 16px; color: #6B7280; margin: 0; max-width: 800px;">Zestaw interaktywnych prezentacji HTML & SVG dedykowanych inżynierom oprogramowania. Zawiera 1-godzinną sesję wprowadzającą oraz 9 szczegółowych modułów warsztatowych (T1 – T9) zoptymalizowanych do 4-godzinnego szkolenia hands-on.</p>
-    </header>
+    """
 
-    <div style="background: #FFFFFF; border: 1px solid #D9D9D9; border-radius: 8px; padding: 14px 20px; margin-bottom: 24px; display: flex; flex-wrap: wrap; gap: 20px; font-size: 13px; color: #475569;">
-      <div><strong>Skróty klawiszowe w prezentacji:</strong></div>
-      <div><kbd style="background:#eee; padding:2px 6px; border-radius:3px;">Spacja / →</kbd> Następny krok/slajd</div>
-      <div><kbd style="background:#eee; padding:2px 6px; border-radius:3px;">G / Esc</kbd> Przegląd slajdów (Grid)</div>
-      <div><kbd style="background:#eee; padding:2px 6px; border-radius:3px;">Alt + A</kbd> Panel Administratora (Motywy)</div>
-      <div><kbd style="background:#eee; padding:2px 6px; border-radius:3px;">H</kbd> Ukryj pasek kontrolek</div>
+    # Slide 3: Golden Rule: Plan-First
+    s3 = f"""
+    <!-- SLIDE 3: ZŁOTA ZASADA: PLAN-FIRST -->
+    <div class="slide-container" data-title="Złota zasada: Najpierw Plan, potem Implementacja" data-type="Złota Zasada">
+      <header class="slide-header">
+        <span class="slide-kicker">ZŁOTA ZASADA // WORKFLOW INŻYNIERSKI</span>
+        <h2 class="slide-title">Nigdy Nie Proś o Kod w Ciemno: Najpierw PLAN, potem IMPLEMENTACJA</h2>
+      </header>
+      <div class="slide-body" style="justify-content: center;">
+        
+        <div style="display: grid; grid-template-columns: 1fr 30px 1fr 30px 1fr; align-items: center; width: 100%; margin-bottom: 20px;">
+          
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--primary); border-radius: 10px; padding: 18px; height: 100%;">
+            <div style="font-size: 11px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 6px;">KROK 1 · WYMUŚ PLAN</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Zero Kodu w Pytaniu</h4>
+            <p style="font-size: 13px; color: #475569; line-height: 1.45; margin: 0;">{step1}</p>
+          </div>
+
+          <div style="display: flex; justify-content: center;">
+            <svg viewBox="0 0 30 20" style="width: 24px; height: 16px;">
+              <defs><marker id="arr1_{case_id}" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 1, 6 3, 0 5" fill="var(--primary)" /></marker></defs>
+              <line x1="2" y1="10" x2="24" y2="10" stroke="var(--primary)" stroke-width="2.5" marker-end="url(#arr1_{case_id})" />
+            </svg>
+          </div>
+
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--primary); border-top: 4px solid var(--accent); border-radius: 10px; padding: 18px; height: 100%; box-shadow: 0 4px 12px rgba(123,45,133,0.08);">
+            <div style="font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 6px;">KROK 2 · TWOJA DECYZJA</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Przegląd w 30 Sekund</h4>
+            <p style="font-size: 13px; color: #475569; line-height: 1.45; margin: 0;">{step2}</p>
+          </div>
+
+          <div style="display: flex; justify-content: center;">
+            <svg viewBox="0 0 30 20" style="width: 24px; height: 16px;">
+              <defs><marker id="arr2_{case_id}" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 1, 6 3, 0 5" fill="var(--primary)" /></marker></defs>
+              <line x1="2" y1="10" x2="24" y2="10" stroke="var(--primary)" stroke-width="2.5" marker-end="url(#arr2_{case_id})" />
+            </svg>
+          </div>
+
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--success); border-radius: 10px; padding: 18px; height: 100%;">
+            <div style="font-size: 11px; font-weight: 800; color: var(--success); text-transform: uppercase; margin-bottom: 6px;">KROK 3 · KOD PO KAWAŁKU</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Tylko Wybrany Punkt</h4>
+            <p style="font-size: 13px; color: #475569; line-height: 1.45; margin: 0;">{step3}</p>
+          </div>
+
+        </div>
+
+        <div class="fragment" style="background: #FAF5FF; border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; padding: 12px 18px; font-size: 13px; color: #3B0764; line-height: 1.45;">
+          💡 <strong>Dlaczego to działa w praktyce?</strong> {takeaway}
+        </div>
+
+      </div>
+      <div class="slide-footer">
+        <span>METODYKA // PLAN-FIRST</span>
+        <span>Slajd 3 / 4</span>
+      </div>
     </div>
+    """
 
-    {index_cards_html}
+    # Slide 4: Workshop Exercise
+    s4 = f"""
+    <!-- SLIDE 4: ĆWICZENIE WARSZTATOWE -->
+    <div class="slide-container" data-title="Zadanie warsztatowe: Przetestuj ten workflow" data-type="Warsztat">
+      <header class="slide-header">
+        <span class="slide-kicker">WARSZTAT HANDS-ON // CZAS NA PRAKTYKĘ (12 MIN)</span>
+        <h2 class="slide-title">Twoje Zadanie: Otwórz IDE i Zastosuj Regułę Plan-First</h2>
+      </header>
+      <div class="slide-body" style="justify-content: center;">
+        
+        <div style="background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; padding: 12px 18px; margin-bottom: 14px; font-size: 13.5px; color: #334155; line-height: 1.4;">
+          <strong>Twoje zadanie:</strong> {scenario}
+        </div>
 
-    <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #D9D9D9; font-size: 12px; color: #6B7280; text-align: center;">
-      Transition Technologies PSC · AI Software Engineering Training Suite · 2026
-    </footer>
-  </div>
-</body>
-</html>
-"""
+        <div class="fragment" style="background: #0F172A; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 11px; font-weight: 800; color: #38BDF8; letter-spacing: 0.08em; text-transform: uppercase;">
+              👉 SKOPIUJ TEN PROMPT I WKLEJ DO COPILOT CHAT
+            </span>
+            <span style="font-size: 11px; color: #94A3B8; font-family: monospace;">TRYB: PLAN-FIRST</span>
+          </div>
+          <pre style="margin: 0; font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; color: #E2E8F0; line-height: 1.45; white-space: pre-wrap; word-break: break-word;">{prompt}</pre>
+        </div>
 
-with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
-    f.write(portal_html)
-print("  Generated: index.html (Technical Trainee Portal)")
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          
+          <div class="fragment" style="background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: 8px; padding: 12px 16px;">
+            <span style="font-size: 11px; font-weight: 800; color: #16A34A; text-transform: uppercase; display: block; margin-bottom: 4px;">🎯 Oczekiwany Wynik (Definicja Sukcesu)</span>
+            <div style="font-size: 12.5px; color: #14532D; line-height: 1.4;">{success}</div>
+          </div>
 
-print("Technical track generated successfully.")
+          <div class="fragment" style="background: #FFF1F2; border: 1.5px solid #FDA4AF; border-radius: 8px; padding: 12px 16px;">
+            <span style="font-size: 11px; font-weight: 800; color: #E11D48; text-transform: uppercase; display: block; margin-bottom: 4px;">⚠️ Na Co Uważać (Częsty Błąd)</span>
+            <div style="font-size: 12.5px; color: #881337; line-height: 1.4;">{trap}</div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="slide-footer">
+        <span>PRAKTYKA // ĆWICZENIE WARSZTATOWE</span>
+        <span>Slajd 4 / 4</span>
+      </div>
+    </div>
+    """
+
+    deck_html = be.wrap_presentation(f"{case_id}: {title}", f"{s1}\n{s2}\n{s3}\n{s4}")
+    with open(os.path.join(OUT_DIR, filename), "w", encoding="utf-8") as f:
+        f.write(deck_html)
+    print(f"  Generated: {filename} (4 human-friendly slides)")
+
+# ==============================================================================
+# 9 TECHNICAL CASE DECKS
+# ==============================================================================
+
+# T1
+generate_human_tech_deck(
+    filename="case-01-failing-test-debug.html",
+    case_id="CASE T1",
+    title="Czerwony Test na 15 Minut Przed Releasem",
+    quote_heading="Piątek, 15:45 i czerwony pipeline",
+    quote_body="Chcesz wdrożyć poprawkę i wyjść z pracy. Nagle test integracyjny wywala się z 80 liniami czerwonego błędu w terminalu. Wklejasz go w panice do Copilota z hasłem 'napraw to', a on podmienia pół klasy i psuje kolejne 3 moduły.",
+    today_title="Dlaczego tracisz 40 minut na debugowanie?",
+    today_points=[
+        "Wklejasz cały 80-liniowy stack trace bez podania kontekstu i pliku",
+        "Pytasz ogólnie 'gdzie jest błąd i napraw', więc AI strzela w ciemno",
+        "Wciskasz Tab bez czytania i tracisz czas na odkręcanie zmian w gicie"
+    ],
+    ai_title="Opanowana diagnoza w 3 minuty",
+    ai_points=[
+        "Wskazujesz samą asercję i plik z błędem w edytorze (@workspace /explain)",
+        "Zlecasz zbadanie 2-3 prawdopodobnych przyczyn BEZ pisania kodu",
+        "Wybierasz właściwą hipotezę i dopiero wtedy generujesz 3 linijki poprawki"
+    ],
+    step1="Wpisz: 'Przeanalizuj ten stack trace. Nie generuj kodu. Wypisz w 3 punktach plan diagnozy i wskaż zmienną, która mogła mieć null'.",
+    step2="Przeglądasz plan w 30 sekund: widzisz, że punkt 2 (brakujący nagłówek autoryzacji w requeście) to strzał w dziesiątkę.",
+    step3="Dopiero teraz: 'Zaimplementuj Krok 2 z planu — dopisz sprawdzenie nagłówka w metodzie parseRequest() w minimalnej liczbie linii'.",
+    takeaway="Copilot doskonale rozumie przyczynę błędu, ale jeśli od razu poprosisz o kod, zacznie zgadywać i zmieniać architekturę. Najpierw wymuś plan.",
+    scenario="Otwórz plik z wywalającym się testem 'OrderProcessingTest'. Zamiast prosić o kod, przeprowadź kontrolowaną diagnozę.",
+    prompt="""@workspace /explain Zbadaj powyższy błąd asercji w OrderProcessingTest.
+NIE GENERUJ KODU IMPLEMENTACJI.
+1. Wypisz 3 najbardziej prawdopodobne przyczyny asercji Expected: 200, Actual: 504.
+2. Przygotuj 3-etapowy plan weryfikacji mocka i serwisu płatności.
+3. Wskaż, którą linijkę musimy sprawdzić w debuggerze.""",
+    success="Otrzymujesz 3 precyzyjne hipotezy i krótki plan weryfikacji mocka, bez ani jednej niepotrzebnej linijki wygenerowanego kodu.",
+    trap="Pozwolenie Copilotowi na wygenerowanie nowego kodu w pierwszym kroku — to najczęstsza przyczyna regresji w projekcie."
+)
+
+# T2
+generate_human_tech_deck(
+    filename="case-02-test-quality.html",
+    case_id="CASE T2",
+    title="Copilot Napisał 10 Testów w 5 Sekund... ale One Nic Nie Testują",
+    quote_heading="Zielony pasek, który kłamie",
+    quote_body="Cieszysz się, bo Copilot wygenerował całą suitę testów i pokrycie skoczyło do 90%. Na code review kolega pyta: 'A co jeśli API zwróci pustą tablicę albo timeout?'. Sprawdzasz testy, a tam zamockowane wszystko na sztywno i asercja assertTrue(true).",
+    today_title="Złudzenie bezpieczeństwa (testy-wydmuszki)",
+    today_points=[
+        "Prosisz ogólnie 'napisz unit testy do tej klasy' i akceptujesz wynik",
+        "Copilot generuje testy tylko dla zadowolonej ścieżki (Happy Path)",
+        "Asercje sprawdzają tylko czy funkcja się nie wywaliła, a nie logikę biznesową"
+    ],
+    ai_title="Twarde asercje i przypadki brzegowe",
+    ai_points=[
+        "Wymuszasz listę stanów brzegowych (Edge Cases) PRZED jakimkolwiek kodem",
+        "Sam zatwierdzasz scenariusze: brak sieci, pusty string, ujemna kwota",
+        "AI generuje testy z twardymi asercjami sprawdzającymi wyjątki i wartości"
+    ],
+    step1="Poproś o plan: 'Zbadaj metodę calculateDiscount(). Wypisz plan 5 testów brzegowych: wartości ujemne, zerowe, kwoty graniczne. Zero kodu'.",
+    step2="Wybierasz 3 kluczowe scenariusze biznesowe, a 2 banalne odrzucasz.",
+    step3="Generujesz kod testu tylko dla wybranego przypadku ujemnej kwoty, z asercją na wyjątek InvalidAmountException.",
+    takeaway="Prawdziwą wartością testu nie jest zielony pasek, lecz to, czy test wywali się, gdy ktoś w przyszłości zepsuje logikę na produkcji.",
+    scenario="Mamy klasę rabatów koszyka 'BasketDiscountService'. Chcemy przetestować zachowanie przy próbie naliczenia rabatu 110%.",
+    prompt="""Przeanalizuj klasę BasketDiscountService.
+NIE PISZ KODU TESTÓW.
+1. Zaproponuj tabelę 4 przypadków brzegowych (dane wejściowe -> oczekiwany wynik).
+2. Uwzględnij: pusty koszyk, rabat przekraczający 100%, kody rabatowe po terminie.
+3. Wskaż, jakie konkretnie asercje i wyjątki musimy zweryfikować w każdym teście.""",
+    success="Otrzymujesz kompletną matrycę scenariuszy brzegowych z konkretnymi wartościami wejściowymi i asercjami wyjątków.",
+    trap="Akceptowanie testów, w których mock zwraca ten sam obiekt, który jest asertowany (test testuje sam siebie)."
+)
+
+# T3
+generate_human_tech_deck(
+    filename="case-03-code-review.html",
+    case_id="CASE T3",
+    title="Kolega Przysłał PR z Kodem z AI, a Ty Bezmyślnie Klikasz LGTM",
+    quote_heading="Złudzenie idealnego kodu w PR",
+    quote_body="Otwierasz Pull Request na 300 linii. Kod wygląda schludnie, ma ładne wcięcia i komentarze. Dajesz 'Approve'. Dwie godziny później na stagingu siada baza danych, bo kod generowany przez AI nie zamykał połączeń w bloku finally.",
+    today_title="Pobieżne review i fałszywe zaufanie",
+    today_points=[
+        "Przeglądasz diff po łebkach, wierząc że 'skoro pisał z Copilotem, to działa'",
+        "Przeoczasz brak obsługi timeoutów i brak indeksów przy zapytaniach SQL",
+        "Wystawiasz formalny komentarz 'looks good to me' bez weryfikacji ryzyk"
+    ],
+    ai_title="Copilot jako adwokat diabła",
+    ai_points=[
+        "Używasz Copilota jako sceptycznego audytora bezpieczeństwa i wydajności",
+        "Zlecasz mu wyszukanie 3 wektorów awarii i wycieków zasobów w diffie",
+        "Sam sprawdzasz wskazane miejsca i zadajesz autorowi konkretne pytania"
+    ],
+    step1="Wklejasz diff PR-a. Prompt: 'Działaj jak bezlitosny audytor bezpieczeństwa. Wskaż w 3 punktach, gdzie ten kod wyłoży się pod obciążeniem'.",
+    step2="Otrzymujesz plan ryzyk: brak limitu pobieranych wierszy, brak transakcyjności w zapisie.",
+    step3="Formułujesz merytoryczne pytania do autora PR z odniesieniem do konkretnych linii diffa.",
+    takeaway="Copilot doskonale znajduje luki we własnym i cudzym kodzie, o ile wyraźnie każesz mu szukać problemów, zamiast go chwalić.",
+    scenario="Otwórz diff Pull Requesta z nowym endpointem pobierającym historię zamówień klienta.",
+    prompt="""Przeanalizuj poniższy diff Pull Requesta jako sceptyczny Senior Architekt.
+1. Wskaż 3 potencjalne problemy: wycieki pamięci, brak transakcji, zapytania N+1.
+2. Przygotuj plan 2 pytań weryfikujących do autora PR.
+3. Oceń, czy kod jest odporny na wstrzykiwanie parametrów (Parameter Tampering).""",
+    success="Wykrycie braku stronicowania (pagination) w zapytaniu do bazy, zanim kod trafi na środowisko produkcyjne.",
+    trap="Akceptowanie kodu z AI tylko dlatego, że wygląda elegancko i ma wygenerowane komentarze Javadoc."
+)
+
+# T4
+generate_human_tech_deck(
+    filename="case-04-legacy-refactor.html",
+    case_id="CASE T4",
+    title="Klasa na 600 Linii Napisana 7 Lat Temu i Strach Przed Zmianą",
+    quote_heading="Kod, którego nikt nie rozumie",
+    quote_body="Masz zmienić jeden warunek biznesowy w pliku 'PaymentManagerLegacy.java'. Ostatni commit był w 2019 roku, autor nie pracuje w firmie, a testów brak. Boisz się, że cokolwiek zmienisz — wywołasz lawinę błędów.",
+    today_title="Ryzykowne przepisywanie od zera",
+    today_points=[
+        "Piszesz do Copilota: 'przepisz tę metodę na czysty kod'",
+        "Copilot usuwa 'dziwne' warunki if, które były łatkami na błędy klienta",
+        "Cały moduł przestaje działać w specyficznych przypadkach brzegowych"
+    ],
+    ai_title="Bezpieczne mikrokroki (Slicing)",
+    ai_points=[
+        "Najpierw tworzysz test utrwalający obecne zachowanie (Pinning Test)",
+        "Zlecasz plan bezpiecznego rozbicia metody na małe, odizolowane plastry",
+        "Wdrażasz refaktoryzację pojedynczymi krokami z natychmiastowym testem"
+    ],
+    step1="Poproś o plan: 'Zbadaj tę metodę. Nie refaktoryzuj. Zaproponuj plan wyodrębnienia pierwszej 10-linijkowej funkcji pomocniczej bez zmiany sygnatury'.",
+    step2="Sprawdzasz czy plan nie modyfikuje ukrytego stanu obiektu.",
+    step3="Generujesz kod tylko dla tej jednej małej funkcji i natychmiast odpalasz testy.",
+    takeaway="W kodzie legacy największym wrogiem jest pośpiech. Bezpieczna zmiana to seria mikrokroków z zatwierdzonym planem.",
+    scenario="Stara metoda obliczania podatku z 15 zagnieżdżonymi warunkami if/else bez żadnego testu jednostkowego.",
+    prompt="""Przeanalizuj metodę calculateTaxLegacy().
+NIE DOKONUJ REFAKTORYZACJI.
+1. Przygotuj 3-etapowy plan wyciągania logiki: krok 1 (walidacja), krok 2 (stawki), krok 3 (zaokrąglenia).
+2. Wskaż zmienne współdzielone (mutowalny stan), na które musimy uważać.
+3. Zaproponuj minimalny test utrwalający obecne działanie (Pinning Test).""",
+    success="Bezpieczny podział na małe, testowalne metody bez naruszenia dotychczasowego zachowania systemu.",
+    trap="Zgoda na przepisanie całej klasy na nowy styl w jednym wielkim kroku bez testów utrwalających."
+)
+
+# T5
+generate_human_tech_deck(
+    filename="case-05-slow-sql-optimization.html",
+    case_id="CASE T5",
+    title="Na Twoim Laptopie Działało w 50 ms, u Klienta Muli przez 14 Sekund",
+    quote_heading="Zderzenie z produkcyjną bazą danych",
+    quote_body="Na lokalnej bazie z 50 rekordami wszystko śmigało. Klient odpala raport z 2 milionami wierszy i serwer staje dęba. Copilot podpowiada 'dodaj 4 indeksy', a baza klienta i tak ich nie użyje z powodu funkcji w klauzuli WHERE.",
+    today_title="Optymalizacja w ciemno",
+    today_points=[
+        "Wklejasz samo zapytanie SQL i prosisz 'zoptymalizuj to zapytanie'",
+        "Copilot przepisuje JOIN-y, gubiąc rekordy (zamienia LEFT JOIN na INNER JOIN)",
+        "Wynik zapytania zmienia się po cichu, a raport pokazuje fałszywe sumy"
+    ],
+    ai_title="Analiza planu wykonania i ekwiwalencja",
+    ai_points=[
+        "Wklejasz plan wykonania (EXPLAIN PLAN) razem z zapytaniem SQL",
+        "Wymuszasz plan sprawdzenia ekwiwalencji logicznej (identyczny zbiór wyników)",
+        "Usuwasz operacje blokujące indeksy (np. funkcje na kolumnach indeksowanych)"
+    ],
+    step1="Oto zapytanie SQL i EXPLAIN PLAN. Wypisz plan: gdzie następuje Full Table Scan i dlaczego indeks nie jest używany.",
+    step2="Weryfikujesz, czy proponowane przepisanie nie zgubi rekordów z wartościami NULL.",
+    step3="Implementujesz zoptymalizowaną wersję i wykonujesz test porównawczy obu zapytań (MINUS / EXCEPT).",
+    takeaway="Optymalizacja SQL to matematyka relacyjna. Każda zmiana zapytania musi zostać zweryfikowana testem ekwiwalencji zbiorów.",
+    scenario="Wolne zapytanie filtrujące faktury po dacie i nazwie klienta z klauzulą WHERE UPPER(name) LIKE '%TECH%'.",
+    prompt="""Przeanalizuj poniższe zapytanie SQL i plan wykonania EXPLAIN.
+NIE PISZ NOWEGO QUERY WPROST.
+1. Zidentyfikuj przyczynę pominięcia indeksu na kolumnie company_name.
+2. Zaproponuj plan 2 wariantów optymalizacji: indeks funkcyjny vs przepisanie warunku.
+3. Przygotuj zapytanie weryfikujące, czy oba warianty zwracają DOKŁADNIE tę samą liczbę wierszy (MINUS / EXCEPT).""",
+    success="Skrócenie czasu zapytania z 14 sekund do 300 ms przy zerowym ryzyku przekłamania raportu finansowego.",
+    trap="Zmiana struktury JOIN bez sprawdzenia przypadków brzegowych wartości NULL."
+)
+
+# T6
+generate_human_tech_deck(
+    filename="case-06-mockup-to-jira.html",
+    case_id="CASE T6",
+    title="Dostałeś Zrzut Ekranu od PO z Tekstem: 'Zróbcie to w Tym Sprincie'",
+    quote_heading="Niejasne wymagania z Figmy",
+    quote_body="Product Owner wrzuca na Slacka screen nowego formularza zamówienia i mówi: 'To tylko 3 pola, dacie radę do piątku'. Siadasz do kodu, a w czwartek okazuje się, że nikt nie opisał walidacji NIP, stanów ładowania ani co ma się stać przy braku połączenia.",
+    today_title="Kodowanie bez dekompozycji",
+    today_points=[
+        "Zaczynasz od razu pisać komponenty bez rozpisania wymagań technicznych",
+        "W połowie pracy pytasz PO o 10 szczegółów, blokując się nawzajem",
+        "W piątek sprint kończy się niedokończonym kodem i nerwami na retro"
+    ],
+    ai_title="Precyzyjne tickety przed kodowaniem",
+    ai_points=[
+        "Wrzucasz opis makiety i prosisz o dekompozycję na konkretne zadania techniczne",
+        "Copilot przygotowuje kryteria akceptacji w standardzie Given-When-Then",
+        "Wklejasz gotowe tickety do Jiry przed napisaniem pierwszej linii kodu"
+    ],
+    step1="Zbadaj ten formularz. Rozpisz plan 3 niezależnych ticketów: 1. Model & Walidacja, 2. Integracja API, 3. Obsługa błędów UI.",
+    step2="Dla każdego zadania wygeneruj 3 kryteria akceptacji (np. co się dzieje przy HTTP 422).",
+    step3="Zatwierdzasz zakres z zespołem i dopiero wtedy implementujesz pierwszy ticket.",
+    takeaway="Najtańszy błąd to ten, który wykryjesz przed napisaniem kodu. Dobry plan dekompozycji oszczędza dni pracy zespołu.",
+    scenario="Makieta ekranu zmiany hasła z wymaganiami złożoności i potwierdzenia mailowego.",
+    prompt="""Przeanalizuj ten komponent formularza zmiany hasła.
+NIE GENERUJ KODU KOMPONENTU.
+1. Rozbij zadanie na 3 tickety Jira (Front-end, Walidacja, Obsługa błędów API).
+2. Dla każdego ticketu napisz kryteria akceptacji w formacie Given-When-Then.
+3. Wypisz 3 stany brzegowe UI (brak sieci, wygaśnięcie tokenu sesji, podwójne kliknięcie).""",
+    success="Kompletna, przejrzysta dekompozycja w Jirze z kryteriami akceptacji gotowa w 5 minut.",
+    trap="Rozpoczynanie pisania stylów CSS przed ustaleniem kontraktu API i obsługi błędów."
+)
+
+# T7
+generate_human_tech_deck(
+    filename="case-07-unfamiliar-repo.html",
+    case_id="CASE T7",
+    title="Pierwszy Dzień w Projekcie: 40 Mikroserwisów i Zerowa Dokumentacja",
+    quote_heading="Zgubiony w gąszczu obcego kodu",
+    quote_body="Dołączasz do nowego zespołu u klienta. Repozytorium ma 400 tysięcy linii kodu, README ma 3 linijki z 2021 roku, a Ty masz naprawić błąd w fakturowaniu. Otwierasz IDE i nie wiesz nawet, która klasa startuje aplikację.",
+    today_title="Szukanie po omacku",
+    today_points=[
+        "Klikasz po 40 folderach na oślep, szukając znajomo brzmiących słów",
+        "Używasz globalnego wyszukiwania i dostajesz 800 wyników w 50 plikach",
+        "Po 2 dniach nadal nie wiesz, jak dane wędrują od kontrolera do bazy"
+    ],
+    ai_title="Nawigacja z kontekstem @workspace",
+    ai_points=[
+        "Używasz kontekstu @workspace do zbudowania mapy przepływu żądania",
+        "Pytasz o architekturę: 'Gdzie w tym projekcie walidujemy faktury?'",
+        "Copilot wskazuje dokładny łańcuch wywołań klas w 10 sekund"
+    ],
+    step1="Użyj @workspace. Zbuduj plan ścieżki przepływu żądania dla operacji 'IssueInvoice': kontroler -> serwis -> repozytorium.",
+    step2="Weryfikujesz 2 wskazane klasy i sprawdzasz wstrzykiwane zależności.",
+    step3="Prosisz o zlokalizowanie miejsca, w którym rzucany jest badany wyjątek.",
+    takeaway="@workspace w Copilocie to Twój prywatny przewodnik po obcym kodzie. Zamiast czytać tysiące linii, pytasz o relacje i przepływy.",
+    scenario="Wejście do nieznanego repozytorium REST API opartego na Spring Boot / NestJS.",
+    prompt="""@workspace Jak w tym repozytorium zorganizowana jest obsługa błędów?
+1. Wskaż klasę obsługującą globalne wyjątki (np. @ControllerAdvice lub middleware).
+2. Pokaż plan przepływu: co dzieje się, gdy serwis rzuca BusinessException.
+3. Wskaż plik konfiguracyjny, w którym rejestrowane są filtry bezpieczeństwa.""",
+    success="Błyskawiczna orientacja w strukturze projektu i odnalezienie właściwego modułu w 2 minuty.",
+    trap="Pytanie o kod bez prefiksu @workspace — Copilot odpowie ogólnikami z internetu zamiast z Twojego projektu."
+)
+
+# T8
+generate_human_tech_deck(
+    filename="case-08-technical-to-business-update.html",
+    case_id="CASE T8",
+    title="Naprawiłeś Skomplikowany Bug, a PO Pyta: 'Co tam Właściwie Było?'",
+    quote_heading="Klątwa wiedzy technicznej",
+    quote_body="Spędziłeś 6 godzin na naprawieniu wyścigu wątków w transakcjach bazodanowych. Na standupie zaczynasz opowiadać o 'deadlockach na poziomie izolacji READ COMMITTED', a Product Owner patrzy na Ciebie pustym wzrokiem i pyta: 'Ale czy klient może już klikać?'.",
+    today_title="Techniczny bełkot i nieporozumienia",
+    today_points=[
+        "Wklejasz na Slacka techniczny żargon albo git log z nazwami wewnętrznych metod",
+        "Biznes nie rozumie ryzyka i nie wie, jak potwierdzić naprawę błędu",
+        "Dochodzi do frustracji po obu stronach co do faktycznego postępu prac"
+    ],
+    ai_title="Tłumaczenie na język wartości biznesowej",
+    ai_points=[
+        "Wrzucasz diff commita do Copilota i prosisz o tłumaczenie na język korzyści",
+        "Otrzymujesz 3 punkty: co było objawem, co naprawiono, jak to przetestować",
+        "PO i klient dostają jasny, profesjonalny komunikat bez technicznego żargonu"
+    ],
+    step1="Oto diff commita. Przygotuj plan notatki w 3 punktach: 1. Co widział użytkownik, 2. Co naprawiono, 3. Co tester ma przeklikać.",
+    step2="Sprawdzasz czy nie użyto hermetycznych nazw bibliotek i struktur bazodanowych.",
+    step3="Kopiujesz zwięzłą notatkę do komentarza w Jirze lub maila do klienta.",
+    takeaway="Najlepszy inżynier to taki, który potrafi wytłumaczyć wartość swojej pracy prostym językiem korzyści biznesowej.",
+    scenario="Zamknięcie trudnego zadania z optymalizacji odświeżania tokenów uwierzytelniania.",
+    prompt="""Przeanalizuj ten commit naprawiający wygasanie tokenów JWT.
+Przetłumacz zmianę na notatkę dla Product Ownera i Testera:
+1. Napisz w 2 zdaniach prostym językiem, co zyskuje użytkownik (zero żargonu).
+2. Wypisz 3 proste kroki dla testera manualnego, jak potwierdzić naprawę.
+3. Wskaż, czy zmiana wymagała migracji bazy lub restartu usług.""",
+    success="Gotowy, elegancki update do ticketa w Jirze zrozumiały dla każdego członka zespołu.",
+    trap="Używanie akronimów i nazw wewnętrznych tabel w oficjalnej komunikacji ze stroną biznesową."
+)
+
+# T9
+generate_human_tech_deck(
+    filename="case-09-client-restrictions-security.html",
+    case_id="CASE T9",
+    title="Klient Mówi: 'Zakaz AI i Chmury', a Ty Chcesz Pracować Wydajnie",
+    quote_heading="Paraliż bezpieczeństwa vs wygoda",
+    quote_body="Klient bankowy lub rządowy wpisał w umowie surowe kary za wysyłanie kodu do chmury. Część zespołu panikuje i wyłącza wszystkie narzędzia, a inni po cichu wklejają prawdziwe dane na czat ryzykując bezpieczeństwo firmy.",
+    today_title="Skrajności: paraliż albo wyciek danych",
+    today_points=[
+        "Całkowita rezygnacja z asystenta AI i spadek produktywności zespołu o połowę",
+        "Nieświadome wysyłanie wrażliwych danych (klucze API, PESEL, nazwy baz klienta)",
+        "Strach przed audytem bezpieczeństwa i brak jasnych reguł w zespole"
+    ],
+    ai_title="Praca na syntetycznych abstrakcjach (Zero Risk)",
+    ai_points=[
+        "Wyodrębnienie czystego problemu algorytmicznego od poufnych danych klienta",
+        "Generowanie struktur syntetycznych (Dummy Data / Generic Interfaces)",
+        "100% zgodności z wymogami bezpieczeństwa i pełne wykorzystanie asystenta"
+    ],
+    step1="Zbadaj problem logiczny. Przygotuj plan sanityzacji: jak zastąpić dane klienta strukturą generyczną (ItemA, ItemB).",
+    step2="Wysyłasz do Copilota wyłącznie czysty algorytm bez nazw domenowych klienta.",
+    step3="Wygenerowane rozwiązanie wklejasz do zabezpieczonego środowiska klienta i wstrzykujesz właściwe typy.",
+    takeaway="Ochrona własności intelektualnej klienta to priorytet inżyniera. Narzędzia AI wykorzystujemy do rozwiązywania łamigłówek logicznych na danych syntetycznych.",
+    scenario="Złożony algorytm podziału budżetu i alokacji środków dla klienta korporacyjnego.",
+    prompt="""Potrzebuję zoptymalizować algorytm alokacji zasobów.
+Pracujemy w reżimie bezpieczeństwa (Zero Client Data).
+1. Zaproponuj generyczny interfejs operujący na typach AllocationSource i AllocationTarget.
+2. Przygotuj 3 syntetyczne przykłady danych testowych (zamaskowane ID, kwoty losowe).
+3. Opracuj plan algorytmu dopasowania bez użycia zewnętrznych zależności.""",
+    success="Rozwiązanie trudnego problemu logicznego przy zerowym ryzyku ujawnienia kodu i danych klienta.",
+    trap="Wklejanie do czatu plików konfiguracyjnych .env, connection stringów lub prawdziwych nazw tabel klienta."
+)
+
+print("\nAll 9 technical case presentations successfully generated!")

@@ -553,270 +553,183 @@
   <div id="deck-wrapper">
 
 
-    <!-- SLIDE 1: TYTUŁOWY -->
-    <div class="slide-container slide-dark" data-title="N5: Identyfikacja Zaległych Działań i Anomalii w Arkuszach Excel" data-type="Title">
-      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 960px; z-index: 2;">
-        <span class="slide-kicker" style="color: var(--accent); letter-spacing: 0.12em; margin-bottom: 16px;">BUSINESS CASE STUDY // MICROSOFT COPILOT</span>
-        <h1 style="font-size: 46px; font-weight: 800; line-height: 1.15; color: var(--text-light); margin-bottom: 22px;">N5: Identyfikacja Zaległych Działań i Anomalii w Arkuszach Excel</h1>
-        <p style="font-size: 19px; line-height: 1.45; color: var(--text-light-muted); margin-bottom: 34px; max-width: 820px;">Warsztatowe studium przypadku: od manualnego tarcia do zweryfikowanego rezultatu w M365.</p>
-        <div style="display: flex; gap: 32px; align-items: center; border-top: 1px solid var(--border-dark); padding-top: 22px;">
-          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Organizacja</span><strong style="font-size: 14px; color: var(--text-light);">Transition Technologies PSC</strong></div>
-          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Format</span><strong style="font-size: 14px; color: var(--text-light);">1h Prezentacja / 4h Warsztat</strong></div>
-          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Kontekst</span><strong style="font-size: 14px; color: var(--text-light);">Scenariusz N5 · TTPSC 2026</strong></div>
+    <!-- SLIDE 1: ŻYCIOWY PUNKT WYJŚCIA -->
+    <div class="slide-container slide-dark" data-title="CASE N5: Arkusz na 2000 Wierszy i Strach Przed Formułą WYSZUKAJ.PIONOWO" data-type="Wprowadzenie">
+      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 980px; z-index: 2;">
+        <span class="slide-kicker" style="color: #64B237; letter-spacing: 0.12em; margin-bottom: 12px;">CASE N5 // MICROSOFT COPILOT DLA BIZNESU</span>
+        <h1 style="font-size: 38px; font-weight: 800; line-height: 1.18; color: var(--text-light); margin-bottom: 20px;">Arkusz na 2000 Wierszy i Strach Przed Formułą WYSZUKAJ.PIONOWO</h1>
+        
+        <div style="background: rgba(255, 255, 255, 0.08); border-left: 4px solid #64B237; border-radius: 0 10px 10px 0; padding: 18px 24px; margin-bottom: 26px;">
+          <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #64B237; margin-bottom: 6px;">
+            💬 SYTUACJA Z ŻYCIA: "Koszmar tabeli przestawnej"
+          </div>
+          <p style="font-size: 17px; line-height: 1.48; color: #F1F5F9; margin: 0;">
+            Dział finansowy przesłał tabelę ze wszystkimi transakcjami z ostatniego kwartału. Musisz znaleźć klientów, którzy zalegają z płatnością powyżej 30 dni, policzyć ile łącznie są nam winni i pogrupować ich według handlowców. Zaczynasz szukać w Google formuł Excela i klniesz na błędy #N/D!.
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 24px; align-items: center; border-top: 1px solid var(--border-dark); padding-top: 18px;">
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Format</span><strong style="font-size: 14px; color: var(--text-light);">12 minut ćwiczenia</strong></div>
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Narzędzie</span><strong style="font-size: 14px; color: #64B237;">Custom Agent / Notebook</strong></div>
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Zasada</span><strong style="font-size: 14px; color: var(--text-light);">Uziemienie i weryfikacja [1]</strong></div>
         </div>
       </div>
       <div class="slide-footer">
-        <span style="color: var(--text-light-muted);">TTPSC AI TRAINING // 2026</span>
-        <span style="color: var(--text-light-muted);">Slajd 1</span>
+        <span style="color: var(--text-light-muted);">TTPSC BUSINESS TRAINING // 2026</span>
+        <span style="color: var(--text-light-muted);">Slajd 1 / 4</span>
       </div>
     </div>
     
 
-    <!-- SLIDE: SPLIT SCREEN -->
-    <div class="slide-container" data-title="Kontekst Operacyjny: Identyfikacja Zaległych Działań i Anomalii w Arkuszach Excel" data-type="Split Screen">
+    <!-- SLIDE 2: ZDERZENIE RZECZYWISTOŚCI -->
+    <div class="slide-container" data-title="Zderzenie rzeczywistości: Ręczne przeklejanie vs Praca z AI" data-type="Zderzenie">
       <header class="slide-header">
-        <span class="slide-kicker">SYTUACJA I WYZWANIE // PROBLEM DEFINITION</span>
-        <h2 class="slide-title">Kontekst Operacyjny: Identyfikacja Zaległych Działań i Anomalii w Arkuszach Excel</h2>
+        <span class="slide-kicker">ZDERZENIE RZECZYWISTOŚCI // GDZIE TRACIMY CZAS?</span>
+        <h2 class="slide-title">Jak Robisz To Dzisiaj vs. Jak Zrobisz To z Copilotem</h2>
       </header>
       <div class="slide-body" style="justify-content: center;">
-        <div style="display: grid; grid-template-columns: 1fr 60px 1fr; gap: 20px; align-items: center; width: 100%;">
+        <div style="display: grid; grid-template-columns: 1fr 50px 1fr; gap: 16px; align-items: center; width: 100%;">
           
-          <div class="fragment" style="background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 12px; padding: 26px 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
-            <div style="display: inline-block; padding: 4px 10px; background: var(--danger-light); color: var(--danger); font-size: 11px; font-weight: 800; border-radius: 4px; text-transform: uppercase; margin-bottom: 12px;">Wyzwanie w Pracy</div>
-            <h3 style="font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px;">Stan Rzeczywisty</h3>
-            <ul class="bullet-list" style="margin: 0; padding-left: 20px; font-size: 14px; color: #334155;">
-              <li style='margin-bottom: 8px;'><strong>Scena:</strong> Przed cotygodniowym spotkaniem menedżer pyta o zaległe zadania i osoby za nie odpowiedzialne.</li><li style='margin-bottom: 8px;'><strong>Presja:</strong> Arkusz zawiera setki wierszy, niejednolite formaty dat i puste komórki w kolumnach statusu.</li><li style='margin-bottom: 8px;'><strong>Ryzyko:</strong> Błędne filtrowanie ukryje krytyczne opóźnienie lub wygeneruje fałszywy wykres.</li>
+          <div class="fragment" style="background: #FFF5F5; border: 1.5px solid #FCA5A5; border-radius: 12px; padding: 22px; height: 100%; display: flex; flex-direction: column;">
+            <div style="display: inline-block; padding: 4px 10px; background: #FEE2E2; color: #DC2626; font-size: 11px; font-weight: 800; border-radius: 4px; text-transform: uppercase; margin-bottom: 10px; width: fit-content;">
+              ❌ DZIŚ: RĘCZNA KATORGA
+            </div>
+            <h3 style="font-size: 18px; font-weight: 800; color: #991B1B; margin-bottom: 14px;">Ręczne filtrowanie i błędy formuł</h3>
+            <ul style="margin: 0; padding-left: 18px; font-size: 13.5px; color: #450A0A; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
+              <li style='margin-bottom: 8px;'>Ręczne filtrowanie i sortowanie kolumn, ryzyko pominięcia ukrytych wierszy</li><li style='margin-bottom: 8px;'>Tracenie godziny na przypomnienie sobie składni skomplikowanych formuł</li><li style='margin-bottom: 8px;'>Ręczne przepisywanie sum na kartkę z ryzykiem błędu rachunkowego</li>
             </ul>
           </div>
 
           <div style="display: flex; justify-content: center; align-items: center;">
-            <svg viewBox="0 0 60 60" style="width: 50px; height: 50px;">
+            <svg viewBox="0 0 50 40" style="width: 44px; height: 34px;">
               <defs>
-                <marker id="splitArrow_2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                  <polygon points="0 1, 8 4, 0 7" fill="var(--primary)" />
+                <marker id="arrow_n_CASE N5" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                  <polygon points="0 1, 8 4, 0 7" fill="#256654" />
                 </marker>
               </defs>
-              <line x1="5" y1="30" x2="48" y2="30" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" marker-end="url(#splitArrow_2)" />
+              <line x1="4" y1="20" x2="40" y2="20" stroke="#256654" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow_n_CASE N5)" />
             </svg>
           </div>
 
-          <div class="fragment" style="background: var(--bg-white); border: 2px solid var(--primary); border-radius: 12px; padding: 26px 24px; box-shadow: 0 4px 16px rgba(123,45,133,0.08);">
-            <div style="display: inline-block; padding: 4px 10px; background: var(--success-light); color: var(--success); font-size: 11px; font-weight: 800; border-radius: 4px; text-transform: uppercase; margin-bottom: 12px;">Cel Warsztatu</div>
-            <h3 style="font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px;">Oczekiwana Transformacja</h3>
-            <ul class="bullet-list" style="margin: 0; padding-left: 20px; font-size: 14px; color: #334155;">
-              <li style='margin-bottom: 8px;'><strong>Cel:</strong> Szybka analiza wyjątków, wygenerowanie formuł sprawdzających i zestawienie wyników.</li><li style='margin-bottom: 8px;'><strong>Narzędzie:</strong> Copilot w MS Excel (lub asysta Copilot Chat przy tworzeniu zaawansowanych formuł).</li><li style='margin-bottom: 8px;'><strong>Standard:</strong> Zestawienie poparte sprawdzonymi formułami i weryfikacją losowych wierszy.</li>
+          <div class="fragment" style="background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: 12px; padding: 22px; height: 100%; display: flex; flex-direction: column;">
+            <div style="display: inline-block; padding: 4px 10px; background: #DCFCE7; color: #16A34A; font-size: 11px; font-weight: 800; border-radius: 4px; text-transform: uppercase; margin-bottom: 10px; width: fit-content;">
+              ✅ Z COPILOTEM: SPOKÓJ I DOKŁADNOŚĆ
+            </div>
+            <h3 style="font-size: 18px; font-weight: 800; color: #14532D; margin-bottom: 14px;">Rozmowa z Excelem ludzkim językiem</h3>
+            <ul style="margin: 0; padding-left: 18px; font-size: 13.5px; color: #052E16; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
+              <li style='margin-bottom: 8px;'>Formatujesz dane jako Tabelę Excel (Ctrl+T) i uruchamiasz Copilota w Excelu</li><li style='margin-bottom: 8px;'>Pytasz po polsku: 'Pokaż sumę zaległości powyżej 30 dni w podziale na opiekuna'</li><li style='margin-bottom: 8px;'>Copilot sam wstawia nową kolumnę z formułą i generuje gotowy wykres</li>
             </ul>
           </div>
 
         </div>
       </div>
       <div class="slide-footer">
-        <span>KONTRAST // METODYKA PRACY</span>
-        <span>Slajd 2</span>
+        <span>KONTRAST // CO ZMIENIAMY</span>
+        <span>Slajd 2 / 4</span>
       </div>
     </div>
     
 
-    <!-- SLIDE: SPLIT SCREEN -->
-    <div class="slide-container" data-title="Ścieżka Tradycyjna vs Praca z Microsoft Copilot" data-type="Split Screen">
+    <!-- SLIDE 3: SPOSÓB PRACY: CUSTOM AGENT & COPILOT NOTEBOOK -->
+    <div class="slide-container" data-title="Złota zasada: Custom Agent i Copilot Notebook" data-type="Złota Zasada">
       <header class="slide-header">
-        <span class="slide-kicker">PORÓWNANIE METODYK // WORKFLOW CONTRAST</span>
-        <h2 class="slide-title">Ścieżka Tradycyjna vs Praca z Microsoft Copilot</h2>
-      </header>
-      <div class="slide-body" style="justify-content: center;">
-        <div style="display: grid; grid-template-columns: 1fr 60px 1fr; gap: 20px; align-items: center; width: 100%;">
-          
-          <div class="fragment" style="background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 12px; padding: 26px 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
-            <div style="display: inline-block; padding: 4px 10px; background: var(--danger-light); color: var(--danger); font-size: 11px; font-weight: 800; border-radius: 4px; text-transform: uppercase; margin-bottom: 12px;">Bez Wsparcia AI</div>
-            <h3 style="font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px;">Przebieg Manualny</h3>
-            <ul class="bullet-list" style="margin: 0; padding-left: 20px; font-size: 14px; color: #334155;">
-              <li style='margin-bottom: 8px;'><strong>Krok 1:</strong> Próby ręcznego ustawiania skomplikowanych filtrów i tabel przestawnych.</li><li style='margin-bottom: 8px;'><strong>Krok 2:</strong> Pisanie z pamięci formuł WYSZUKAJ.PIONOWO lub ORAZ/JEŻELI z błędami składni.</li><li style='margin-bottom: 8px;'><strong>Tarcie:</strong> Niepewność, czy formuła poprawnie obsłużyła puste komórki i formaty tekstowe.</li>
-            </ul>
-          </div>
-
-          <div style="display: flex; justify-content: center; align-items: center;">
-            <svg viewBox="0 0 60 60" style="width: 50px; height: 50px;">
-              <defs>
-                <marker id="splitArrow_3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                  <polygon points="0 1, 8 4, 0 7" fill="var(--primary)" />
-                </marker>
-              </defs>
-              <line x1="5" y1="30" x2="48" y2="30" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" marker-end="url(#splitArrow_3)" />
-            </svg>
-          </div>
-
-          <div class="fragment" style="background: var(--bg-white); border: 2px solid var(--primary); border-radius: 12px; padding: 26px 24px; box-shadow: 0 4px 16px rgba(123,45,133,0.08);">
-            <div style="display: inline-block; padding: 4px 10px; background: var(--success-light); color: var(--success); font-size: 11px; font-weight: 800; border-radius: 4px; text-transform: uppercase; margin-bottom: 12px;">Z Microsoft Copilot</div>
-            <h3 style="font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px;">Pętla Wspomagana</h3>
-            <ul class="bullet-list" style="margin: 0; padding-left: 20px; font-size: 14px; color: #334155;">
-              <li style='margin-bottom: 8px;'><strong>Krok 1:</strong> Polecenie dla Copilot w Excel: 'Zidentyfikuj wiersze przeterminowane i pogrupuj według właścicieli'.</li><li style='margin-bottom: 8px;'><strong>Krok 2:</strong> Alternatywnie w Chat: prośba o dokładną formułę Excel z wyjaśnieniem założeń.</li><li style='margin-bottom: 8px;'><strong>Dźwignia:</strong> Bezpieczna analiza dużego zbioru w kilka minut.</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-      <div class="slide-footer">
-        <span>KONTRAST // METODYKA PRACY</span>
-        <span>Slajd 3</span>
-      </div>
-    </div>
-    
-
-    <!-- SLIDE: PIPELINE PROCESS -->
-    <div class="slide-container" data-title="Krok po Kroku z Autoryzowanym Zbiorem Danych" data-type="Pipeline">
-      <header class="slide-header">
-        <span class="slide-kicker">PRZEPŁYW LABORATORYJNY // 4 KROKI ĆWICZENIA</span>
-        <h2 class="slide-title">Krok po Kroku z Autoryzowanym Zbiorem Danych</h2>
+        <span class="slide-kicker">SPOSÓB PRACY // BEZPIECZEŃSTWO I DUŻY KONTEKST</span>
+        <h2 class="slide-title">Koniec z Gubieniem Wątków: Użyj Copilot Notebooka lub Własnego Agenta</h2>
       </header>
       <div class="slide-body" style="justify-content: center;">
         
-        <div style="position: relative; width: 100%; margin-bottom: 20px;">
-          <svg viewBox="0 0 1152 40" style="width: 100%; height: 36px;">
-            <defs>
-              <marker id="pipeArrow_4" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                <polygon points="0 1, 8 4, 0 7" fill="var(--primary)" />
-              </marker>
-            </defs>
-            <line x1="20" y1="18" x2="1140" y2="18" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round" />
-            <line x1="20" y1="18" x2="880" y2="18" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" marker-end="url(#pipeArrow_4)" />
-            <circle cx="140" cy="18" r="9" fill="var(--primary)" />
-            <circle cx="430" cy="18" r="9" fill="var(--primary)" />
-            <circle cx="720" cy="18" r="9" fill="var(--primary)" />
-            <circle cx="1010" cy="18" r="9" fill="#94A3B8" />
-          </svg>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+        <div style="display: grid; grid-template-columns: 1fr 30px 1fr 30px 1fr; align-items: center; width: 100%; margin-bottom: 20px;">
           
-        <div class="fragment" style="background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 12px; padding: 20px 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
-          <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--primary); display: block; margin-bottom: 6px;">Krok 1 (10 min)</span>
-          <h4 style="font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">Wybór Źródła</h4>
-          <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.4;">Wskaż zatwierdzony plik w SharePoint lub załącz przygotowany dokument.</p>
-        </div>
-        
-        <div class="fragment" style="background: var(--bg-white); border: 2px solid var(--primary); border-radius: 12px; padding: 20px 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
-          <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--primary); display: block; margin-bottom: 6px;">Krok 2 (15 min)</span>
-          <h4 style="font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">Struktura Promptu</h4>
-          <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.4;">Sformułuj zapytanie z wymogiem numerów stron i zakazem zmyślania.</p>
-        </div>
-        
-        <div class="fragment" style="background: var(--bg-white); border: 2px solid var(--primary); border-radius: 12px; padding: 20px 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
-          <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--primary); display: block; margin-bottom: 6px;">Krok 3 (10 min)</span>
-          <h4 style="font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">Weryfikacja Faktów</h4>
-          <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.4;">Zweryfikuj każdą datę i kwotę bezpośrednio w pliku bazowym.</p>
-        </div>
-        
-        <div class="fragment" style="background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 12px; padding: 20px 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
-          <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--primary); display: block; margin-bottom: 6px;">Krok 4 (5 min)</span>
-          <h4 style="font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">Decyzja Biznesowa</h4>
-          <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.4;">Zatwierdź wersję roboczą notatki, tabeli lub slajdu.</p>
-        </div>
-        
-        </div>
-
-      </div>
-      <div class="slide-footer">
-        <span>ARCHITEKTURA PRZEPŁYWU // PIPELINE</span>
-        <span>Slajd 4</span>
-      </div>
-    </div>
-    
-
-    <!-- SLIDE: HERO STAT / BIG NUMBER -->
-    <div class="slide-container" data-title="Mierzalna Korzyść i Wartość dla Uczestnika" data-type="Hero Stat">
-      <header class="slide-header">
-        <span class="slide-kicker">REZULTAT JAKOŚCIOWY // MEASURABLE SUCCESS</span>
-        <h2 class="slide-title">Mierzalna Korzyść i Wartość dla Uczestnika</h2>
-      </header>
-      <div class="slide-body" style="justify-content: center; align-items: center; text-align: center;">
-        
-        <div style="display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 24px;">
-          <div style="font-size: 105px; font-weight: 900; line-height: 1; color: var(--primary); letter-spacing: -0.04em;">
-            3x
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid #256654; border-radius: 10px; padding: 18px; height: 100%;">
+            <div style="font-size: 11px; font-weight: 800; color: #256654; text-transform: uppercase; margin-bottom: 6px;">KROK 1 · DUŻA PRZESTRZEŃ</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Notebook / Własny Agent</h4>
+            <p style="font-size: 13px; color: #475569; line-height: 1.45; margin: 0;">Warunek konieczny: zaznacz dane w Excelu i wciśnij Ctrl+T (Copilot działa tylko na Tabelach Excel).</p>
           </div>
-          <div style="display: flex; flex-direction: column; align-items: flex-start; text-align: left;">
-            <svg viewBox="0 0 60 70" style="width: 44px; height: 52px;">
-              <defs>
-                <marker id="heroTrendArrow_5" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-                  <polygon points="0 6, 4 0, 8 6" fill="var(--success)" />
-                </marker>
-              </defs>
-              <path d="M 10 55 Q 15 18 42 14" fill="none" stroke="var(--success)" stroke-width="5" stroke-linecap="round" marker-end="url(#heroTrendArrow_5)" />
+
+          <div style="display: flex; justify-content: center;">
+            <svg viewBox="0 0 30 20" style="width: 24px; height: 16px;">
+              <defs><marker id="arr1_n_CASE N5" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 1, 6 3, 0 5" fill="#256654" /></marker></defs>
+              <line x1="2" y1="10" x2="24" y2="10" stroke="#256654" stroke-width="2.5" marker-end="url(#arr1_n_CASE N5)" />
             </svg>
-            <span style="font-size: 15px; font-weight: 800; color: var(--success); margin-top: 4px;">Szybsza analityka</span>
           </div>
+
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid #256654; border-top: 4px solid #64B237; border-radius: 10px; padding: 18px; height: 100%; box-shadow: 0 4px 12px rgba(37,102,84,0.08);">
+            <div style="font-size: 11px; font-weight: 800; color: #256654; text-transform: uppercase; margin-bottom: 6px;">KROK 2 · KONKRETNA TABELA</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Wskaż Plik i Kolumny</h4>
+            <p style="font-size: 13px; color: #475569; line-height: 1.45; margin: 0;">Wpisz polecenie: 'Dodaj kolumnę Dni Spóźnienia i podświetl na czerwono wartości powyżej 30'.</p>
+          </div>
+
+          <div style="display: flex; justify-content: center;">
+            <svg viewBox="0 0 30 20" style="width: 24px; height: 16px;">
+              <defs><marker id="arr2_n_CASE N5" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 1, 6 3, 0 5" fill="#256654" /></marker></defs>
+              <line x1="2" y1="10" x2="24" y2="10" stroke="#256654" stroke-width="2.5" marker-end="url(#arr2_n_CASE N5)" />
+            </svg>
+          </div>
+
+          <div class="fragment" style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid #0284C7; border-radius: 10px; padding: 18px; height: 100%;">
+            <div style="font-size: 11px; font-weight: 800; color: #0284C7; text-transform: uppercase; margin-bottom: 6px;">KROK 3 · REGUŁA PRZYPISU [1]</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px;">Sprawdź 1 Liczbę u Źródła</h4>
+            <p style="font-size: 13px; color: #475569; line-height: 1.45; margin: 0;">Kliknij 'Wstaw tabelę przestawną' wygenerowaną przez Copilota i masz gotowy raport.</p>
+          </div>
+
         </div>
 
-        <p class="fragment" style="font-size: 22px; color: var(--text-dark); max-width: 780px; line-height: 1.45; margin: 0 auto;">
-          <strong>Formuły Bez Frustracji:</strong> Uczestnik zyskuje umiejętność przekładania pytań biznesowych na sprawdzalne formuły arkusza.
-        </p>
+        <div class="fragment" style="background: #E3EFE9; border-left: 4px solid #256654; border-radius: 0 8px 8px 0; padding: 12px 18px; font-size: 13px; color: #1D2B29; line-height: 1.45;">
+          💡 <strong>Dlaczego to działa w praktyce?</strong> W Excelu nie musisz być programistą formuł. Wystarczy, że wiesz, o jakie zjawisko biznesowe pytasz.
+        </div>
 
       </div>
       <div class="slide-footer">
-        <span>METRYKA KLUCZOWA // IMPACT</span>
-        <span>Slajd 5</span>
+        <span>METODYKA // AGENT & NOTEBOOK</span>
+        <span>Slajd 3 / 4</span>
       </div>
     </div>
     
 
-    <!-- SLIDE: CTA DECISION ROWS -->
-    <div class="slide-container" data-title="Niezbędna Kontrola Człowieka i Kryteria Jakości" data-type="CTA">
+    <!-- SLIDE 4: ĆWICZENIE WARSZTATOWE -->
+    <div class="slide-container" data-title="Zadanie warsztatowe: Przetestuj ten workflow" data-type="Warsztat">
       <header class="slide-header">
-        <span class="slide-kicker">REKOMENDACJE & BARIERY // GUARDRAILS</span>
-        <h2 class="slide-title">Niezbędna Kontrola Człowieka i Kryteria Jakości</h2>
+        <span class="slide-kicker">WARSZTAT HANDS-ON // CZAS NA PRAKTYKĘ (12 MIN)</span>
+        <h2 class="slide-title">Twoje Zadanie: Zastosuj Copilota do Swojego Dokumentu</h2>
       </header>
-      <div class="slide-body" style="gap: 14px; padding-bottom: 12px;">
+      <div class="slide-body" style="justify-content: center;">
         
-        <div class="fragment" style="flex: 1; display: grid; grid-template-columns: 60px 1fr 240px; align-items: center; gap: 20px; background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 12px; padding: 0 28px;">
-          <div style="font-size: 40px; font-weight: 900; color: var(--primary);">1</div>
-          <div>
-            <div style="font-size: 20px; font-weight: 700; color: var(--text-dark);">Definicja Sukcesu</div>
-            <div style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Podsumowanie zaległości zgodne z ręczną wyrywkową kontrolą, z ujawnionymi brakami w danych wejściowych.</div>
-          </div>
-          <div style="border-left: 2px solid var(--border-light); padding-left: 24px;">
-            <div style="font-size: 34px; font-weight: 800; color: var(--success); line-height: 1;">DONE</div>
-            <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Kryterium ukończenia</div>
-          </div>
+        <div style="background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; padding: 12px 18px; margin-bottom: 14px; font-size: 13.5px; color: #334155; line-height: 1.4;">
+          <strong>Twoje zadanie:</strong> Arkusz z rejestrem faktur i terminami płatności. Chcemy znaleźć największe zaległości.
         </div>
-        
-        <div class="fragment" style="flex: 1; display: grid; grid-template-columns: 60px 1fr 240px; align-items: center; gap: 20px; background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 12px; padding: 0 28px;">
-          <div style="font-size: 40px; font-weight: 900; color: var(--primary);">2</div>
-          <div>
-            <div style="font-size: 20px; font-weight: 700; color: var(--text-dark);">Punkt Kontroli Człowieka</div>
-            <div style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">Zweryfikuj logikę dat, filtry i puste komórki. Wygenerowane obliczenia pozostają niepotwierdzone do momentu kontroli człowieka.</div>
-          </div>
-          <div style="border-left: 2px solid var(--border-light); padding-left: 24px;">
-            <div style="font-size: 34px; font-weight: 800; color: var(--danger); line-height: 1;">HUMAN</div>
-            <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Wymóg zatwierdzenia</div>
-          </div>
-        </div>
-        
-      </div>
-      <div class="slide-footer">
-        <span>REKOMENDACJE STRATEGICZNE // NASTĘPNE KROKI</span>
-        <span>Slajd 6</span>
-      </div>
-    </div>
-    
 
-    <!-- SLIDE FINAŁOWY: Q&A -->
-    <div class="slide-container slide-dark" data-title="Gotowi do Zadania N5?" data-type="Finał">
-      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; z-index: 2;">
-        <span class="slide-kicker" style="color: var(--accent); letter-spacing: 0.12em; margin-bottom: 14px;">CASE STUDY N5 // HANDS-ON LAB</span>
-        <h2 style="font-size: 54px; font-weight: 800; color: var(--text-light); margin-bottom: 20px;">Gotowi do Zadania N5?</h2>
-        <p style="font-size: 20px; color: var(--text-light-muted); max-width: 640px; margin-bottom: 36px; line-height: 1.4;">Uruchom aplikację M365, otwórz plik ćwiczeniowy i rozpocznij zadanie.</p>
-        <div style="display: flex; gap: 20px;">
-          <div style="background: rgba(255,255,255,0.08); border: 1px solid var(--border-dark); border-radius: 8px; padding: 12px 24px; color: var(--text-light); font-size: 14px;">
-            <strong>Kontakt z trenerem:</strong> support-biz@ttpsc.pl
+        <div class="fragment" style="background: #0F172A; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 11px; font-weight: 800; color: #64B237; letter-spacing: 0.08em; text-transform: uppercase;">
+              👉 SKOPIUJ TEN PROMPT I WKLEJ DO COPILOT / NOTEBOOK
+            </span>
+            <span style="font-size: 11px; color: #94A3B8; font-family: monospace;">TRYB: DANE FIRMOWE</span>
           </div>
-          <div style="background: rgba(255,255,255,0.08); border: 1px solid var(--border-dark); border-radius: 8px; padding: 12px 24px; color: var(--text-light); font-size: 14px;">
-            <strong>Materiały repo:</strong> Transition Technologies PSC
-          </div>
+          <pre style="margin: 0; font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; color: #E2E8F0; line-height: 1.45; white-space: pre-wrap; word-break: break-word;">W arkuszu faktur:
+1. Dodaj nową kolumnę z obliczeniem liczby dni po terminie na dzień dzisiejszy.
+2. Wskaż 3 klientów z najwyższą łączną kwotą przeterminowanych należności.
+3. Przygotuj tabelę podsumowującą łączną wartość zadłużenia w podziale na kategorie: 
+   0-30 dni, 31-60 dni, pow. 60 dni.</pre>
         </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          
+          <div class="fragment" style="background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: 8px; padding: 12px 16px;">
+            <span style="font-size: 11px; font-weight: 800; color: #16A34A; text-transform: uppercase; display: block; margin-bottom: 4px;">🎯 Oczekiwany Wynik (Definicja Sukcesu)</span>
+            <div style="font-size: 12.5px; color: #14532D; line-height: 1.4;">Zaawansowana analiza finansowa wykonana w 60 sekund bez ręcznego wpisywania formuł.</div>
+          </div>
+
+          <div class="fragment" style="background: #FFF1F2; border: 1.5px solid #FDA4AF; border-radius: 8px; padding: 12px 16px;">
+            <span style="font-size: 11px; font-weight: 800; color: #E11D48; text-transform: uppercase; display: block; margin-bottom: 4px;">⚠️ Na Co Uważać (Częsty Błąd)</span>
+            <div style="font-size: 12.5px; color: #881337; line-height: 1.4;">Próba uruchomienia Copilota na zwykłym zakresie komórek zamiast Tabeli Excela (Ctrl+T).</div>
+          </div>
+
+        </div>
+
       </div>
       <div class="slide-footer">
-        <span style="color: var(--text-light-muted);">TTPSC AI TRAINING // FIN</span>
-        <span style="color: var(--text-light-muted);">Koniec</span>
+        <span>PRAKTYKA // ĆWICZENIE WARSZTATOWE</span>
+        <span>Slajd 4 / 4</span>
       </div>
     </div>
     
