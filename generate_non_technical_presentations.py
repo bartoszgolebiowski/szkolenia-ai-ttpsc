@@ -10,165 +10,95 @@ os.makedirs(OUT_DIR, exist_ok=True)
 print(f"Generating non-technical presentations in ./{OUT_DIR} ...")
 
 # ==============================================================================
-# 00: MASTER 1-HOUR PRESENTATION (NON-TECHNICAL TRACK)
+# 00: MASTER PRESENTATION (NON-TECHNICAL TRACK - 4 SLIDES)
 # ==============================================================================
 master_slides = [
     be.slide_title(
         title="Microsoft Copilot w Pracy Biznesowej: Od Przypadkowych Zapytań do Sprawdzonych Wyników",
         kicker="TRANSITION TECHNOLOGIES PSC // BUSINESS TRAINING TRACK",
-        subtitle="1-godzinna sesja strategiczna otwierająca 4-godzinny warsztat praktyczny dla zespołów biznesowych, operacyjnych i PM",
+        subtitle="1-godzinna prezentacja wprowadzająca do 4-godzinnego warsztatu praktycznego. Wyjaśnia uziemienie odpowiedzi w autoryzowanych plikach SharePoint, eliminację halucynacji w M365 oraz automatyzację rejestrów i raportów.",
         meta="Microsoft 365 Copilot · Teams · Word · Excel · 2026"
     ),
 
     be.slide_chart_columns(
-        kicker="STAN ZESPOŁU // WYNIKI ANKIETY TTPSC (N=6)",
-        title="Codzienne Użycie z Luką w Analityce Danych i Prezentacjach",
+        kicker="DIAGNOZA ZESPOŁU // ANKIETA TTPSC (N=6)",
+        title="83% Używa Copilota Codziennie, Lecz wciąż Manualnie Przetwarza Dokumenty",
         kpi_val="83%",
-        kpi_label="Zespołu używa AI codziennie",
+        kpi_label="Używa Copilota codziennie w pracy",
         delta_val="+100%",
-        delta_label="Deklaracji edycji i researchu",
+        delta_label="Deklaracji edycji tekstów i researchu",
         col_items=[
-            ("Redagowanie Word/Outlook", "100%", 280, True),
-            ("Wyszukiwanie informacji", "100%", 280, True),
-            ("Podsumowania Teams", "50%", 140, False),
-            ("Analiza arkuszy Excel", "50%", 140, False),
-            ("Tworzenie slajdów PowerPoint", "33%", 95, False)
+            ("Redagowanie Word / Outlook", "100%", 280, True),
+            ("Wyszukiwanie i synteza web", "100%", 280, True),
+            ("Podsumowania spotkań Teams", "50%", 140, False),
+            ("Analiza danych w Excelu", "50%", 140, False),
+            ("Prezentacje PowerPoint", "33%", 95, False)
         ],
         slide_num=2
     ),
 
     be.slide_pipeline(
         kicker="HARMONOGRAM // 4-GODZINNY WARSZTAT HANDS-ON",
-        title="Cztery Fazy Warsztatu: Od Podstaw Bezpieczeństwa do Samodzielnej Praktyki",
+        title="Agenda Warsztatu: Trzy Pętle Praktyki w M365 (12 + 40 + 10 min)",
         steps=[
-            {"phase": "Faza 1 (10 min)", "title": "Baza i Granice", "desc": "Zasady uziemienia danych, etykiety poufności i weryfikacja cytowań.", "active": False},
-            {"phase": "Faza 2 (62 min)", "title": "Lab 1: Raport i Slajdy", "desc": "Przekształcenie rozproszonych danych w jednostronicowy raport i zarys 3 slajdów.", "active": True},
-            {"phase": "Faza 3 (62 min)", "title": "Lab 2: Baza Wiedzy", "desc": "Praca z pakietem dokumentów w SharePoint i tworzenie instrukcji operacyjnych.", "active": True},
-            {"phase": "Faza 4 (86 min)", "title": "Lab 3: Excel i Zespoły", "desc": "Analiza wyjątków w arkuszu kalkulacyjnym, rejestr zadań Teams i plan wdrożenia.", "active": True}
+            {
+                "phase": "00:00–00:10",
+                "title": "Baza i Granice",
+                "desc": "Uziemienie w autoryzowanych źródłach, uprawnienia SharePoint, ochrona poufności.",
+                "active": False
+            },
+            {
+                "phase": "00:10–01:12",
+                "title": "Lab 1: Raport & Slajdy",
+                "desc": "Przekształcenie rozproszonych danych w 1-stronicowy status i zarys 3 slajdów.",
+                "active": True
+            },
+            {
+                "phase": "01:22–02:24",
+                "title": "Lab 2: Baza Wiedzy",
+                "desc": "Wyszukiwanie w pakiecie dokumentów SharePoint i tworzenie instrukcji bez halucynacji.",
+                "active": True
+            },
+            {
+                "phase": "02:34–04:00",
+                "title": "Lab 3: Excel i Zespoły",
+                "desc": "Wykrywanie anomalii w arkuszu kalkulacyjnym, rejestr akcji z Teams i transfer.",
+                "active": True
+            }
         ],
         slide_num=3
     ),
 
-    be.slide_double_diamond(
-        kicker="METODYKA JAKOŚCI // PODWÓJNY DIAMENT DLA BIZNESU",
-        title="Cztery Kroki Rzetelnej Pracy z Copilotem: Źródło → Struktura → Wersja → Weryfikacja",
-        phases=[
-            {"name": "Wskaż Źródło", "desc": "Wybierz autoryzowane pliki w SharePoint lub załącz dokument roboczy."},
-            {"name": "Zdefiniuj Format", "desc": "Określ rolę, odbiorcę, strukturę tabelaryczną i zakaz domyślania się."},
-            {"name": "Wersja Robocza", "desc": "Wygeneruj wstępny szkic z wyeksponowanymi brakami i niepewnościami."},
-            {"name": "Weryfikacja Faktów", "desc": "Sprawdź każdą kwotę, datę i warunek bezpośrednio u źródła."}
-        ],
-        slide_num=4
-    ),
-
-    be.slide_vicious_cycle(
-        kicker="ANALIZA ZAGROŻEŃ // SYSTEMOWE RYZYKO",
-        title="Błędne Koło Zapytań Bez Uziemienia Danych (No Grounding)",
-        nodes=[
-            {"num": "1", "title": "Zapytanie Ogólne", "desc": "Brak załączonego pliku lub wskazania SharePoint."},
-            {"num": "2", "title": "Płynna Odpowiedź", "desc": "Elegancki tekst brzmiący bardzo wiarygodnie."},
-            {"num": "3", "title": "Ukryta Halucynacja", "desc": "Pominięcie kluczowego wyjątku w umowie handlowej."},
-            {"num": "4", "title": "Utrata Zaufania", "desc": "Konflikt z klientem i powrót do czasochłonnej pracy ręcznej."}
-        ],
-        slide_num=5
-    ),
-
-    be.slide_ishikawa(
-        kicker="ROOT CAUSE // DLACZEGO ODPOWIEDZI AI BYWAJĄ NIEPRECYZYJNE",
-        title="Cztery Źródła Niezgodności w Odpowiedziach Microsoft Copilot",
-        head_text="Niezgodność Faktów i Błędne Dane w Raporcie",
-        cat1={"title": "Pliki Źródłowe", "desc": "Nieaktualne wersje robocze krążące w folderach SharePoint."},
-        cat2={"title": "Treść Promptu", "desc": "Brak sprecyzowanego odbiorcy i nieokreślone ograniczenia."},
-        cat3={"title": "Uprawnienia", "desc": "Copilot widzi tylko to, do czego użytkownik ma nadany dostęp."},
-        cat4={"title": "Weryfikacja", "desc": "Brak nawyku klikania w przypisy i sprawdzania stron źródłowych."},
-        slide_num=6
-    ),
-
-    be.slide_transformation_bridge(
-        kicker="PLAN TRANSFORMACJI // EVOLUTION PATH",
-        title="Most Dojrzałości: Od 'Zwykłego Czatu' do Zintegrowanego Partnera Wiedzy",
-        from_title="Przypadkowy Czat",
-        from_points=[
-            "Zadawanie pytań w przeglądarce bez kontekstu plików.",
-            "Ręczne przepisywanie danych z tabel do maili.",
-            "Niepewność co do aktualności przepisów i liczb."
-        ],
-        bridge_steps=[
-            {"k": "Krok 1", "v": "Uziemienie w Plikach"},
-            {"k": "Krok 2", "v": "Aplikacje M365 (Word/Excel)"},
-            {"k": "Krok 3", "v": "Weryfikacja Cytowań"}
-        ],
-        to_title="Sprawdzony Partner",
-        to_points=[
-            "Ustrukturyzowane ekstrakcje bezpośrednio z SharePoint.",
-            "Rzetelne tabele w Excelu z jawnym oznaczeniem braków.",
-            "Oszczędność 40% czasu na administracji."
-        ],
-        slide_num=7
-    ),
-
-    be.slide_grid_matrix(
-        kicker="TAKTYKA DOBORU // MATRYCA EKOSYSTEMU M365",
-        title="Dopasowanie Narzędzia Microsoft Copilot do Charakteru Pracy",
-        label_top="Praca Wielodokumentowa / Przekrojowa",
-        label_bottom="Pojedynczy Plik / Zadanie Punktowe",
-        label_left="Eksploracja i Badanie",
-        label_right="Finalny Dokument / Tabela",
-        q1={"title": "Copilot Chat / Web & Work", "desc": "Szybki research, porównywanie informacji z sieci i zasobów firmowych."},
-        q2={"title": "Copilot Notebooks & Pages", "desc": "Budowa syntezy wiedzy z wielu załączonych dokumentów, przygotowanie briefu."},
-        q3={"title": "Copilot w Word / Outlook", "desc": "Formatowanie korespondencji, zmiana tonu, redagowanie wersji roboczej."},
-        q4={"title": "Copilot w Excel / PowerPoint", "desc": "Analiza tabelaryczna, formuły, generowanie zarysu prezentacji ze źródła."},
-        slide_num=8
-    ),
-
-    be.slide_cards_flow(
-        kicker="PROGRAM WARSZTATU // KATALOG PRZYPADKÓW",
-        title="Trzy Ścieżki Warsztatowe Oparte na Realnych Potrzebach TTPSC",
-        cards=[
-            {"num": "01", "title": "Dokumenty & Umowy", "desc": "N1 (Długie umowy handlowe), N2 (Rejestr korespondencji), N3 (Dostęp do SharePoint).", "featured": False},
-            {"num": "02", "title": "Raporty & Klienci", "desc": "N4 (Cykliczny status projektu), N7 (Raport na prezentację), N8 (Spotkanie z klientem B2B).", "featured": True},
-            {"num": "03", "title": "Analityka & Zespół", "desc": "N5 (Zaległe zadania w Excel), N6 (Notatki Teams na akcje), N9 (Szacowanie migracji).", "featured": False}
-        ],
-        slide_num=9
-    ),
-
     be.slide_cta_decision_rows(
-        kicker="ZASADY PRACOWNIKA // TRZY ZŁOTE ZASADY WARSZTATU",
-        title="Trzy Nienaruszalne Reguły Biznesowe dla Uczestników",
+        kicker="REZULTATY // CO ZABIERASZ Z WARSZTATU",
+        title="Trzy Kluczowe Umiejętności po Zakończeniu Szkolenia",
         decisions=[
             {
                 "num": "1",
-                "title": "Zawsze Wskaż Plik Źródłowy",
-                "desc": "Koniec z ogólnymi pytaniami; podaj konkretny załącznik lub link do SharePoint.",
+                "title": "Zawsze Wskazujesz Plik Źródłowy",
+                "desc": "Koniec z ogólnymi pytaniami; uziemienie w konkretnym dokumencie w SharePoint.",
                 "stat": "+80%",
-                "stat_desc": "pewności merytorycznej",
+                "stat_desc": "pewności merytorycznej w odpowiedziach",
                 "stat_color": "var(--success)"
             },
             {
                 "num": "2",
-                "title": "Człowiek Weryfikuje Liczby i Daty",
-                "desc": "Każda kwota, termin wypowiedzenia i asumpcja wymaga sprawdzenia u źródła.",
+                "title": "Weryfikujesz Cytowania i Liczby",
+                "desc": "Nawyk sprawdzania odnośników do stron, kwot i terminów u źródła przed publikacją.",
                 "stat": "100%",
-                "stat_desc": "odpowiedzialności człowieka",
+                "stat_desc": "odpowiedzialności człowieka za treść",
                 "stat_color": "var(--danger)"
             },
             {
                 "num": "3",
-                "title": "Ochrona Danych i Etykiety Poufności",
-                "desc": "Przestrzegaj reguł klasyfikacji informacji TTPSC; nie mieszaj źródeł poufnych.",
-                "stat": "0",
-                "stat_desc": "wycieków danych wrażliwych",
+                "title": "Automatyzacja Rejestrów i Raportów",
+                "desc": "Błyskawiczna budowa tabel Excel z pism i przekształcanie notatek w zadania Teams.",
+                "stat": "4x",
+                "stat_desc": "szybsze przygotowanie cyklicznych raportów",
                 "stat_color": "var(--primary)"
             }
         ],
-        slide_num=10
-    ),
-
-    be.slide_closing(
-        title="Czas na Praktykę w Microsoft 365!",
-        subtitle="Uruchom aplikacje Office, otwórz przygotowany pakiet materiałów i rozpocznij ćwiczenia.",
-        kicker="TRANSITION TECHNOLOGIES PSC // HANDS-ON WORKSHOP",
-        contact="trener-biznesowy@ttpsc.pl"
+        slide_num=4
     )
 ]
 
@@ -603,9 +533,9 @@ index_cards_html = """
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 30px;">
   <a href="00-master-1h-training.html" style="text-decoration: none; color: inherit; grid-column: 1 / -1;">
     <div style="background: linear-gradient(135deg, #2B0D30 0%, #4A1A52 100%); color: #FFFFFF; border-radius: 12px; padding: 28px 32px; box-shadow: 0 6px 20px rgba(43,13,48,0.2); border: 2px solid #D03A8C; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-      <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #D03A8C; margin-bottom: 8px;">★ PREZENTACJA GŁÓWNA // 1-GODZINNY KEYNOTE</div>
-      <h2 style="font-size: 26px; font-weight: 800; margin: 0 0 10px; color: #FFFFFF;">00. Microsoft Copilot w Pracy Biznesowej: Sesja Strategiczna</h2>
-      <p style="font-size: 15px; color: #D9D9D9; margin: 0; line-height: 1.45;">Kompletny 11-slajdowy konspekt wprowadzający do 4-godzinnego warsztatu dla zespołów biznesowych. Zawiera wyniki ankiety TTPSC, architekturę warsztatu, uziemienie w plikach SharePoint, błędne koło braku źródeł oraz reguły weryfikacji.</p>
+      <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #D03A8C; margin-bottom: 8px;">★ PREZENTACJA GŁÓWNA // 1-GODZINNY PRZEGLĄD (4 SLAJDY)</div>
+      <h2 style="font-size: 26px; font-weight: 800; margin: 0 0 10px; color: #FFFFFF;">00. Microsoft Copilot w Pracy Biznesowej: Sesja Wprowadzająca</h2>
+      <p style="font-size: 15px; color: #D9D9D9; margin: 0; line-height: 1.45;">Zwięzły 4-slajdowy konspekt wprowadzający do 4-godzinnego warsztatu dla zespołów biznesowych. Zawiera wyjaśnienie celu szkolenia, zebrane wnioski z ankiety zespołu TTPSC, pełną agendę 4-godzinnego warsztatu (3 pętle) oraz kluczowe rezultaty.</p>
     </div>
   </a>
 """

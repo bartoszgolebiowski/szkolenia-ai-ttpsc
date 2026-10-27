@@ -10,168 +10,97 @@ os.makedirs(OUT_DIR, exist_ok=True)
 print(f"Generating technical presentations in ./{OUT_DIR} ...")
 
 # ==============================================================================
-# 00: MASTER 1-HOUR PRESENTATION (TECHNICAL TRACK)
+# 00: MASTER PRESENTATION (TECHNICAL TRACK - 4 SLIDES)
 # ==============================================================================
 master_slides = [
     be.slide_title(
         title="GitHub Copilot w Inżynierii Oprogramowania: Od Podpowiedzi do Samodzielnego Dewelopera w Pętli",
         kicker="TRANSITION TECHNOLOGIES PSC // TECHNICAL TRAINING TRACK",
-        subtitle="1-godzinna sesja strategiczna otwierająca 4-godzinny warsztat laboratoryjny dla inżynierów i programistów TTPSC",
+        subtitle="1-godzinna prezentacja wprowadzająca do 4-godzinnego warsztatu praktycznego. Wyjaśnia zasady współpracy z asystentem AI w IDE i CLI, eliminację płytkich testów oraz reguły bezpieczeństwa w projektach komercyjnych.",
         meta="GitHub Copilot · CLI · Test-Driven · 2026"
     ),
 
     be.slide_ranking_bars(
-        kicker="STAN ZESPOŁU // WYNIKI ANKIETY TTPSC (N=8)",
-        title="Wąskie Gardło Inżynierii: 38% Zespołu Traci Tyle Samo Czasu na Poprawki Kodu AI",
+        kicker="DIAGNOZA ZESPOŁU // ANKIETA TTPSC (N=8)",
+        title="100% Używa Copilota, Lecz 38% Traci Tyle Samo Czasu na Poprawki Kodu",
         items=[
-            ("Użycie GitHub Copilot / Chat", "100%", 100, True),
-            ("Wsparcie: Boilerplate & Generowanie", "62.5%", 62.5, True),
-            ("Wsparcie: Debugowanie & Stack trace", "62.5%", 62.5, True),
-            ("Tworzenie dokumentacji i RFC", "50.0%", 50, False),
-            ("Wpływ neutralny (czas review = czas pisania)", "37.5%", 37.5, True),
-            ("Brak własnych reguł (.cursorrules / prompts)", "75.0%", 75, False),
-            ("Restrykcje klienta blokujące MCP i dane", "75.0%", 75, False),
-            ("Tworzenie pełnych zestawów testów", "12.5%", 12.5, False)
+            ("Użycie GitHub Copilot / Chat w IDE", "100%", 100, True),
+            ("Przyspieszenie: Boilerplate i szkielety", "62.5%", 62.5, True),
+            ("Przyspieszenie: Debugowanie i stack trace", "62.5%", 62.5, True),
+            ("Wpływ neutralny (review kodu AI = czas pisania)", "37.5%", 37.5, True),
+            ("Restrykcje NDA klienta (blokada MCP / danych)", "75.0%", 75, False),
+            ("Brak zespołowych reguł (.cursorrules / prompts)", "75.0%", 75, False),
+            ("Generowanie wartościowych testów jednostkowych", "12.5%", 12.5, False)
         ],
         pareto_text={
             "big": "38%",
-            "desc": "Inżynierów zgłasza brak zysku czasowego z powodu długiego audytu i poprawek niespełniających kryteriów."
+            "desc": "Inżynierów wskazuje brak oszczędności czasu bez jasnych kryteriów akceptacji i weryfikacji asercji."
         },
         slide_num=2
     ),
 
     be.slide_pipeline(
         kicker="HARMONOGRAM // 4-GODZINNY WARSZTAT HANDS-ON",
-        title="Cztery Fazy Warsztatu: Od Diagnozy do Samodzielnej Pętli Narzędziowej",
+        title="Agenda Warsztatu: Trzy Pętle Praktyki i Weryfikacji (12 + 40 + 10 min)",
         steps=[
-            {"phase": "Faza 1 (10 min)", "title": "Baza i Granice", "desc": "Zasady izolacji kodu, sanitacja danych klienta i definicja Done.", "active": False},
-            {"phase": "Faza 2 (62 min)", "title": "Lab 1: Spec & Testy", "desc": "Przekształcenie niejednoznacznego ticketu Jira w zbadany wycinek kodu.", "active": True},
-            {"phase": "Faza 3 (62 min)", "title": "Lab 2: CLI & Skille", "desc": "Zamykanie pętli zadania z konsoli z wykorzystaniem poleceń /goal i /loop.", "active": True},
-            {"phase": "Faza 4 (86 min)", "title": "Lab 3: Sceptyczny Audyt", "desc": "Przegląd PR z perspektywy sceptyka, analiza modeli i transfer wiedzy.", "active": True}
+            {
+                "phase": "00:00–00:10",
+                "title": "Baza i Granice",
+                "desc": "Zasady izolacji kodu, sanitacja danych klienta (NDA), kryteria akceptacji.",
+                "active": False
+            },
+            {
+                "phase": "00:10–01:12",
+                "title": "Lab 1: Ticket → Testy",
+                "desc": "Przekształcenie niejednoznacznego ticketu Jira w zbadany, bezpieczny wycinek kodu.",
+                "active": True
+            },
+            {
+                "phase": "01:22–02:24",
+                "title": "Lab 2: CLI & Skille",
+                "desc": "Zamykanie pętli zadania z konsoli z użyciem poleceń /goal i /loop.",
+                "active": True
+            },
+            {
+                "phase": "02:34–04:00",
+                "title": "Lab 3: Sceptyczny PR",
+                "desc": "Adversarial code review, porównanie modeli na jednym zadaniu i transfer do pracy.",
+                "active": True
+            }
         ],
         slide_num=3
     ),
 
-    be.slide_double_diamond(
-        kicker="METODYKA JAKOŚCI // PODWÓJNY DIAMENT INŻYNIERA",
-        title="Cztery Kroki Pewnego Wdrożenia: Zbieraj → Strukturyzuj → Buduj → Weryfikuj",
-        phases=[
-            {"name": "Zbierz Kontekst", "desc": "Przekaż pliki repozytorium, schematy, logi i wyznaczone granice błędu."},
-            {"name": "Strukturyzuj Plan", "desc": "Zdefiniuj kryteria akceptacji i przypadki brzegowe przed linią kodu."},
-            {"name": "Wytwórz Wycinek", "desc": "Wygeneruj minimalny, atomowy diff realizujący jedno założenie."},
-            {"name": "Krytyczny Audyt", "desc": "Uruchom testy jednostkowe, asercje regresji i inspekcję bezpieczeństwa."}
-        ],
-        slide_num=4
-    ),
-
-    be.slide_vicious_cycle(
-        kicker="ANALIZA BŁĘDÓW // SYSTEMOWE ZAGROŻENIE",
-        title="Błędne Koło Naiwnego Kodowania z Asystentem AI",
-        nodes=[
-            {"num": "1", "title": "Prompt Bez Kontekstu", "desc": "Zlecenie bez testów i kryteriów brzegowych."},
-            {"num": "2", "title": "Płynna Iluzja Działania", "desc": "Kod kompiluje się, lecz maskuje błędy architektury."},
-            {"num": "3", "title": "Regresja na Produkcji", "desc": "Niewykryty edge-case ujawnia się w integracji."},
-            {"num": "4", "title": "Żmudny Manualny Audyt", "desc": "Deweloper traci 2x więcej czasu na cofanie zmian."}
-        ],
-        slide_num=5
-    ),
-
-    be.slide_ishikawa(
-        kicker="ROOT CAUSE // DLACZEGO KOD AI PRZEPADA NA REVIEW",
-        title="Cztery Przyczyny Odrzucenia Kodu Generowanego w TTPSC",
-        head_text="Niezaliczony Code Review i Dług Techniczny",
-        cat1={"title": "Ludzie", "desc": "Akceptacja kodu bez sprawdzania asercji i brzegów."},
-        cat2={"title": "Repozytorium", "desc": "Brak wytycznych .github/copilot-instructions."},
-        cat3={"title": "Testy", "desc": "Zielony pasek przy asercjach typu assert true."},
-        cat4={"title": "Środowisko", "desc": "Restrykcje NDA klienta uniemożliwiające MCP."},
-        slide_num=6
-    ),
-
-    be.slide_transformation_bridge(
-        kicker="PLAN TRANSFORMACJI // EVOLUTION PATH",
-        title="Most Dojrzałości: Od Losowych Podpowiedzi do Dewelopera w Pełnej Pętli",
-        from_title="Naiwny Asystent",
-        from_points=[
-            "Podpowiedzi tabem bez znajomości architektury repo.",
-            "Ręczne kopiowanie fragmentów do okna czatu.",
-            "Review obciążające seniorów."
-        ],
-        bridge_steps=[
-            {"k": "Krok 1", "v": "Spec-Driven Prompting"},
-            {"k": "Krok 2", "v": "Skille & CLI /goal"},
-            {"k": "Krok 3", "v": "Izolowany Sandbox"}
-        ],
-        to_title="Autonomiczny Partner",
-        to_points=[
-            "Precyzyjne repozytorium z instrukcjami kontekstowymi.",
-            "Weryfikacja asercji przed zatwierdzeniem commita.",
-            "Oszczędność 40% realnego czasu pracy."
-        ],
-        slide_num=7
-    ),
-
-    be.slide_grid_matrix(
-        kicker="TAKTYKA DOBORU // MATRYCA INTERFEJSÓW COPILOTA",
-        title="Dopasowanie Narzędzia do Złożoności i Ryzyka Zadania",
-        label_top="Wysoka Złożoność / Wieloetapowość",
-        label_bottom="Niska Złożoność / Zadanie Lokalne",
-        label_left="Niskie Ryzyko / Izolacja",
-        label_right="Wysokie Ryzyko / Wpływ na Produkcję",
-        q1={"title": "Copilot Chat / Edit", "desc": "Refaktoryzacja małego modułu, wyjaśnianie zawiłego algorytmu i stack trace."},
-        q2={"title": "CLI Workflows (/goal, /loop)", "desc": "Wieloetapowa migracja kodu, zautomatyzowane pętle weryfikacji i testów."},
-        q3={"title": "Inline Completion (Tab)", "desc": "Boilerplate, powtarzalne sygnatury metod, DTO, typowe mapowania."},
-        q4={"title": "Sceptyczny Code Review", "desc": "Audyt bezpieczeństwa, inspekcja uprawnień, weryfikacja planu SQL."},
-        slide_num=8
-    ),
-
-    be.slide_cards_flow(
-        kicker="PROGRAM WARSZTATU // KATALOG PRZYPADKÓW",
-        title="Trzy Ścieżki Warsztatowe Oparte na Realnych Casach TTPSC",
-        cards=[
-            {"num": "01", "title": "Diagnostyka & Testy", "desc": "T1 (Debug testu), T2 (Jakość asercji), T4 (Bezpieczna migracja starego kodu).", "featured": False},
-            {"num": "02", "title": "Integracja & Narzędzia", "desc": "T5 (Optymalizacja Oracle SQL), T6 (Makieta do zadań Jira), T7 (Nieznane repozytorium).", "featured": True},
-            {"num": "03", "title": "Ład & Komunikacja", "desc": "T3 (Adversarial review), T8 (Tłumaczenie dla biznesu), T9 (Restrykcje NDA klienta).", "featured": False}
-        ],
-        slide_num=9
-    ),
-
     be.slide_cta_decision_rows(
-        kicker="ZASADY DEWELOPERA // TRZY ZŁOTE ZASADY WARSZTATU",
-        title="Trzy Nienaruszalne Reguły Inżynierskie dla Uczestników",
+        kicker="REZULTATY // CO ZABIERASZ Z WARSZTATU",
+        title="Trzy Kluczowe Umiejętności po Zakończeniu Szkolenia",
         decisions=[
             {
                 "num": "1",
-                "title": "Specyfikacja Przed Kodem",
-                "desc": "Zawsze formułuj kryteria akceptacji przed poproszeniem o implementację.",
+                "title": "Spec-Driven Development",
+                "desc": "Formułowanie kryteriów akceptacji przed poproszeniem o implementację w IDE.",
                 "stat": "+60%",
-                "stat_desc": "trafności w pierwszym podejściu",
+                "stat_desc": "trafności kodu w pierwszym podejściu",
                 "stat_color": "var(--success)"
             },
             {
                 "num": "2",
                 "title": "Sceptyczna Weryfikacja Asercji",
-                "desc": "Wygenerowany test jest podejrzany, dopóki nie udowodni wychwycenia regresji.",
+                "desc": "Wykrywanie fałszywych testów jednostkowych i sprawdzanie rzeczywistych brzegów.",
                 "stat": "0%",
                 "stat_desc": "ślepego zaufania do zielonego paska",
                 "stat_color": "var(--danger)"
             },
             {
                 "num": "3",
-                "title": "Sanitacja i Bezpieczeństwo Danych",
-                "desc": "Nigdy nie wysyłaj sekretów, tokenów ani surowych danych klienta poza sandbox.",
+                "title": "Praca w Reżimie NDA Klienta",
+                "desc": "Techniki pracy na danych syntetycznych w bezpiecznym sandboxie bez wycieku IP.",
                 "stat": "100%",
-                "stat_desc": "zgodności z politykami NDA",
+                "stat_desc": "zgodności z politykami bezpieczeństwa",
                 "stat_color": "var(--primary)"
             }
         ],
-        slide_num=10
-    ),
-
-    be.slide_closing(
-        title="Gotowi na Praktykę w Repozytorium?",
-        subtitle="Przechodzimy do środowiska laboratoryjnego i pierwszego ćwiczenia z ticketem Jira.",
-        kicker="TRANSITION TECHNOLOGIES PSC // HANDS-ON WORKSHOP",
-        contact="trener-techniczny@ttpsc.pl"
+        slide_num=4
     )
 ]
 
@@ -606,9 +535,9 @@ index_cards_html = """
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 30px;">
   <a href="00-master-1h-training.html" style="text-decoration: none; color: inherit; grid-column: 1 / -1;">
     <div style="background: linear-gradient(135deg, #2B0D30 0%, #4A1A52 100%); color: #FFFFFF; border-radius: 12px; padding: 28px 32px; box-shadow: 0 6px 20px rgba(43,13,48,0.2); border: 2px solid #D03A8C; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-      <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #D03A8C; margin-bottom: 8px;">★ PREZENTACJA GŁÓWNA // 1-GODZINNY KEYNOTE</div>
-      <h2 style="font-size: 26px; font-weight: 800; margin: 0 0 10px; color: #FFFFFF;">00. GitHub Copilot w Inżynierii Oprogramowania: Sesja Strategiczna</h2>
-      <p style="font-size: 15px; color: #D9D9D9; margin: 0; line-height: 1.45;">Kompletny 11-slajdowy konspekt strategiczno-metodyczny wprowadzający do 4-godzinnego warsztatu. Zawiera dane z ankiety TTPSC, architekturę 3 pętli laboratoryjnych, diagram Ishikawy, podwójny diament oraz reguły dewelopera.</p>
+      <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #D03A8C; margin-bottom: 8px;">★ PREZENTACJA GŁÓWNA // 1-GODZINNY PRZEGLĄD (4 SLAJDY)</div>
+      <h2 style="font-size: 26px; font-weight: 800; margin: 0 0 10px; color: #FFFFFF;">00. GitHub Copilot w Inżynierii Oprogramowania: Sesja Wprowadzająca</h2>
+      <p style="font-size: 15px; color: #D9D9D9; margin: 0; line-height: 1.45;">Zwięzły 4-slajdowy konspekt wprowadzający do 4-godzinnego warsztatu. Zawiera wyjaśnienie celu szkolenia, zebrane wnioski z ankiety zespołu inżynierów TTPSC, pełną agendę 4-godzinnego warsztatu (3 pętle) oraz kluczowe rezultaty.</p>
     </div>
   </a>
 """

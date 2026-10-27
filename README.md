@@ -20,7 +20,7 @@ Każde szkolenie realizowane jest w rytmie **hands-on**:
 
 ### 1. `technical-trainee/` — Zespoły Inżynieryjne (GitHub Copilot)
 Katalog dedykowany programistom, inżynierom oprogramowania i DevOps:
-- [`00-master-1h-training.html`](./technical-trainee/00-master-1h-training.html) — **1-Godzinny Keynote Strategiczny**: ankieta TTPSC (N=8), architektura 4h, metoda "Zbierz → Strukturyzuj → Zbuduj → Przetestuj" (Double Diamond), błędne koło długu technicznego, diagram Ishikawy oraz reguły dewelopera.
+- [`00-master-1h-training.html`](./technical-trainee/00-master-1h-training.html) — **Przegląd Szkolenia (4 Slajdy)**: o czym jest warsztat, zebrane wnioski z ankiety inżynierów TTPSC (N=8), pełna agenda warsztatu 4h (3 pętle) oraz kluczowe rezultaty.
 - [`case-01-failing-test-debug.html`](./technical-trainee/case-01-failing-test-debug.html) — **T1**: Diagnostyka przyczyny czerwonego testu jednostkowego.
 - [`case-02-test-quality.html`](./technical-trainee/case-02-test-quality.html) — **T2**: Podnoszenie jakości i pokrycia generowanych testów.
 - [`case-03-code-review.html`](./technical-trainee/case-03-code-review.html) — **T3**: Sceptyczny audyt i przegląd kodu wspomaganego AI.
@@ -34,7 +34,7 @@ Katalog dedykowany programistom, inżynierom oprogramowania i DevOps:
 
 ### 2. `non-technical-trainee/` — Zespoły Biznesowe (Microsoft Copilot)
 Katalog dedykowany analitykom, kierownikom projektów i specjalistom operacyjnym:
-- [`00-master-1h-training.html`](./non-technical-trainee/00-master-1h-training.html) — **1-Godzinny Keynote Strategiczny**: ankieta TTPSC (N=6), architektura 4h, uziemienie w plikach SharePoint, błędne koło braku źródeł, most dojrzałości oraz zasady weryfikacji.
+- [`00-master-1h-training.html`](./non-technical-trainee/00-master-1h-training.html) — **Przegląd Szkolenia (4 Slajdy)**: o czym jest warsztat, zebrane wnioski z ankiety biznesowej TTPSC (N=6), pełna agenda warsztatu 4h (3 pętle) oraz kluczowe rezultaty.
 - [`case-01-long-agreement-contract.html`](./non-technical-trainee/case-01-long-agreement-contract.html) — **N1**: Odnajdywanie kluczowych zapisów w długich umowach handlowych.
 - [`case-02-correspondence-register.html`](./non-technical-trainee/case-02-correspondence-register.html) — **N2**: Budowa ustrukturyzowanego rejestru pism z plików SharePoint.
 - [`case-03-source-access-sharepoint.html`](./non-technical-trainee/case-03-source-access-sharepoint.html) — **N3**: Weryfikacja uprawnień i źródeł (SharePoint vs Confluence).
