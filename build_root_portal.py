@@ -316,9 +316,9 @@ portal_content = """<!DOCTYPE html>
 
           <div style="background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 8px; padding: 14px; margin-bottom: 16px;">
             <a href="non-technical-trainee/00-master-1h-training.html" style="text-decoration: none; color: inherit; display: block;">
-              <span style="font-size: 11px; font-weight: 800; color: #256654; text-transform: uppercase;">★ Prezentacja Główna (1h Overview)</span>
+              <span style="font-size: 11px; font-weight: 800; color: #256654; text-transform: uppercase;">★ Wprowadzenie (10 minut · 3 slajdy)</span>
               <div style="font-weight: 700; font-size: 15px; color: #1F1F1F; margin-top: 2px;">00. Microsoft Copilot w Pracy Biznesowej</div>
-              <div style="font-size: 12px; color: #64748B; margin-top: 4px;">4 zwięzłe slajdy: cel i zakres szkolenia, diagnoza zespołu z ankiety TTPSC, agenda 4-godzinnego warsztatu oraz rezultaty.</div>
+              <div style="font-size: 12px; color: #64748B; margin-top: 4px;">3 slajdy w prostym języku: cel szkolenia, diagnoza zespołu z ankiety oraz 3 praktyczne zadania warsztatowe odpowiadające na potrzeby z ankiety.</div>
             </a>
           </div>
 

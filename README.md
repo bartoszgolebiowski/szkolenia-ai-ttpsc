@@ -34,7 +34,7 @@ Katalog dedykowany programistom, inżynierom oprogramowania i DevOps:
 
 ### 2. `non-technical-trainee/` — Zespoły Biznesowe (Microsoft Copilot)
 Katalog dedykowany analitykom, kierownikom projektów i specjalistom operacyjnym:
-- [`00-master-1h-training.html`](./non-technical-trainee/00-master-1h-training.html) — **Przegląd Szkolenia (4 Slajdy)**: o czym jest warsztat, zebrane wnioski z ankiety biznesowej TTPSC (N=6), pełna agenda warsztatu 4h (3 pętle) oraz kluczowe rezultaty.
+- [`00-master-1h-training.html`](./non-technical-trainee/00-master-1h-training.html) — **Wprowadzenie do Warsztatu (10 Minut / 3 Slajdy w Prostym Języku)**: o czym jest warsztat, zebrane wnioski z ankiety biznesowej TTPSC (N=6) oraz 3 praktyczne bloki warsztatowe odpowiadające bezpośrednio na zgłoszone potrzeby (długie umowy w SharePoint, tabele i rejestry w Excelu, zadania po spotkaniach Teams i slajdy).
 - [`case-01-long-agreement-contract.html`](./non-technical-trainee/case-01-long-agreement-contract.html) — **N1**: Odnajdywanie kluczowych zapisów w długich umowach handlowych.
 - [`case-02-correspondence-register.html`](./non-technical-trainee/case-02-correspondence-register.html) — **N2**: Budowa ustrukturyzowanego rejestru pism z plików SharePoint.
 - [`case-03-source-access-sharepoint.html`](./non-technical-trainee/case-03-source-access-sharepoint.html) — **N3**: Weryfikacja uprawnień i źródeł (SharePoint vs Confluence).

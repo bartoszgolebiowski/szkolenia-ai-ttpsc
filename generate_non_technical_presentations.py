@@ -10,102 +10,113 @@ os.makedirs(OUT_DIR, exist_ok=True)
 print(f"Generating non-technical presentations in ./{OUT_DIR} ...")
 
 # ==============================================================================
-# 00: MASTER PRESENTATION (NON-TECHNICAL TRACK - 4 SLIDES)
+# 00: MASTER PRESENTATION (NON-TECHNICAL TRACK - 3 SLIDES IN SIMPLE LANGUAGE)
 # ==============================================================================
-master_slides = [
-    be.slide_title(
-        title="Microsoft Copilot w Pracy Biznesowej: Od Przypadkowych Zapytań do Sprawdzonych Wyników",
-        kicker="TRANSITION TECHNOLOGIES PSC // BUSINESS TRAINING TRACK",
-        subtitle="1-godzinna prezentacja wprowadzająca do 4-godzinnego warsztatu praktycznego. Wyjaśnia uziemienie odpowiedzi w autoryzowanych plikach SharePoint, eliminację halucynacji w M365 oraz automatyzację rejestrów i raportów.",
-        meta="Microsoft 365 Copilot · Teams · Word · Excel · 2026"
-    ),
+slide_1_intro = """
+    <!-- SLIDE 1: 10-MINUTOWE WPROWADZENIE W PROSTYM JĘZYKU -->
+    <div class="slide-container slide-dark" data-title="Praktyczny Microsoft Copilot: Jak Ułatwić Sobie Codzienną Pracę" data-type="Title">
+      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 960px; z-index: 2;">
+        <span class="slide-kicker" style="color: #64B237; letter-spacing: 0.12em; margin-bottom: 16px;">TRANSITION TECHNOLOGIES PSC // WARSZTAT BIZNESOWY</span>
+        <h1 style="font-size: 46px; font-weight: 800; line-height: 1.15; color: var(--text-light); margin-bottom: 22px;">Praktyczny Microsoft Copilot: Jak Ułatwić Sobie Codzienną Pracę</h1>
+        <p style="font-size: 20px; line-height: 1.45; color: var(--text-light-muted); margin-bottom: 34px; max-width: 820px;">10-minutowe wprowadzenie do 4-godzinnego warsztatu. Uczymy się na Waszych codziennych dokumentach, mailach i arkuszach — prosto, bezpiecznie i bez technicznego żargonu.</p>
+        <div style="display: flex; gap: 32px; align-items: center; border-top: 1px solid var(--border-dark); padding-top: 22px;">
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Organizacja</span><strong style="font-size: 14px; color: var(--text-light);">Transition Technologies PSC</strong></div>
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Wstęp</span><strong style="font-size: 14px; color: #64B237;">10 minut wprowadzenia</strong></div>
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Forma</span><strong style="font-size: 14px; color: var(--text-light);">4 godziny praktyki na żywo</strong></div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span style="color: var(--text-light-muted);">TTPSC AI TRAINING // 2026</span>
+        <span style="color: var(--text-light-muted);">Slajd 1</span>
+      </div>
+    </div>
+"""
 
-    be.slide_chart_columns(
-        kicker="DIAGNOZA ZESPOŁU // ANKIETA TTPSC (N=6)",
-        title="83% Używa Copilota Codziennie, Lecz wciąż Manualnie Przetwarza Dokumenty",
-        kpi_val="83%",
-        kpi_label="Używa Copilota codziennie w pracy",
-        delta_val="+100%",
-        delta_label="Deklaracji edycji tekstów i researchu",
-        col_items=[
-            ("Redagowanie Word / Outlook", "100%", 280, True),
-            ("Wyszukiwanie i synteza web", "100%", 280, True),
-            ("Podsumowania spotkań Teams", "50%", 140, False),
-            ("Analiza danych w Excelu", "50%", 140, False),
-            ("Prezentacje PowerPoint", "33%", 95, False)
-        ],
-        slide_num=2
-    ),
+slide_2_insights = be.slide_chart_columns(
+    kicker="WYNIKI ANKIETY // ZESPÓŁ BIZNESOWY TTPSC (N=6)",
+    title="Wszyscy Korzystamy z AI, ale wciąż Ręcznie Przetwarzamy Dane",
+    kpi_val="83%",
+    kpi_label="Używa Copilota codziennie w pracy",
+    delta_val="+100%",
+    delta_label="Pisze teksty i szuka informacji",
+    col_items=[
+        ("Pisanie i maile (Word / Outlook)", "100%", 280, True),
+        ("Szukanie informacji w sieci", "100%", 280, True),
+        ("Notatki ze spotkań Teams", "50%", 140, False),
+        ("Praca z arkuszami Excel", "50%", 140, False),
+        ("Prezentacje PowerPoint", "33%", 95, False)
+    ],
+    slide_num=2
+)
 
-    be.slide_pipeline(
-        kicker="HARMONOGRAM // 4-GODZINNY WARSZTAT HANDS-ON",
-        title="Agenda Warsztatu: Trzy Pętle Praktyki w M365 (12 + 40 + 10 min)",
-        steps=[
-            {
-                "phase": "00:00–00:10",
-                "title": "Baza i Granice",
-                "desc": "Uziemienie w autoryzowanych źródłach, uprawnienia SharePoint, ochrona poufności.",
-                "active": False
-            },
-            {
-                "phase": "00:10–01:12",
-                "title": "Lab 1: Raport & Slajdy",
-                "desc": "Przekształcenie rozproszonych danych w 1-stronicowy status i zarys 3 slajdów.",
-                "active": True
-            },
-            {
-                "phase": "01:22–02:24",
-                "title": "Lab 2: Baza Wiedzy",
-                "desc": "Wyszukiwanie w pakiecie dokumentów SharePoint i tworzenie instrukcji bez halucynacji.",
-                "active": True
-            },
-            {
-                "phase": "02:34–04:00",
-                "title": "Lab 3: Excel i Zespoły",
-                "desc": "Wykrywanie anomalii w arkuszu kalkulacyjnym, rejestr akcji z Teams i transfer.",
-                "active": True
-            }
-        ],
-        slide_num=3
-    ),
+slide_3_answer = """
+    <!-- SLIDE 3: ODPOWIEDŹ NA ANKIETĘ W PROSTYM JĘZYKU -->
+    <div class="slide-container" data-title="Odpowiedź na ankietę: Trzy praktyczne zadania" data-type="Pipeline">
+      <header class="slide-header">
+        <span class="slide-kicker">ODPOWIEDŹ NA ANKIETĘ // CO BĘDZIEMY ROBIĆ NA WARSZTACIE</span>
+        <h2 class="slide-title">Trzy Praktyczne Zadania Prosto z Waszych Zgłoszeń</h2>
+      </header>
+      <div class="slide-body" style="justify-content: center;">
+        
+        <div style="position: relative; width: 100%; margin-bottom: 20px;">
+          <svg viewBox="0 0 1152 40" style="width: 100%; height: 36px;">
+            <defs>
+              <marker id="pipeArrow_biz" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <polygon points="0 1, 8 4, 0 7" fill="#256654" />
+              </marker>
+            </defs>
+            <line x1="20" y1="18" x2="1140" y2="18" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round" />
+            <line x1="20" y1="18" x2="1080" y2="18" stroke="#256654" stroke-width="4" stroke-linecap="round" marker-end="url(#pipeArrow_biz)" />
+            <circle cx="160" cy="18" r="9" fill="#256654" />
+            <circle cx="576" cy="18" r="9" fill="#256654" />
+            <circle cx="992" cy="18" r="9" fill="#256654" />
+          </svg>
+        </div>
 
-    be.slide_cta_decision_rows(
-        kicker="REZULTATY // CO ZABIERASZ Z WARSZTATU",
-        title="Trzy Kluczowe Umiejętności po Zakończeniu Szkolenia",
-        decisions=[
-            {
-                "num": "1",
-                "title": "Zawsze Wskazujesz Plik Źródłowy",
-                "desc": "Koniec z ogólnymi pytaniami; uziemienie w konkretnym dokumencie w SharePoint.",
-                "stat": "+80%",
-                "stat_desc": "pewności merytorycznej w odpowiedziach",
-                "stat_color": "var(--success)"
-            },
-            {
-                "num": "2",
-                "title": "Weryfikujesz Cytowania i Liczby",
-                "desc": "Nawyk sprawdzania odnośników do stron, kwot i terminów u źródła przed publikacją.",
-                "stat": "100%",
-                "stat_desc": "odpowiedzialności człowieka za treść",
-                "stat_color": "var(--danger)"
-            },
-            {
-                "num": "3",
-                "title": "Automatyzacja Rejestrów i Raportów",
-                "desc": "Błyskawiczna budowa tabel Excel z pism i przekształcanie notatek w zadania Teams.",
-                "stat": "4x",
-                "stat_desc": "szybsze przygotowanie cyklicznych raportów",
-                "stat_color": "var(--primary)"
-            }
-        ],
-        slide_num=4
-    )
-]
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+          
+          <div class="fragment" style="background: var(--bg-white); border: 2px solid #256654; border-radius: 12px; padding: 22px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+            <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #256654; display: block; margin-bottom: 6px;">Część 1 · Dokumenty i Umowy</span>
+            <h4 style="font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">Długie Pliki w SharePoint</h4>
+            <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;"><strong>Z ankiety:</strong> „Czytanie 60 stron umowy zajmuje za dużo czasu”.</div>
+            <div style="font-size: 13px; color: #1F1F1F; line-height: 1.45;"><strong>Na warsztacie:</strong> Wskazujesz plik i w 2 minuty wyciągasz kluczowe daty, kary i warunki wypowiedzenia.</div>
+          </div>
 
-html_00 = be.wrap_presentation("Microsoft Copilot · 1h Master Keynote (Business Track)", "\n".join(master_slides))
+          <div class="fragment" style="background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 12px; padding: 22px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+            <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #256654; display: block; margin-bottom: 6px;">Część 2 · Tabele i Rejestry</span>
+            <h4 style="font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">Excel Bez Klepania Danych</h4>
+            <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;"><strong>Z ankiety:</strong> „Ręczne przepisywanie pism do Excela jest monotonne”.</div>
+            <div style="font-size: 13px; color: #1F1F1F; line-height: 1.45;"><strong>Na warsztacie:</strong> Copilot tworzy tabelę pism z SharePointa i wyłapuje zaległe zadania w arkuszu.</div>
+          </div>
+
+          <div class="fragment" style="background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 12px; padding: 22px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+            <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #256654; display: block; margin-bottom: 6px;">Część 3 · Spotkania i Raporty</span>
+            <h4 style="font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">Teams i Slajdy w 5 Minut</h4>
+            <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;"><strong>Z ankiety:</strong> „Ustalenia ze spotkań giną, a tworzenie slajdów męczy”.</div>
+            <div style="font-size: 13px; color: #1F1F1F; line-height: 1.45;"><strong>Na warsztacie:</strong> Zamieniamy notatki ze spotkania w listę zadań dla zespołu i zarys 3 slajdów dla szefa.</div>
+          </div>
+
+        </div>
+
+        <div class="fragment" style="margin-top: 18px; background: #E3EFE9; border-left: 4px solid #256654; border-radius: 0 8px 8px 0; padding: 12px 18px; font-size: 13px; color: #1D2B29;">
+          <strong>Jedna prosta zasada przez całe 4 godziny:</strong> Zawsze podajemy Copilotowi konkretny plik, a każdą wyciągniętą liczbę i datę sprawdzamy u źródła przed wysłaniem.
+        </div>
+
+      </div>
+      <div class="slide-footer">
+        <span>PLAN WARSZTATU // PRAKTYCZNA ODPOWIEDŹ</span>
+        <span>Slajd 3</span>
+      </div>
+    </div>
+"""
+
+html_00 = be.wrap_presentation(
+    "Microsoft Copilot · Wprowadzenie do Warsztatu (10 min)",
+    f"{slide_1_intro}\n{slide_2_insights}\n{slide_3_answer}"
+)
 with open(os.path.join(OUT_DIR, "00-master-1h-training.html"), "w", encoding="utf-8") as f:
     f.write(html_00)
-print("  Generated: 00-master-1h-training.html")
+print("  Generated: 00-master-1h-training.html (3 slides)")
 
 # ==============================================================================
 # CASE STUDY GENERATOR HELPER
@@ -533,9 +544,9 @@ index_cards_html = """
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 30px;">
   <a href="00-master-1h-training.html" style="text-decoration: none; color: inherit; grid-column: 1 / -1;">
     <div style="background: linear-gradient(135deg, #2B0D30 0%, #4A1A52 100%); color: #FFFFFF; border-radius: 12px; padding: 28px 32px; box-shadow: 0 6px 20px rgba(43,13,48,0.2); border: 2px solid #D03A8C; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-      <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #D03A8C; margin-bottom: 8px;">★ PREZENTACJA GŁÓWNA // 1-GODZINNY PRZEGLĄD (4 SLAJDY)</div>
-      <h2 style="font-size: 26px; font-weight: 800; margin: 0 0 10px; color: #FFFFFF;">00. Microsoft Copilot w Pracy Biznesowej: Sesja Wprowadzająca</h2>
-      <p style="font-size: 15px; color: #D9D9D9; margin: 0; line-height: 1.45;">Zwięzły 4-slajdowy konspekt wprowadzający do 4-godzinnego warsztatu dla zespołów biznesowych. Zawiera wyjaśnienie celu szkolenia, zebrane wnioski z ankiety zespołu TTPSC, pełną agendę 4-godzinnego warsztatu (3 pętle) oraz kluczowe rezultaty.</p>
+      <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #D03A8C; margin-bottom: 8px;">★ WPROWADZENIE // 10 MINUT (3 SLAJDY W PROSTYM JĘZYKU)</div>
+      <h2 style="font-size: 26px; font-weight: 800; margin: 0 0 10px; color: #FFFFFF;">00. Microsoft Copilot w Pracy Biznesowej: Jak Ułatwić Sobie Codzienną Pracę</h2>
+      <p style="font-size: 15px; color: #D9D9D9; margin: 0; line-height: 1.45;">Krótkie 10-minutowe otwarcie warsztatu w prostym języku. Wyjaśnia cel szkolenia, pokazuje wyniki ankiety zespołu biznesowego TTPSC oraz przedstawia 3 praktyczne zadania warsztatowe odpowiadające bezpośrednio na Wasze potrzeby.</p>
     </div>
   </a>
 """
