@@ -10,112 +10,191 @@ os.makedirs(OUT_DIR, exist_ok=True)
 print(f"Generating non-technical presentations in ./{OUT_DIR} ...")
 
 # ==============================================================================
-# 00: MASTER PRESENTATION (NON-TECHNICAL TRACK - 3 SLIDES IN SIMPLE LANGUAGE)
+# 00: MASTER PRESENTATION (NON-TECHNICAL TRACK - 3 SLIDES)
 # ==============================================================================
-slide_1_intro = """
+non_tech_slide_1 = """
     <!-- SLIDE 1: 10-MINUTOWE WPROWADZENIE W PROSTYM JĘZYKU -->
     <div class="slide-container slide-dark" data-title="Praktyczny Microsoft Copilot: Jak Ułatwić Sobie Codzienną Pracę" data-type="Title">
-      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 960px; z-index: 2;">
-        <span class="slide-kicker" style="color: #64B237; letter-spacing: 0.12em; margin-bottom: 16px;">TRANSITION TECHNOLOGIES PSC // WARSZTAT BIZNESOWY</span>
-        <h1 style="font-size: 46px; font-weight: 800; line-height: 1.15; color: var(--text-light); margin-bottom: 22px;">Praktyczny Microsoft Copilot: Jak Ułatwić Sobie Codzienną Pracę</h1>
-        <p style="font-size: 20px; line-height: 1.45; color: var(--text-light-muted); margin-bottom: 34px; max-width: 820px;">10-minutowe wprowadzenie do 4-godzinnego warsztatu. Uczymy się na Waszych codziennych dokumentach, mailach i arkuszach — prosto, bezpiecznie i bez technicznego żargonu.</p>
-        <div style="display: flex; gap: 32px; align-items: center; border-top: 1px solid var(--border-dark); padding-top: 22px;">
+      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 980px; z-index: 2;">
+        <span class="slide-kicker" style="color: #64B237; letter-spacing: 0.12em; margin-bottom: 14px;">TRANSITION TECHNOLOGIES PSC // WARSZTAT DLA ZESPOŁÓW BIZNESOWYCH</span>
+        <h1 style="font-size: 44px; font-weight: 800; line-height: 1.15; color: var(--text-light); margin-bottom: 18px;">Praktyczny Microsoft Copilot: Jak Ułatwić Sobie Codzienną Pracę</h1>
+        <p style="font-size: 18px; line-height: 1.45; color: var(--text-light-muted); margin-bottom: 24px; max-width: 860px;">10-minutowe wprowadzenie do 4-godzinnego warsztatu. Uczymy się na Waszych codziennych dokumentach, mailach i arkuszach — prosto, bezpiecznie i bez technicznego żargonu.</p>
+        
+        <!-- WAŻNA UWAGA O NDA I BEZPIECZEŃSTWIE -->
+        <div style="background: rgba(100, 178, 55, 0.15); border-left: 4px solid #64B237; border-radius: 0 8px 8px 0; padding: 12px 18px; margin-bottom: 24px; font-size: 13px; color: #FFFFFF; line-height: 1.4;">
+          <strong>Ważna informacja organizacyjna:</strong> To szkolenie nie dotyczy umów NDA ani formalnych polityk bezpieczeństwa u konkretnych klientów. Wszelkie pytania i zasady dotyczące dopuszczalności przetwarzania danych w Twoim zespole omawiaj bezpośrednio ze swoim <strong>Managerem</strong>.
+        </div>
+
+        <div style="display: flex; gap: 32px; align-items: center; border-top: 1px solid var(--border-dark); padding-top: 18px;">
           <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Organizacja</span><strong style="font-size: 14px; color: var(--text-light);">Transition Technologies PSC</strong></div>
           <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Wstęp</span><strong style="font-size: 14px; color: #64B237;">10 minut wprowadzenia</strong></div>
           <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Forma</span><strong style="font-size: 14px; color: var(--text-light);">4 godziny praktyki na żywo</strong></div>
         </div>
       </div>
       <div class="slide-footer">
-        <span style="color: var(--text-light-muted);">TTPSC AI TRAINING // 2026</span>
+        <span style="color: var(--text-light-muted);">TTPSC BUSINESS TRAINING // 2026</span>
         <span style="color: var(--text-light-muted);">Slajd 1</span>
       </div>
     </div>
 """
 
-slide_2_insights = be.slide_chart_columns(
-    kicker="WYNIKI ANKIETY // ZESPÓŁ BIZNESOWY TTPSC (N=6)",
-    title="Wszyscy Korzystamy z AI, ale wciąż Ręcznie Przetwarzamy Dane",
-    kpi_val="83%",
-    kpi_label="Używa Copilota codziennie w pracy",
-    delta_val="+100%",
-    delta_label="Pisze teksty i szuka informacji",
-    col_items=[
-        ("Pisanie i maile (Word / Outlook)", "100%", 280, True),
-        ("Szukanie informacji w sieci", "100%", 280, True),
-        ("Notatki ze spotkań Teams", "50%", 140, False),
-        ("Praca z arkuszami Excel", "50%", 140, False),
-        ("Prezentacje PowerPoint", "33%", 95, False)
-    ],
-    slide_num=2
-)
-
-slide_3_answer = """
-    <!-- SLIDE 3: ODPOWIEDŹ NA ANKIETĘ W PROSTYM JĘZYKU -->
-    <div class="slide-container" data-title="Odpowiedź na ankietę: Trzy praktyczne zadania" data-type="Pipeline">
+non_tech_slide_2 = """
+    <!-- SLIDE 2: WYNIKI ANKIETY BEZ PRZYCINANIA -->
+    <div class="slide-container" data-title="Wyniki ankiety zespołu biznesowego (pełne odpowiedzi)" data-type="Wykres kolumnowy">
       <header class="slide-header">
-        <span class="slide-kicker">ODPOWIEDŹ NA ANKIETĘ // CO BĘDZIEMY ROBIĆ NA WARSZTACIE</span>
-        <h2 class="slide-title">Trzy Praktyczne Zadania Prosto z Waszych Zgłoszeń</h2>
+        <span class="slide-kicker">WYNIKI ANKIETY // ZESPÓŁ BIZNESOWY TTPSC (N=6)</span>
+        <h2 class="slide-title">Wszyscy Korzystamy z AI, ale wciąż Ręcznie Przetwarzamy Dane</h2>
       </header>
-      <div class="slide-body" style="justify-content: center;">
+      <div class="slide-body" style="flex-direction: row; gap: 40px; align-items: center;">
         
-        <div style="position: relative; width: 100%; margin-bottom: 20px;">
-          <svg viewBox="0 0 1152 40" style="width: 100%; height: 36px;">
-            <defs>
-              <marker id="pipeArrow_biz" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                <polygon points="0 1, 8 4, 0 7" fill="#256654" />
-              </marker>
-            </defs>
-            <line x1="20" y1="18" x2="1140" y2="18" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round" />
-            <line x1="20" y1="18" x2="1080" y2="18" stroke="#256654" stroke-width="4" stroke-linecap="round" marker-end="url(#pipeArrow_biz)" />
-            <circle cx="160" cy="18" r="9" fill="#256654" />
-            <circle cx="576" cy="18" r="9" fill="#256654" />
-            <circle cx="992" cy="18" r="9" fill="#256654" />
-          </svg>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        <div style="width: 290px; display: flex; flex-direction: column; justify-content: center; gap: 8px;">
+          <div style="font-size: 52px; font-weight: 800; line-height: 1; color: var(--text-dark); letter-spacing: -0.03em;">83%</div>
+          <div style="font-size: 15px; color: var(--text-muted);">Używa Copilota codziennie w pracy</div>
           
-          <div class="fragment" style="background: var(--bg-white); border: 2px solid #256654; border-radius: 12px; padding: 22px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-            <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #256654; display: block; margin-bottom: 6px;">Część 1 · Dokumenty i Umowy</span>
-            <h4 style="font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">Długie Pliki w SharePoint</h4>
-            <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;"><strong>Z ankiety:</strong> „Czytanie 60 stron umowy zajmuje za dużo czasu”.</div>
-            <div style="font-size: 13px; color: #1F1F1F; line-height: 1.45;"><strong>Na warsztacie:</strong> Wskazujesz plik i w 2 minuty wyciągasz kluczowe daty, kary i warunki wypowiedzenia.</div>
+          <div style="margin-top: 18px; padding: 12px 14px; background: #E3EFE9; border-radius: 8px; border: 1px solid #C9DED1;">
+            <div style="font-size: 12px; font-weight: 800; color: #256654; text-transform: uppercase; margin-bottom: 4px;">Główny Potencjał</div>
+            <div style="font-size: 12px; color: #1D2B29; line-height: 1.35;">Przejście od prostego pisania maili do automatyzacji arkuszy i analizy umów.</div>
           </div>
-
-          <div class="fragment" style="background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 12px; padding: 22px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-            <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #256654; display: block; margin-bottom: 6px;">Część 2 · Tabele i Rejestry</span>
-            <h4 style="font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">Excel Bez Klepania Danych</h4>
-            <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;"><strong>Z ankiety:</strong> „Ręczne przepisywanie pism do Excela jest monotonne”.</div>
-            <div style="font-size: 13px; color: #1F1F1F; line-height: 1.45;"><strong>Na warsztacie:</strong> Copilot tworzy tabelę pism z SharePointa i wyłapuje zaległe zadania w arkuszu.</div>
-          </div>
-
-          <div class="fragment" style="background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 12px; padding: 22px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-            <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #256654; display: block; margin-bottom: 6px;">Część 3 · Spotkania i Raporty</span>
-            <h4 style="font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">Teams i Slajdy w 5 Minut</h4>
-            <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;"><strong>Z ankiety:</strong> „Ustalenia ze spotkań giną, a tworzenie slajdów męczy”.</div>
-            <div style="font-size: 13px; color: #1F1F1F; line-height: 1.45;"><strong>Na warsztacie:</strong> Zamieniamy notatki ze spotkania w listę zadań dla zespołu i zarys 3 slajdów dla szefa.</div>
-          </div>
-
         </div>
 
-        <div class="fragment" style="margin-top: 18px; background: #E3EFE9; border-left: 4px solid #256654; border-radius: 0 8px 8px 0; padding: 12px 18px; font-size: 13px; color: #1D2B29;">
-          <strong>Jedna prosta zasada przez całe 4 godziny:</strong> Zawsze podajemy Copilotowi konkretny plik, a każdą wyciągniętą liczbę i datę sprawdzamy u źródła przed wysłaniem.
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 9px;">
+          
+          <div style="display: grid; grid-template-columns: 1fr 90px; gap: 12px; align-items: center; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 14px;">
+            <div style="font-size: 13px; font-weight: 700; color: var(--text-dark);">Redagowanie, poprawianie maili i pism (Word / Outlook)</div>
+            <div style="font-size: 14px; font-weight: 800; color: #256654; text-align: right;">100% (6/6)</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 90px; gap: 12px; align-items: center; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 14px;">
+            <div style="font-size: 13px; font-weight: 700; color: var(--text-dark);">Wyszukiwanie informacji i research zamiast wyszukiwarki</div>
+            <div style="font-size: 14px; font-weight: 800; color: #256654; text-align: right;">100% (6/6)</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 90px; gap: 12px; align-items: center; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 14px;">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-dark);">Podsumowywanie spotkań, transkryptów i długich plików w Teams</div>
+            <div style="font-size: 14px; font-weight: 800; color: #256654; text-align: right;">50.0% (3/6)</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 90px; gap: 12px; align-items: center; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 14px;">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-dark);">Analiza danych i praca z arkuszami kalkulacyjnymi w Excelu</div>
+            <div style="font-size: 14px; font-weight: 800; color: #256654; text-align: right;">50.0% (3/6)</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 90px; gap: 12px; align-items: center; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 14px;">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-dark);">Tworzenie zarysów prezentacji i zawartości slajdów w PowerPoint</div>
+            <div style="font-size: 14px; font-weight: 800; color: #64748B; text-align: right;">33.3% (2/6)</div>
+          </div>
+
         </div>
 
       </div>
       <div class="slide-footer">
-        <span>PLAN WARSZTATU // PRAKTYCZNA ODPOWIEDŹ</span>
+        <span>DANE EMPIRYCZNE // PEŁNE WYNIKI ANKIETY</span>
+        <span>Slajd 2</span>
+      </div>
+    </div>
+"""
+
+non_tech_slide_3 = """
+    <!-- SLIDE 3: INTERAKTYWNA ODPOWIEDŹ NA ANKIETĘ Z BEZPOŚREDNIMI LINKAMI DO 9 ĆWICZEŃ -->
+    <div class="slide-container" data-title="Odpowiedź na ankietę: Wybierz ćwiczenie (N1-N9)" data-type="Pipeline">
+      <header class="slide-header">
+        <span class="slide-kicker">PLAN WARSZTATU // KLIKNIJ ĆWICZENIE, ABY OTWORZYĆ PREZENTACJĘ</span>
+        <h2 class="slide-title">Trzy Części Warsztatu i Bezpośredni Dostęp do 9 Zadań</h2>
+      </header>
+      <div class="slide-body" style="justify-content: center;">
+        
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 14px;">
+          
+          <!-- BLOK 1 -->
+          <div style="background: var(--bg-white); border: 1.5px solid #256654; border-radius: 10px; padding: 14px 14px 12px; display: flex; flex-direction: column;">
+            <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #256654; margin-bottom: 4px;">Część 1 · Umowy i Pliki</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px;">Word & SharePoint</h4>
+            
+            <div style="display: flex; flex-direction: column; gap: 7px; flex: 1;">
+              <a href="case-01-long-agreement-contract.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#E3EFE9'; this.style.borderColor='#256654'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: #256654;">N1 · Zapisy w Umowach ↗</div>
+                <div style="font-size: 12px; color: #334155;">Wyciąganie terminów i kar z 60 stron umowy</div>
+              </a>
+
+              <a href="case-02-correspondence-register.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#E3EFE9'; this.style.borderColor='#256654'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: #256654;">N2 · Rejestr Pism z SharePoint ↗</div>
+                <div style="font-size: 12px; color: #334155;">Automatyczna tabela w Excelu bez przepisywania</div>
+              </a>
+
+              <a href="case-03-source-access-sharepoint.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#E3EFE9'; this.style.borderColor='#256654'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: #256654;">N3 · Uprawnienia i Źródła ↗</div>
+                <div style="font-size: 12px; color: #334155;">Sprawdzanie do czego Copilot ma faktyczny dostęp</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- BLOK 2 -->
+          <div style="background: var(--bg-white); border: 1.5px solid var(--border-light); border-radius: 10px; padding: 14px 14px 12px; display: flex; flex-direction: column;">
+            <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #256654; margin-bottom: 4px;">Część 2 · Raporty i Klienci</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px;">Word, PowerPoint, Outlook</h4>
+            
+            <div style="display: flex; flex-direction: column; gap: 7px; flex: 1;">
+              <a href="case-04-weekly-update-drafting.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#E3EFE9'; this.style.borderColor='#256654'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: #256654;">N4 · Raport dla Zarządu ↗</div>
+                <div style="font-size: 12px; color: #334155;">Złożenie luźnych notatek w zwięzły status</div>
+              </a>
+
+              <a href="case-07-report-to-presentation.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#E3EFE9'; this.style.borderColor='#256654'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: #256654;">N7 · Raport na 5 Slajdów ↗</div>
+                <div style="font-size: 12px; color: #334155;">Przekształcenie 40 stron raportu w prezentację</div>
+              </a>
+
+              <a href="case-08-customer-meeting-prep.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#E3EFE9'; this.style.borderColor='#256654'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: #256654;">N8 · Rozmowa z Klientem ↗</div>
+                <div style="font-size: 12px; color: #334155;">Przygotowanie rozmowy handlowej w 5 minut</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- BLOK 3 -->
+          <div style="background: var(--bg-white); border: 1.5px solid var(--border-light); border-radius: 10px; padding: 14px 14px 12px; display: flex; flex-direction: column;">
+            <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #256654; margin-bottom: 4px;">Część 3 · Dane i Zespół</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px;">Excel, Teams, Oferty</h4>
+            
+            <div style="display: flex; flex-direction: column; gap: 7px; flex: 1;">
+              <a href="case-05-spreadsheet-overdue-analysis.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#E3EFE9'; this.style.borderColor='#256654'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: #256654;">N5 · Zaległości w Excelu ↗</div>
+                <div style="font-size: 12px; color: #334155;">Formuły i wyłapywanie opóźnień w arkuszu</div>
+              </a>
+
+              <a href="case-06-meeting-actions-follow-up.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#E3EFE9'; this.style.borderColor='#256654'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: #256654;">N6 · Notatki Teams na Zadania ↗</div>
+                <div style="font-size: 12px; color: #334155;">Zamiana nagrania w listę akcji z właścicielami</div>
+              </a>
+
+              <a href="case-09-estimating-implementation-work.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#E3EFE9'; this.style.borderColor='#256654'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: #256654;">N9 · Wycena Prac Wdrożeń ↗</div>
+                <div style="font-size: 12px; color: #334155;">Wstępna struktura WBS i wyłapywanie ryzyk</div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="background: #E3EFE9; border-radius: 8px; padding: 10px 16px; font-size: 12px; color: #1D2B29; display: flex; justify-content: space-between; align-items: center;">
+          <span>💡 <strong>Nawigacja:</strong> Kliknij dowolne ćwiczenie powyżej, aby od razu otworzyć dedykowaną prezentację danego case'a.</span>
+          <span style="font-weight: 700; color: #256654;">9 Gotowych Scenariuszy</span>
+        </div>
+
+      </div>
+      <div class="slide-footer">
+        <span>INTERAKTYWNY KATALOG // WYBIERZ CASE</span>
         <span>Slajd 3</span>
       </div>
     </div>
 """
 
-html_00 = be.wrap_presentation(
+non_tech_master_html = be.wrap_presentation(
     "Microsoft Copilot · Wprowadzenie do Warsztatu (10 min)",
-    f"{slide_1_intro}\n{slide_2_insights}\n{slide_3_answer}"
+    f"{non_tech_slide_1}\n{non_tech_slide_2}\n{non_tech_slide_3}"
 )
 with open(os.path.join(OUT_DIR, "00-master-1h-training.html"), "w", encoding="utf-8") as f:
-    f.write(html_00)
+    f.write(non_tech_master_html)
 print("  Generated: 00-master-1h-training.html (3 slides)")
 
 # ==============================================================================

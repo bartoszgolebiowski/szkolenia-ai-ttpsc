@@ -10,103 +10,204 @@ os.makedirs(OUT_DIR, exist_ok=True)
 print(f"Generating technical presentations in ./{OUT_DIR} ...")
 
 # ==============================================================================
-# 00: MASTER PRESENTATION (TECHNICAL TRACK - 4 SLIDES)
+# 00: MASTER PRESENTATION (TECHNICAL TRACK - 3 SLIDES)
 # ==============================================================================
-master_slides = [
-    be.slide_title(
-        title="GitHub Copilot w Inżynierii Oprogramowania: Od Podpowiedzi do Samodzielnego Dewelopera w Pętli",
-        kicker="TRANSITION TECHNOLOGIES PSC // TECHNICAL TRAINING TRACK",
-        subtitle="1-godzinna prezentacja wprowadzająca do 4-godzinnego warsztatu praktycznego. Wyjaśnia zasady współpracy z asystentem AI w IDE i CLI, eliminację płytkich testów oraz reguły bezpieczeństwa w projektach komercyjnych.",
-        meta="GitHub Copilot · CLI · Test-Driven · 2026"
-    ),
+tech_slide_1 = """
+    <!-- SLIDE 1: 10-MINUTOWE WPROWADZENIE W PROSTYM JĘZYKU -->
+    <div class="slide-container slide-dark" data-title="Praktyczny GitHub Copilot: Narzędzia w Rękach Dewelopera" data-type="Title">
+      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 980px; z-index: 2;">
+        <span class="slide-kicker" style="color: var(--accent); letter-spacing: 0.12em; margin-bottom: 14px;">TRANSITION TECHNOLOGIES PSC // WARSZTAT DLA PROGRAMISTÓW</span>
+        <h1 style="font-size: 44px; font-weight: 800; line-height: 1.15; color: var(--text-light); margin-bottom: 18px;">Praktyczny GitHub Copilot: Narzędzia w Rękach Dewelopera</h1>
+        <p style="font-size: 18px; line-height: 1.45; color: var(--text-light-muted); margin-bottom: 24px; max-width: 860px;">10-minutowe wprowadzenie do 4-godzinnego warsztatu praktycznego. Uczymy się pisać wartościowe testy, bezpiecznie badać błędy i zamykać zadania z konsoli bez zgadywania.</p>
+        
+        <!-- WAŻNA UWAGA O NDA I BEZPIECZEŃSTWIE -->
+        <div style="background: rgba(225, 29, 72, 0.15); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 12px 18px; margin-bottom: 24px; font-size: 13px; color: #FFFFFF; line-height: 1.4;">
+          <strong>Ważna informacja organizacyjna:</strong> To szkolenie techniczne nie dotyczy umów NDA, audytów prawnych ani formalnych polityk bezpieczeństwa u konkretnych klientów. Wszelkie pytania i zasady dotyczące dopuszczenia narzędzi AI w Twoim projekcie omawiaj bezpośrednio ze swoim <strong>Managerem Projektu</strong>.
+        </div>
 
-    be.slide_ranking_bars(
-        kicker="DIAGNOZA ZESPOŁU // ANKIETA TTPSC (N=8)",
-        title="100% Używa Copilota, Lecz 38% Traci Tyle Samo Czasu na Poprawki Kodu",
-        items=[
-            ("Użycie GitHub Copilot / Chat w IDE", "100%", 100, True),
-            ("Przyspieszenie: Boilerplate i szkielety", "62.5%", 62.5, True),
-            ("Przyspieszenie: Debugowanie i stack trace", "62.5%", 62.5, True),
-            ("Wpływ neutralny (review kodu AI = czas pisania)", "37.5%", 37.5, True),
-            ("Restrykcje NDA klienta (blokada MCP / danych)", "75.0%", 75, False),
-            ("Brak zespołowych reguł (.cursorrules / prompts)", "75.0%", 75, False),
-            ("Generowanie wartościowych testów jednostkowych", "12.5%", 12.5, False)
-        ],
-        pareto_text={
-            "big": "38%",
-            "desc": "Inżynierów wskazuje brak oszczędności czasu bez jasnych kryteriów akceptacji i weryfikacji asercji."
-        },
-        slide_num=2
-    ),
+        <div style="display: flex; gap: 32px; align-items: center; border-top: 1px solid var(--border-dark); padding-top: 18px;">
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Organizacja</span><strong style="font-size: 14px; color: var(--text-light);">Transition Technologies PSC</strong></div>
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Wstęp</span><strong style="font-size: 14px; color: var(--accent);">10 minut wprowadzenia</strong></div>
+          <div><span style="font-size: 11px; text-transform: uppercase; color: var(--text-light-muted); display: block;">Forma</span><strong style="font-size: 14px; color: var(--text-light);">4 godziny praktyki w IDE i konsoli</strong></div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span style="color: var(--text-light-muted);">TTPSC TECHNICAL TRAINING // 2026</span>
+        <span style="color: var(--text-light-muted);">Slajd 1</span>
+      </div>
+    </div>
+"""
 
-    be.slide_pipeline(
-        kicker="HARMONOGRAM // 4-GODZINNY WARSZTAT HANDS-ON",
-        title="Agenda Warsztatu: Trzy Pętle Praktyki i Weryfikacji (12 + 40 + 10 min)",
-        steps=[
-            {
-                "phase": "00:00–00:10",
-                "title": "Baza i Granice",
-                "desc": "Zasady izolacji kodu, sanitacja danych klienta (NDA), kryteria akceptacji.",
-                "active": False
-            },
-            {
-                "phase": "00:10–01:12",
-                "title": "Lab 1: Ticket → Testy",
-                "desc": "Przekształcenie niejednoznacznego ticketu Jira w zbadany, bezpieczny wycinek kodu.",
-                "active": True
-            },
-            {
-                "phase": "01:22–02:24",
-                "title": "Lab 2: CLI & Skille",
-                "desc": "Zamykanie pętli zadania z konsoli z użyciem poleceń /goal i /loop.",
-                "active": True
-            },
-            {
-                "phase": "02:34–04:00",
-                "title": "Lab 3: Sceptyczny PR",
-                "desc": "Adversarial code review, porównanie modeli na jednym zadaniu i transfer do pracy.",
-                "active": True
-            }
-        ],
-        slide_num=3
-    ),
+tech_slide_2 = """
+    <!-- SLIDE 2: PEŁNE ODPOWIEDZI Z ANKIETY BEZ PRZYCINANIA (...) -->
+    <div class="slide-container" data-title="Wyniki ankiety zespołu inżynierów (pełne odpowiedzi)" data-type="Ranking słupkowy">
+      <header class="slide-header">
+        <span class="slide-kicker">DIAGNOZA ZESPOŁU // ANKIETA PROGRAMISTÓW TTPSC (N=8)</span>
+        <h2 class="slide-title">100% Używa Copilota, ale 38% Traci Czas na Poprawki Kodu AI</h2>
+      </header>
+      <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 280px; gap: 24px; align-items: center;">
+          
+          <!-- LISTA W PEŁNYM BRZMIENIU BEZ UCIĘĆ -->
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            
+            <div style="display: grid; grid-template-columns: 1fr 100px; gap: 12px; align-items: center; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 14px;">
+              <div style="font-size: 13px; font-weight: 700; color: var(--text-dark); line-height: 1.3;">Aktywne korzystanie z GitHub Copilot lub Copilot Chat w IDE</div>
+              <div style="font-size: 14px; font-weight: 800; color: var(--primary); text-align: right;">100% (8/8)</div>
+            </div>
 
-    be.slide_cta_decision_rows(
-        kicker="REZULTATY // CO ZABIERASZ Z WARSZTATU",
-        title="Trzy Kluczowe Umiejętności po Zakończeniu Szkolenia",
-        decisions=[
-            {
-                "num": "1",
-                "title": "Spec-Driven Development",
-                "desc": "Formułowanie kryteriów akceptacji przed poproszeniem o implementację w IDE.",
-                "stat": "+60%",
-                "stat_desc": "trafności kodu w pierwszym podejściu",
-                "stat_color": "var(--success)"
-            },
-            {
-                "num": "2",
-                "title": "Sceptyczna Weryfikacja Asercji",
-                "desc": "Wykrywanie fałszywych testów jednostkowych i sprawdzanie rzeczywistych brzegów.",
-                "stat": "0%",
-                "stat_desc": "ślepego zaufania do zielonego paska",
-                "stat_color": "var(--danger)"
-            },
-            {
-                "num": "3",
-                "title": "Praca w Reżimie NDA Klienta",
-                "desc": "Techniki pracy na danych syntetycznych w bezpiecznym sandboxie bez wycieku IP.",
-                "stat": "100%",
-                "stat_desc": "zgodności z politykami bezpieczeństwa",
-                "stat_color": "var(--primary)"
-            }
-        ],
-        slide_num=4
-    )
-]
+            <div style="display: grid; grid-template-columns: 1fr 100px; gap: 12px; align-items: center; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 14px;">
+              <div style="font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.3;">Przyspieszanie pisania kodu powtarzalnego (boilerplate) i uzupełnianie składni</div>
+              <div style="font-size: 14px; font-weight: 800; color: var(--primary); text-align: right;">62.5% (5/8)</div>
+            </div>
 
-html_00 = be.wrap_presentation("GitHub Copilot · 1h Master Keynote (Technical Track)", "\n".join(master_slides))
+            <div style="display: grid; grid-template-columns: 1fr 100px; gap: 12px; align-items: center; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 14px;">
+              <div style="font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.3;">Szukanie przyczyn błędów, analiza długich stack trace i debugowanie</div>
+              <div style="font-size: 14px; font-weight: 800; color: var(--primary); text-align: right;">62.5% (5/8)</div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 100px; gap: 12px; align-items: center; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 14px;">
+              <div style="font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.3;">Tworzenie dokumentacji technicznej, opisów Pull Requestów i dokumentów RFC</div>
+              <div style="font-size: 14px; font-weight: 800; color: var(--primary); text-align: right;">50.0% (4/8)</div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 100px; gap: 12px; align-items: center; background: #FFF1F2; border: 1.5px solid var(--danger); border-radius: 6px; padding: 8px 14px;">
+              <div style="font-size: 13px; font-weight: 700; color: var(--danger); line-height: 1.3;">Wpływ neutralny: czas poświęcony na review i poprawki kodu AI = czas pisania</div>
+              <div style="font-size: 14px; font-weight: 800; color: var(--danger); text-align: right;">37.5% (3/8)</div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 100px; gap: 12px; align-items: center; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 14px;">
+              <div style="font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.3;">Brak zespołowych reguł i instrukcji (.cursorrules, skille, prompt guidelines)</div>
+              <div style="font-size: 14px; font-weight: 800; color: #64748B; text-align: right;">75.0% (6/8)</div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 100px; gap: 12px; align-items: center; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 14px;">
+              <div style="font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.3;">Wykorzystywanie AI do pisania pełnych zestawów testów jednostkowych</div>
+              <div style="font-size: 14px; font-weight: 800; color: #64748B; text-align: right;">12.5% (1/8)</div>
+            </div>
+
+          </div>
+
+          <!-- KARTA WNIOSKU Z ANKIETY -->
+          <div class="fragment" style="background: var(--bg-white); border: 2px solid var(--primary); border-radius: 12px; padding: 22px; text-align: center; box-shadow: 0 4px 16px rgba(123,45,133,0.08);">
+            <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--primary); display: block; margin-bottom: 6px;">Kluczowy Wniosek z Ankiety</span>
+            <div style="font-size: 44px; font-weight: 900; color: var(--primary); line-height: 1.1; margin-bottom: 8px;">38%</div>
+            <p style="font-size: 13px; color: #475569; margin: 0 0 14px; line-height: 1.45;">Programistów nie zyskuje czasu, dopóki nie wprowadzi specyfikacji przed kodem i krytycznej weryfikacji asercji.</p>
+            <div style="background: var(--primary-light); color: var(--primary); font-size: 12px; font-weight: 700; padding: 6px 10px; border-radius: 6px;">
+              Cel: Przejście do kontrolowanej pętli inżynierskiej
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>DANE EMPIRYCZNE // PEŁNE WYNIKI ANKIETY</span>
+        <span>Slajd 2</span>
+      </div>
+    </div>
+"""
+
+tech_slide_3 = """
+    <!-- SLIDE 3: INTERAKTYWNA AGENDA Z BEZPOŚREDNIMI LINKAMI DO 9 ĆWICZEŃ -->
+    <div class="slide-container" data-title="Plan warsztatu: Wybierz ćwiczenie (T1-T9)" data-type="Pipeline">
+      <header class="slide-header">
+        <span class="slide-kicker">PLAN WARSZTATU // KLIKNIJ ĆWICZENIE, ABY OTWORZYĆ PREZENTACJĘ</span>
+        <h2 class="slide-title">Trzy Części Warsztatu i Bezpośredni Dostęp do 9 Zadań</h2>
+      </header>
+      <div class="slide-body" style="justify-content: center;">
+        
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 14px;">
+          
+          <!-- BLOK 1 -->
+          <div style="background: var(--bg-white); border: 1.5px solid var(--primary); border-radius: 10px; padding: 14px 14px 12px; display: flex; flex-direction: column;">
+            <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--primary); margin-bottom: 4px;">Część 1 · 00:10–01:12</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px;">Diagnostyka & Testy w IDE</h4>
+            
+            <div style="display: flex; flex-direction: column; gap: 7px; flex: 1;">
+              <a href="case-01-failing-test-debug.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#ECD3ED'; this.style.borderColor='#7B2D85'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: var(--primary);">T1 · Diagnostyka Testu ↗</div>
+                <div style="font-size: 12px; color: #334155;">Izolacja błędu w stack trace bez zgadywania</div>
+              </a>
+
+              <a href="case-02-test-quality.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#ECD3ED'; this.style.borderColor='#7B2D85'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: var(--primary);">T2 · Jakość Testów ↗</div>
+                <div style="font-size: 12px; color: #334155;">Wykrywanie pozornych testów i stanów brzegowych</div>
+              </a>
+
+              <a href="case-04-legacy-refactor.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#ECD3ED'; this.style.borderColor='#7B2D85'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: var(--primary);">T4 · Migracja Legacy ↗</div>
+                <div style="font-size: 12px; color: #334155;">Wymiana wywołań w małych plastrach kodu</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- BLOK 2 -->
+          <div style="background: var(--bg-white); border: 1.5px solid var(--border-light); border-radius: 10px; padding: 14px 14px 12px; display: flex; flex-direction: column;">
+            <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--primary); margin-bottom: 4px;">Część 2 · 01:22–02:24</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px;">Konsola CLI & Narzędzia</h4>
+            
+            <div style="display: flex; flex-direction: column; gap: 7px; flex: 1;">
+              <a href="case-05-slow-sql-optimization.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#ECD3ED'; this.style.borderColor='#7B2D85'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: var(--primary);">T5 · Optymalizacja Oracle SQL ↗</div>
+                <div style="font-size: 12px; color: #334155;">Analiza planu zapytania i test ekwiwalencji</div>
+              </a>
+
+              <a href="case-06-mockup-to-jira.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#ECD3ED'; this.style.borderColor='#7B2D85'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: var(--primary);">T6 · Makieta na Zadania Jira ↗</div>
+                <div style="font-size: 12px; color: #334155;">Dekompozycja ekranu na zadania z kryteriami</div>
+              </a>
+
+              <a href="case-07-unfamiliar-repo.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#ECD3ED'; this.style.borderColor='#7B2D85'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: var(--primary);">T7 · Nowe Repozytorium ↗</div>
+                <div style="font-size: 12px; color: #334155;">Nawigacja w kodzie z kontekstem @workspace</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- BLOK 3 -->
+          <div style="background: var(--bg-white); border: 1.5px solid var(--border-light); border-radius: 10px; padding: 14px 14px 12px; display: flex; flex-direction: column;">
+            <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--primary); margin-bottom: 4px;">Część 3 · 02:34–04:00</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 10px;">Audyt Kodu & Komunikacja</h4>
+            
+            <div style="display: flex; flex-direction: column; gap: 7px; flex: 1;">
+              <a href="case-03-code-review.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#ECD3ED'; this.style.borderColor='#7B2D85'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: var(--primary);">T3 · Sceptyczny Audyt PR ↗</div>
+                <div style="font-size: 12px; color: #334155;">Sprawdzanie kodu AI jak sceptyk przed merge</div>
+              </a>
+
+              <a href="case-08-technical-to-business-update.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#ECD3ED'; this.style.borderColor='#7B2D85'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: var(--primary);">T8 · Notatka dla Biznesu ↗</div>
+                <div style="font-size: 12px; color: #334155;">Tłumaczenie zmian technicznych na język PO</div>
+              </a>
+
+              <a href="case-09-client-restrictions-security.html" style="text-decoration: none; display: block; background: #F8FAFC; border: 1px solid var(--border-light); border-radius: 6px; padding: 8px 10px; transition: all 0.2s;" onmouseover="this.style.background='#ECD3ED'; this.style.borderColor='#7B2D85'" onmouseout="this.style.background='#F8FAFC'; this.style.borderColor='#D9D9D9'">
+                <div style="font-size: 11px; font-weight: 800; color: var(--primary);">T9 · Bezpieczny Sandbox ↗</div>
+                <div style="font-size: 12px; color: #334155;">Praca na danych syntetycznych w izolacji</div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="background: #F1F5F9; border-radius: 8px; padding: 10px 16px; font-size: 12px; color: #475569; display: flex; justify-content: space-between; align-items: center;">
+          <span>💡 <strong>Nawigacja:</strong> Kliknij dowolne ćwiczenie powyżej, aby od razu otworzyć dedykowaną prezentację danego case'a.</span>
+          <span style="font-weight: 700; color: var(--primary);">9 Gotowych Scenariuszy</span>
+        </div>
+
+      </div>
+      <div class="slide-footer">
+        <span>INTERAKTYWNY KATALOG // WYBIERZ CASE</span>
+        <span>Slajd 3</span>
+      </div>
+    </div>
+"""
+
+tech_master_html = be.wrap_presentation(
+    "GitHub Copilot · Wprowadzenie do Warsztatu (10 min)",
+    f"{tech_slide_1}\n{tech_slide_2}\n{tech_slide_3}"
+)
 with open(os.path.join(OUT_DIR, "00-master-1h-training.html"), "w", encoding="utf-8") as f:
-    f.write(html_00)
+    f.write(tech_master_html)
 print("  Generated: 00-master-1h-training.html")
 
 # ==============================================================================
